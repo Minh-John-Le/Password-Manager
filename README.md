@@ -1,8 +1,7 @@
 # Object-Oriented-Design
 Object Orient Project
 
-#########################
-Team Memebers:
+#Team Members:
 Quang Tang,
 Minh Le,
 Van Chuong,
