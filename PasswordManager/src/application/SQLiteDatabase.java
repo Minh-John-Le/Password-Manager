@@ -7,52 +7,84 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.UUID;
 
 import org.omg.CORBA.Environment;
 
 public class SQLiteDatabase {
 	private static String jdbcUrl = "jdbc:sqlite:applicationDb.db";
-	private static String usernameTable = "usernameTable";
+	private static String usernameTable = "userInfoTable";
+	private static String accountTable = "accountInfoTable";
 	public static void main(String[] args)
 	{
 		String databaseName = "John";
 		
 		
-		try {
+		try 
+		{
 			
-			
-			Connection connection = DriverManager.getConnection(jdbcUrl);		
-			String sql = "CREATE TABLE IF NOT EXISTS " + databaseName + "(firstname varchar(20), lastname varchar(20))";			
+			initializeDatabase();
+			Connection connection = DriverManager.getConnection(jdbcUrl);				
 			java.sql.Statement statement = connection.createStatement();			
-			statement.executeUpdate(sql);
+//=======================================================================================================			
+			// test create new account
+		     createNewUser("Minh Hung Le", "122345", "Who am I?", "John");
+		     createNewUser("Van Chuong", "122345", "Who am I?", "Chuong");
+		     createNewUser("ABC", "122345", "Who am I?", "ABC");
+		     updateUserInfo("ABC", "2222", "How are you?", "I am good" );
+		     createNewUser("Minh Hung Le", "122345", "Who am I?", "John");
+		     createNewUser("Minh Hung Le", "122345", "Who am I?", "John");
+		     
+		     deleteUser("VanChuong");
+					 
+		     String selectAllUsersql = "SELECT * FROM " + usernameTable;
+		     statement = connection.createStatement();			
+			 ResultSet result = statement.executeQuery(selectAllUsersql);
+			 
+			 
+			 while (result.next())
+			 {
+				 
+				String uniqueID = result.getString("userID");
+				String name = result.getString("username");
+				String password = result.getString("userPassword");
+				String question = result.getString("secQuestion");
+				String answer = result.getString("answer");
+				
+				System.out.println(uniqueID + "  |  " + name + "  |  " + password + " | " + question +  "  |  " + answer);
+			 }
 			
+//=============================================================================================================
+			 //Test adding new account
+			 
+			addNewAccount("Minh Hung Le", "Google", "username1","password1", "email1","04/12/22","04/12/22","100");
+			addNewAccount("Minh Hung Le", "Google", "username2","password1", "email1","04/12/22","04/12/22","100");
+			addNewAccount("Minh Hung Le", "Google", "username3","password1", "email1","04/12/22","04/12/22","100");
+			addNewAccount("Minh Hung Le", "Google", "username1","password1", "email1","04/12/22","04/12/22","100");
+			addNewAccount("Minh Hung Le", "Google", "username1","password1", "email1","04/12/22","04/12/22","100");
+
 			
-			createNewAccount("Jim", "Google", "Test1", "123456","10", "", "100");
-			createNewAccount("Jim", "google", "test2", "123456","10", "", "100");
-			createNewAccount("Jim", "GOOGLE", "Test3", "123456","10", "", "100");
-			createNewAccount("Jim", "GOOGLE", "Test4", "123456","10", "", "100");
-			
-			deleteAccount("Jim", "GOOGLE", "Test4");
-			
-			
-			updateAccountInfo("Jim", "Google", "Test1", "AWS", "Test1", "123456","10", "", "100" );
 			
 			// Selecting database
-			sql = "SELECT * FROM " + "Jim";
+			String selectAllAccountSql = "SELECT * FROM " + accountTable;
 			statement = connection.createStatement();			
-			ResultSet result = statement.executeQuery(sql);
-			
-			
+			result = statement.executeQuery(selectAllAccountSql);
+
+
 			// loop through result;
 			while (result.next())
 			{
-				String applicationName = result.getString("applicationName");
-				String accountName = result.getString("accountName");
-				String password = result.getString("password");
+			
+				String userID = result.getString("userID");
+				String accID = result.getString("accountID");
+				String applicationName = result.getString("appName");
+				String accountName = result.getString("accountUsername");
+				String password = result.getString("accountPass");
 				
-				System.out.println(applicationName + "  |  " + accountName + " | " + password);
+				System.out.println(userID + "  |  "+ accID + "  |  " +applicationName + "  |  " + accountName + " | " + password );
 			}
 			
+			/*
 			System.out.println("===============================================");
 			result = searchAccount("Jim", "","test1"); 
 			
@@ -71,28 +103,8 @@ public class SQLiteDatabase {
 		
 		     
 		     //================================
-		     // test create new account
-		     createNewUser("MinhHungLe", "122345", "Who am I?", "John");
-		     createNewUser("VanChuong", "122345", "Who am I?", "Chuong");
-		     createNewUser("ABC", "122345", "Who am I?", "ABC");
-		     updateUserInfo("ABC", "2222", "How are you?", "I am good" );
 		     
-		     deleteUser("VanChuong");
-					 
-		     sql = "SELECT * FROM " + usernameTable;
-		     statement = connection.createStatement();			
-			 result = statement.executeQuery(sql);
-			 
-			 
-			 while (result.next())
-				{
-					String name = result.getString("username");
-					String password = result.getString("password");
-					String question = result.getString("question");
-					
-					System.out.println(name + "  |  " + password + " | " + question);
-				}
-				
+				*/
 			 
 		} 
 		catch (SQLException e) 
@@ -106,49 +118,109 @@ public class SQLiteDatabase {
 	
 	
 	
+	private static void initializeDatabase() 
+	{
+		try {
+			Connection connection = DriverManager.getConnection(jdbcUrl);		
+			java.sql.Statement statement = connection.createStatement();
+			String userTablesql = "CREATE TABLE IF NOT EXISTS " + usernameTable
+					+"(userID varchar(32) PRIMARY KEY, " 
+					+ "username varchar(64), "
+					+"userPassword varchar(64), "
+					+"secQuestion varchar(256), "
+					+"answer varchar(256))";  
+			
+			statement.executeUpdate(userTablesql);
+			
+			
+			String accountTablesql = "CREATE TABLE IF NOT EXISTS " + accountTable + "("
+					+"userID varchar(32), "
+					+"accountID varchar(32) PRIMARY KEY, "
+					+"appName varchar(64), " 
+					+"accountUsername varchar(64), "
+					+"accountPass varchar(64), "
+					+"email varchar(64), "
+					+"dateCreated varchar(64), "    
+					+"dateExpire varchar(64), "  
+					+"duration varchar(64), "
+					+"FOREIGN KEY (userID) REFERENCES " + usernameTable + "(userID)"
+					+")";
+	
+			statement.executeUpdate(accountTablesql);
+			
+			connection.close();
+		} 
+		catch (SQLException e) 
+		{
+			System.out.println("Error initialize database");
+			
+			e.printStackTrace();
+		}
+	}
+
+	
+	
+	
 	/***
 	 * This method adding a new account into user table based on the user name
-
 	 */
-	private static void createNewAccount(String username, String applicationName, String accountName,
-			String password, String email, String creationDay, String duration) 
+	private static void addNewAccount(String username, String appName, String accountUsername,
+			String accountPass, String email, String dateCreated, String dateExpire, String duration) 
 	{
 		try 
 		{
 			// check if account already exit
-			if (isAccountExist(username, applicationName, accountName))
+			if (!isUserExist(username))
+			{
+				return;	
+			}
+			
+			// get username ID
+			Connection connection = DriverManager.getConnection(jdbcUrl);
+			java.sql.Statement statement = connection.createStatement(); 
+			String searchAccountSql = "SELECT * FROM " + usernameTable
+					+ " WHERE " 
+					+ "username = '" + username + "'";
+					
+			ResultSet result = statement.executeQuery(searchAccountSql);
+			
+			String userID = result.getString("userID");			
+
+
+			if (isAccountExist(userID, appName, accountUsername))
 			{
 				return;
 			}
 			
-			Connection connection = DriverManager.getConnection(jdbcUrl);
-			java.sql.Statement statement = connection.createStatement();
 			
 			
 			
-			// command for new table if table not exist yet
-			String sql = "CREATE TABLE IF NOT EXISTS " + username +
-					"(applicationName varchar(64), accountName varchar(64), password varchar(64),"
-					+ " email varchar(64), creationDay varchar(64), duration varchar(10))";
 			
-			statement.executeUpdate(sql);
+			//java.sql.Statement statement = connection.createStatement();
 			
-			sql = "INSERT INTO " + username + "(applicationName, accountName, password, email, creationDay, duration) " + "\n" + 
-					"VALUES(?,?,?,?,?,?)";
+			String accountID = UUID.randomUUID().toString().replace("-", "");
+			String addAccountsql = "INSERT INTO " + accountTable + 
+					"(userID, accountID, appName, accountUsername, accountPass, "
+					+ "email, dateCreated, dateExpire, duration) " + "\n" + 
+					"VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			
 			
 			// add data to table
-	        PreparedStatement pstmt = connection.prepareStatement(sql);
+	        PreparedStatement addAccountPstmt = connection.prepareStatement(addAccountsql);
 		
-			pstmt.setString(1, applicationName);
-	        pstmt.setString(2, accountName);
-	        pstmt.setString(3, password);
-	        pstmt.setString(4, email);
-	        pstmt.setString(5, creationDay);
-	        pstmt.setString(6, duration);
+	        addAccountPstmt.setString(1, userID);
+	        addAccountPstmt.setString(2, accountID);
+	        addAccountPstmt.setString(3, appName);
+	        addAccountPstmt.setString(4, accountUsername);
+	        addAccountPstmt.setString(5, accountPass);
+	        addAccountPstmt.setString(6, email);
+	        addAccountPstmt.setString(7, dateCreated);
+	        addAccountPstmt.setString(8, dateExpire);
+	        addAccountPstmt.setString(9, duration);
 	        
-	        pstmt.executeUpdate();
-	        
+	        addAccountPstmt.executeUpdate();
+	        connection.close();
+
 
 		}
 		catch (SQLException e) 
@@ -163,7 +235,7 @@ public class SQLiteDatabase {
 	/***
 	 * This method adding a new user into database
 	 */
-	private static void createNewUser(String username, String password, String question, String answer)
+	private static void createNewUser(String username, String userPassword, String secQuestion, String answer)
 	{
 		try 
 		{
@@ -174,29 +246,21 @@ public class SQLiteDatabase {
 			}
 			
 			Connection connection = DriverManager.getConnection(jdbcUrl);
-			java.sql.Statement statement = connection.createStatement();
 			
-			// Create a new table in data base if need
-			String sql = "CREATE TABLE IF NOT EXISTS usernameTable("
-					+ "username varchar(64),"
-					+ "password varchar(64),"
-					+ "question varchar(64),"
-					+ "answer varchar(64))";		
-
-
-	        statement.executeUpdate(sql);        
-	        
 	        // adding new user name into table
-	        sql = "INSERT INTO " + usernameTable + "(username, password, question, answer) " + "\n" + 
-					"VALUES(?,?,?,?)";
+	        String createNewUserSql = "INSERT INTO " + usernameTable 
+	        		+"(userID, username, userPassword, secQuestion, answer) " + "\n" 
+	        		+"VALUES(?, ?, ?, ?, ?)";
 			
 			// add data to table
-	        PreparedStatement pstmt = connection.prepareStatement(sql);		
-			pstmt.setString(1, username);
-	        pstmt.setString(2, password);
-	        pstmt.setString(3, question);
-	        pstmt.setString(4, answer);    
-	        pstmt.executeUpdate();
+	        PreparedStatement createNewUserPs = connection.prepareStatement(createNewUserSql);
+	        String userID = UUID.randomUUID().toString().replace("-", "");
+	        createNewUserPs.setString(1, userID);
+	        createNewUserPs.setString(2, username);
+	        createNewUserPs.setString(3, userPassword);
+	        createNewUserPs.setString(4, secQuestion); 
+	        createNewUserPs.setString(5, answer); 
+	        createNewUserPs.executeUpdate();
 	
 		}
 		catch (SQLException e) 
@@ -216,7 +280,7 @@ public class SQLiteDatabase {
 	 * @param accountName
 	 * @return
 	 */
-	private static ResultSet searchAccount(String username,String applicationName, String accountName)
+	private static ResultSet searchAccount(String userID, String appName, String accountUsername)
 	{
 		ResultSet result = null;
 		try 
@@ -225,22 +289,23 @@ public class SQLiteDatabase {
 			Connection connection = DriverManager.getConnection(jdbcUrl);
 			java.sql.Statement statement = connection.createStatement();
 			
-			String sql = "SELECT * FROM " + username
+			String searchAccountSql = "SELECT * FROM " + accountTable
 					+ " WHERE " 
-					+ "applicationName = '" + applicationName + "'" + " COLLATE NOCASE "
+					+ "userID = '" + userID + "'"
+					+ " AND " 
 					
+					+ "(appName = '" + appName + "'" + " COLLATE NOCASE "
 					+ " OR " 
-					
-					+ "accountName like '" + accountName + "'" + " COLLATE NOCASE ";
+					+ "accountUsername = '" + accountUsername + "'" + " COLLATE NOCASE)";
 				
 			
-			result = statement.executeQuery(sql);
+			result = statement.executeQuery(searchAccountSql);
 			
 			
 		}
 		catch (SQLException e) 
 		{
-			System.out.println("Error in searching account");
+			System.out.println("Error in searching account by userID, appName and accountUserName");
 			
 			e.printStackTrace();	
 		}
@@ -248,6 +313,64 @@ public class SQLiteDatabase {
 		return  result;
 	}
 	
+	/**
+	 * This method search Account by user ID and accountID
+	 * @param userID
+	 * @param accountID
+	 * @return
+	 */
+	private static ResultSet searchAccount(String userID, String accountID)
+	{
+		ResultSet result = null;
+		try 
+		{
+			
+			Connection connection = DriverManager.getConnection(jdbcUrl);
+			java.sql.Statement statement = connection.createStatement();
+			
+			String searchAccountSql = "SELECT * FROM " + accountTable
+					+ " WHERE " 
+					+ "userID = '" + userID + "'"
+					+ "accountID = '" + accountID + "'";
+			statement.executeQuery(searchAccountSql);
+			
+			
+		}
+		catch (SQLException e) 
+		{
+			System.out.println("Error in searching account by User ID and Account ID");
+			
+			e.printStackTrace();	
+		}
+		
+		return  result;
+	}
+	
+	private static ResultSet searchUser(String username)
+	{
+		ResultSet result = null;
+		try 
+		{
+			
+			Connection connection = DriverManager.getConnection(jdbcUrl);
+			java.sql.Statement statement = connection.createStatement();
+			
+			String searchAccountSql = "SELECT * FROM " + usernameTable
+					+ " WHERE " 
+					+ "username = '" + username + "'";
+					
+			result = statement.executeQuery(searchAccountSql);
+			
+		}
+		catch (SQLException e) 
+		{
+			System.out.println("Error in searching username");
+			
+			e.printStackTrace();	
+		}
+		
+		return  result;
+	}
 	
 	private static void deleteUser(String username)
 	{
@@ -259,20 +382,27 @@ public class SQLiteDatabase {
 				return;
 			}
 			
+			// Delete all account binds to user
+			String userID = searchUser(username).getString("userID");
+			
 			Connection connection = DriverManager.getConnection(jdbcUrl);
 			java.sql.Statement statement = connection.createStatement();
 			
-			String sql = "DELETE FROM " + usernameTable
-					+ " WHERE " 
-					
-					+ "username = '" + username + "'";
+			String deleteUserAllAccountSql = "DELETE FROM " + accountTable
+					+ " WHERE " 				
+					+ "userId = '" + userID + "'";
+			statement.execute(deleteUserAllAccountSql);
+			
+			
+			// Delete user
+			String deleteUserSql = "DELETE FROM " + usernameTable
+					+ " WHERE " 				
+					+ "userID = '" + userID + "'";
 								
 			
-			statement.execute(sql);
+			statement.execute(deleteUserSql);
 			
-			sql = "DROP TABLE IF EXISTS " + username;
-			statement = connection.createStatement();			
-			statement.execute(sql);
+		
 		}
 		catch  (SQLException e) 
 		{
@@ -284,30 +414,34 @@ public class SQLiteDatabase {
 	/***
 	 * This Method delete an account from current user name table
 	 */
-	private static void deleteAccount(String username, String applicationName, String accountName)
+	private static void deleteAccount(String userID, String appName, String accountUsername)
 	{
 		try 
 		{
 			
-			if (!isAccountExist(username, applicationName, accountName))
+			if (!isAccountExist(userID, appName, accountUsername))
 			{
 				return;
+		
 			}
-			
 			Connection connection = DriverManager.getConnection(jdbcUrl);
 			java.sql.Statement statement = connection.createStatement();
 			
-			String sql = "DELETE FROM " + username
+			String deleteAccountSql = "DELETE FROM " + accountTable
 					+ " WHERE " 
 					
-					+ "applicationName = '" + applicationName + "'"
+					+ "userID = '" + userID + "'"
 					
 					+ " AND " 
 					
-					+ "accountName = '" + accountName + "'";
+					+ "appName = '" + appName + "'"
+					
+					+ " AND " 
+			
+					+ "accountUsername = '" + accountUsername + "'";
 				
 			
-			statement.execute(sql);
+			statement.execute(deleteAccountSql);
 		}
 		catch  (SQLException e) 
 		{
@@ -318,6 +452,43 @@ public class SQLiteDatabase {
 		
 	}
 
+	/**
+	 * This method delete account by user ID and accountID
+	 * @param userID
+	 * @param accountID
+	 */
+	private static void deleteAccount(String userID, String accountID)
+	{
+		try 
+		{
+			/*
+			if (!isAccountExist(username, applicationName, accountName))
+			{
+				return;
+			}
+			*/
+			Connection connection = DriverManager.getConnection(jdbcUrl);
+			java.sql.Statement statement = connection.createStatement();
+			
+			String deleteAccountSql = "DELETE FROM " + accountTable
+					+ " WHERE " 
+					
+					+ "userID = '" + userID + "'"
+					
+					+ " AND " 
+					
+					+ "accountID = '" + accountID + "'";
+			
+			statement.execute(deleteAccountSql);
+		}
+		catch  (SQLException e) 
+		{
+			System.out.println("Error in delete account by user ID and Account ID");	
+			e.printStackTrace();	
+		}
+		
+		
+	}
 	
 	/**
 	 * This method check whether or not an account already created by user
@@ -326,7 +497,7 @@ public class SQLiteDatabase {
 	 * @param accountName
 	 * @return
 	 */	
-	private static boolean isAccountExist(String username, String applicationName, String accountName)
+	private static boolean isAccountExist(String userID, String appName, String accountUsername)
 	{
 		ResultSet result = null;
 		try 
@@ -335,21 +506,20 @@ public class SQLiteDatabase {
 			Connection connection = DriverManager.getConnection(jdbcUrl);
 			java.sql.Statement statement = connection.createStatement();
 			
-			// command for new table if table not exist yet
-			String sql = "CREATE TABLE IF NOT EXISTS " + username +
-					"(applicationName varchar(64), accountName varchar(64), password varchar(64),"
-					+ " email varchar(64), creationDay varchar(64), duration varchar(10))";
-			
-			statement.executeUpdate(sql);
 			
 			// Find if account already exist
-			sql = "SELECT * FROM " + username
+			String sql = "SELECT * FROM " + accountTable
 					+ " WHERE " 
-					+ "applicationName = '" + applicationName + "'"
+					
+					+ "userID = '" + userID + "'"
 					
 					+ " AND " 
 					
-					+ "accountName = '" + accountName + "'";
+					+ "appName = '" + appName + "'"
+					
+					+ " AND " 
+					
+					+ "accountUsername = '" + accountUsername + "'";
 			
 			result = statement.executeQuery(sql);
 			
@@ -385,22 +555,16 @@ public class SQLiteDatabase {
 			Connection connection = DriverManager.getConnection(jdbcUrl);
 			java.sql.Statement statement = connection.createStatement();
 			
-			// Create a new table in data base if need
-			String sql = "CREATE TABLE IF NOT EXISTS " + usernameTable + "("
-					+ "username varchar(64),"
-					+ "password varchar(64),"
-					+ "question varchar(64),"
-					+ "answer varchar(64))";		
+	
 
 
-			statement.executeUpdate(sql);
 			// Find if account already exist
-			sql = "SELECT * FROM " + usernameTable
+			String findUserSql = "SELECT * FROM " + usernameTable
 					+ " WHERE " 
 					+ "username = '" + username + "'";
 
 			
-			result = statement.executeQuery(sql);
+			result = statement.executeQuery(findUserSql);
 			
 			if (result.next())
 			{
@@ -420,20 +584,20 @@ public class SQLiteDatabase {
 	}
 
 	
-	private static void updateAccountInfo(String username, String applicationName, String accountName, String newApplicationName, String newAccountName,
+	private static void updateAccountInfo(String userID, String appName, String accountUsername, String newApplicationName, String newAccountName,
 			String newPassword, String newEmail, String newCreationDay, String newDuration)
 	{
 		try 
 		{
-			if (isAccountExist(username, newApplicationName, newAccountName))
+			if (isAccountExist(userID, newApplicationName, newAccountName))
 			{
 				return;
 			}
-			
+			String accountID = searchAccount(userID, appName, accountUsername).getString("accountID");
 			Connection connection = DriverManager.getConnection(jdbcUrl);
 			java.sql.Statement statement = connection.createStatement();
 			
-			String sql = "UPDATE " + username
+			String sql = "UPDATE " + accountTable
 					+ " SET " 
 					+ "applicationName = '" + newApplicationName + "' , " 
 					+ "accountName = '" + newAccountName + "' , "
@@ -443,11 +607,11 @@ public class SQLiteDatabase {
 					+ "duration = '" + newDuration +  "' "
 					
 					+ " WHERE " 
-					+ "applicationName = '" + applicationName + "'"
+					+ "userID = '" + userID + "'"
 					
 					+ " AND " 
 					
-					+ "accountName = '" + accountName + "'";
+					+ "accountID = '" + accountID + "'";
 			
 			statement.executeUpdate(sql);
 
@@ -475,8 +639,8 @@ public class SQLiteDatabase {
 			
 			String sql = "UPDATE " + usernameTable
 					+ " SET " 
-					+ "password = '" + newPassword + "' , " 
-					+ "question = '" + newQuestion + "' , "
+					+ "userPassword = '" + newPassword + "' , " 
+					+ "secQuestion = '" + newQuestion + "' , "
 					+ "answer = '" + newAnswer + "'"
 
 					+ " WHERE " 
@@ -492,6 +656,8 @@ public class SQLiteDatabase {
 			e.printStackTrace();	
 		}
 	}
+
+	
 }
 
 
