@@ -62,7 +62,7 @@ public class SQLiteDatabase {
 			addNewAccount("Minh Hung Le", "Google", "username3","password1", "email1","04/12/22","04/12/22","100");
 			addNewAccount("Minh Hung Le", "Google", "username1","password1", "email1","04/12/22","04/12/22","100");
 			addNewAccount("Minh Hung Le", "Google", "username1","password1", "email1","04/12/22","04/12/22","100");
-
+			deleteAccount("Minh Hung Le", "Google", "username3");
 			
 			
 			// Selecting database
@@ -84,15 +84,15 @@ public class SQLiteDatabase {
 				System.out.println(userID + "  |  "+ accID + "  |  " +applicationName + "  |  " + accountName + " | " + password );
 			}
 			
-			/*
-			System.out.println("===============================================");
-			result = searchAccount("Jim", "","test1"); 
+			
+//==================================================================================
+			result = searchAccount( "Minh Hung Le","Google", "username1"); 
 			
 			while (result.next())
 			{
-				String applicationName = result.getString("applicationName");
-				String accountName = result.getString("accountName");
-				String password = result.getString("password");
+				String applicationName = result.getString("username");
+				String accountName = result.getString("appName");
+				String password = result.getString("accountPass");
 				
 				System.out.println(applicationName + "  |  " + accountName + " | " + password);
 			}
@@ -100,11 +100,9 @@ public class SQLiteDatabase {
 			 String path = System.getProperty("user.dir");
 		        
 		     System.out.println("Working Directory = " + path);
-		
+			
 		     
-		     //================================
-		     
-				*/
+				
 			 
 		} 
 		catch (SQLException e) 
@@ -172,6 +170,7 @@ public class SQLiteDatabase {
 			// check if account already exit
 			if (!isUserExist(username))
 			{
+				
 				return;	
 			}
 			
@@ -189,14 +188,11 @@ public class SQLiteDatabase {
 
 			if (isAccountExist(userID, appName, accountUsername))
 			{
+				connection.close();
 				return;
 			}
 			
 			
-			
-			
-			
-			//java.sql.Statement statement = connection.createStatement();
 			
 			String accountID = UUID.randomUUID().toString().replace("-", "");
 			String addAccountsql = "INSERT INTO " + accountTable + 
@@ -414,18 +410,32 @@ public class SQLiteDatabase {
 	/***
 	 * This Method delete an account from current user name table
 	 */
-	private static void deleteAccount(String userID, String appName, String accountUsername)
+	private static void deleteAccount(String username, String appName, String accountUsername)
 	{
 		try 
 		{
+			if (!isUserExist(username))
+			{
+				return;
+			}
+			
+			Connection connection = DriverManager.getConnection(jdbcUrl);
+			java.sql.Statement statement = connection.createStatement(); 
+			String searchAccountSql = "SELECT * FROM " + usernameTable
+					+ " WHERE " 
+					+ "username = '" + username + "'";
+					
+			ResultSet result = statement.executeQuery(searchAccountSql);
+			
+			String userID = result.getString("userID");
+			
 			
 			if (!isAccountExist(userID, appName, accountUsername))
 			{
 				return;
 		
 			}
-			Connection connection = DriverManager.getConnection(jdbcUrl);
-			java.sql.Statement statement = connection.createStatement();
+
 			
 			String deleteAccountSql = "DELETE FROM " + accountTable
 					+ " WHERE " 
@@ -441,7 +451,8 @@ public class SQLiteDatabase {
 					+ "accountUsername = '" + accountUsername + "'";
 				
 			
-			statement.execute(deleteAccountSql);
+			statement.executeUpdate(deleteAccountSql);
+			connection.close();
 		}
 		catch  (SQLException e) 
 		{
