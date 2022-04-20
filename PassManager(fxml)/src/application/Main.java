@@ -17,10 +17,12 @@ public class Main   extends Application{
     //this is the starting point of the program
 	@Override
 	public void start(Stage primaryStage) throws IOException {
+		
 		newLogin = new AppUI();
 		newLogin.setStage(fxml,title);
 	}
 	public static void main(String[] args) {
+			SQLiteDatabase.initializeDatabase();
 			launch(args);
 	}
 }

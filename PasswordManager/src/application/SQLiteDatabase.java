@@ -28,13 +28,16 @@ public class SQLiteDatabase {
 			java.sql.Statement statement = connection.createStatement();			
 //=======================================================================================================			
 			// test create new account
+			/*
 		     createNewUser("Minh Hung Le", "122345", "Who am I?", "John");
 		     createNewUser("Van Chuong", "122345", "Who am I?", "Chuong");
 		     createNewUser("ABC", "122345", "Who am I?", "ABC");
 		     updateUserInfo("ABC", "2222", "How are you?", "I am good" );
-		     createNewUser("Minh Hung Le", "122345", "Who am I?", "John");
-		     createNewUser("Minh Hung Le", "122345", "Who am I?", "John");
-		     
+		     createNewUser("Minh Hung ", "122345", "Who am I?", "John");
+		     createNewUser("Minh Hung ", "122345", "Who am I?", "John");
+		     */
+			
+			 createNewUser("Tim", "122345", "Who am I?", "Tim");
 		     deleteUser("VanChuong");
 					 
 		     String selectAllUsersql = "SELECT * FROM " + usernameTable;

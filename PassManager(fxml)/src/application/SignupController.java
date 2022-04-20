@@ -24,7 +24,7 @@ public class SignupController extends AppUI{
 	//it returns back app info menu
 	public void click_submit(ActionEvent event) throws IOException {
 		//logic for saving new user info in database
-				
+		SQLiteDatabase.createNewUser(username.getText(),pass.getText(),quest.getText(),ans.getText());
 		changeScene(event,fxml1);
 	}
 	@FXML
