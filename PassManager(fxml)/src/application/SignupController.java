@@ -23,13 +23,33 @@ public class SignupController extends AppUI{
 	
 	//it returns back app info menu
 	public void click_submit(ActionEvent event) throws IOException {
-		//logic for saving new user info in database
-				
-		changeScene(event,fxml1);
+		try {
+			String newUsername = username.getText();
+			String newPass = pass.getText();
+			String newRepeatedPass = repeatedPass.getText();
+			String newQuest = quest.getText();
+			String newAns = ans.getText();
+		
+			if(newPass.equals(newRepeatedPass)){
+				SQLiteDatabase.createNewUser(newUsername, newRepeatedPass, newQuest, newAns);
+			
+				alretMessege("Sign Up Succcessful!!");		
+				changeScene(event,fxml1);
+			
+			}
+			else alretMessege("Password and RepeatedPassword don't match");
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		
 	}
 	@FXML
 	//it returns back app info menu
 	public void click_cancel(ActionEvent event) throws IOException {
+		alretMessege("See you again!!!");
 		changeScene(event,fxml1);
 	}
 	public void click_generatePass(ActionEvent event) throws IOException {

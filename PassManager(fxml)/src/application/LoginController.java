@@ -35,9 +35,26 @@ public class LoginController extends AppUI {
 	//check the password and then call main menu if successful
 	public void click_login(ActionEvent event) throws IOException {
 		try {
+			String username = getUsername().getText();
+			String password = getPassword().getText();
 			
 			//logic for check user/password
-			if(!isTextFieldCleared(getUsername().getText())) {
+			if(!username.isEmpty() && !password.isEmpty()) {
+				if(SQLiteDatabase.isUserExist(username)) {
+					
+					if(SQLiteDatabase.searchUser(username).getString(3).equals(password))
+					{
+						changeScene(event,fxml1);
+					}
+					else {
+						alretMessege("Wrong Password. Try Again!!!");
+					}	
+				}
+				else {
+					alretMessege("UserName is wrong or not exits!!!");
+				}
+				
+				
 				//check account if there is expired info, if yes first show warning
 				//if(expired) then show warning ,else show main
 				
@@ -46,13 +63,13 @@ public class LoginController extends AppUI {
 				//should be ready for enter new entry
 
 				//setup the main menu
-				changeScene(event,fxml1);
 				
 				//set the user name in main menu if login is successful
 
 				
 				
 			}else {
+				alretMessege("Please Enter UserName and Password!!!");
 				
 			}
 			
