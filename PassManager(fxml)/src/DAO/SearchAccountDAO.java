@@ -43,12 +43,10 @@ public class SearchAccountDAO {
 				accountList.add(account);
 				//System.out.println(uniqueID + "  |  " + name + "  |  " + password + " | " + question +  "  |  " + answer);
 			
-			 }
-			return accountList;
-			
+			}
 			connection.close();
-			
-			
+			return accountList;
+
 		}
 		catch (SQLException e) 
 		{

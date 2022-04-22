@@ -37,43 +37,9 @@ public class LoginController extends AppUI {
 	//check the password and then call main menu if successful
 	public void click_login(ActionEvent event) throws IOException {
 		try {
-			String username = getUsername().getText();
-			String password = getPassword().getText();
-			
-			//logic for check user/password
-			if(!username.isEmpty() && !password.isEmpty()) {
-				if(SQLiteDatabase.isUserExist(username)) {
-					
-					if(SQLiteDatabase.searchUser(username).getString(3).equals(password))
-					{
-						changeScene(event,fxml1);
-					}
-					else {
-						alretMessege("Wrong Password. Try Again!!!");
-					}	
-				}
-				else {
-					alretMessege("UserName is wrong or not exits!!!");
-				}
-				
-				
-				//check account if there is expired info, if yes first show warning
-				//if(expired) then show warning ,else show main
-				
-				//clear the user pass textfield after login
-				//the reason is when we get back to this scene, the textfiled always 
-				//should be ready for enter new entry
-
-				//setup the main menu
-				
-				//set the user name in main menu if login is successful
 
 				
-				
-			}else {
-				alretMessege("Please Enter UserName and Password!!!");
-				
-			}
+
 			
 		} catch(Exception e) {
 			e.printStackTrace();
