@@ -49,7 +49,7 @@ public class ResetPasswordDAO {
 			String answer = result.getString("answer");
 			
 			//System.out.println(uniqueID + "  |  " + name + "  |  " + password + " | " + question +  "  |  " + answer);
-			user = new User(userID, username, password, question, answer, null);
+			user = new User(userID, username, password, question, answer);
 				
 		}
 		catch (SQLException e) 
