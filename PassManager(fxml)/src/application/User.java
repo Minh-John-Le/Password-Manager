@@ -3,14 +3,14 @@ package application;
 import java.util.List;
 
 public class User {
-	private String userID;
+	private int userID;
 	private String userName;
 	private String userPass;
 	private String secQuestion;
 	private String answer;
 	private List<Account> accountList;
 	
-	public User(String userId, String userName, String userPass, String secQuestion, String answer, List<Account> accountList) {
+	public User(int userId, String userName, String userPass, String secQuestion, String answer, List<Account> accountList) {
 		
 		this.userID = userId;
 		this.userName = userName;
@@ -51,7 +51,7 @@ public class User {
 		this.answer = answer;
 	}
 	
-	public String getUserID()
+	public int getUserID()
 	{
 		return this.userID;
 	}

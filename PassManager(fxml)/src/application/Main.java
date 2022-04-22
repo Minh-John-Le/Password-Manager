@@ -6,6 +6,8 @@
 package application;
 	
 import java.io.IOException;
+
+import DAO.InitializeDAO;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -22,7 +24,7 @@ public class Main   extends Application{
 		newLogin.setStage(fxml,title);
 	}
 	public static void main(String[] args) {
-			SQLiteDatabase.initializeDatabase();
+			InitializeDAO.initializeDatabase();
 			launch(args);
 	}
 }

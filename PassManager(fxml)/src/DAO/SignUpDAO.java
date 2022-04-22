@@ -54,6 +54,7 @@ public class SignUpDAO {
 			
 			if (isUserExist(username))
 			{
+				
 				return false; 
 			}
 			
@@ -67,15 +68,17 @@ public class SignUpDAO {
 			
 			// add data to table
 	        PreparedStatement createNewUserPs = connection.prepareStatement(createNewUserSql);
-	        String userID = UUID.randomUUID().toString().replace("-", "");
-	        createNewUserPs.setString(1, userID);
+	        
+	        //createNewUserPs.setString(1, userID);
 	        createNewUserPs.setString(2, username);
 	        createNewUserPs.setString(3, userPassword);
 	        createNewUserPs.setString(4, secQuestion); 
 	        createNewUserPs.setString(5, answer); 
 	        createNewUserPs.executeUpdate();
 	        
+	        connection.close();
 	        return true;
+	        
 		}
 		catch (SQLException e) 
 		{
@@ -83,7 +86,6 @@ public class SignUpDAO {
 			
 			e.printStackTrace();	
 		}
-		
 		return false;
 	}
 }

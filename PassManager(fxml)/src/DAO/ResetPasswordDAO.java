@@ -42,7 +42,7 @@ public class ResetPasswordDAO {
 		
 		try
 		{
-			String userID = result.getString("userID");
+			int userID = result.getInt("userID");
 			String username = result.getString("username");
 			String password = result.getString("userPassword");
 			String question = result.getString("secQuestion");

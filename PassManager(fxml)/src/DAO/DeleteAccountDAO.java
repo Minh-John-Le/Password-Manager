@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import GeneralSettings.Settings;
 
 public class DeleteAccountDAO {
-	public static void deleteAccount(String userID, String accountID)
+	public static void deleteAccount(int userID, int accountID)
 	{
 		try 
 		{

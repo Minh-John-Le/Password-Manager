@@ -9,7 +9,7 @@ import GeneralSettings.Settings;
 
 public class DeleteUserDAO {
 	
-	private static void deleteUser(String userID)
+	public static void deleteUser(int userID)
 	{
 		try 
 		{
@@ -31,7 +31,6 @@ public class DeleteUserDAO {
 								
 			
 			statement.execute(deleteUserSql);
-			
 		
 		}
 		catch  (SQLException e) 

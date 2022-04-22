@@ -9,21 +9,38 @@ import application.User;
 
 public class LoginDAO {
 	
-	private static User getUser(ResultSet result)
+	public static User getUser(String username)
 	{
+		ResultSet result = null;
 		User user = null;
-		
-		try
+		try 
 		{
-			String userID = result.getString("userID");
-			String username = result.getString("username");
+			
+			Connection connection = DriverManager.getConnection(Settings.jdbcUrl);
+			java.sql.Statement statement = connection.createStatement();
+			
+			// Search for user
+			String searchAccountSql = "SELECT * FROM " + Settings.usernameTable
+					+ " WHERE " 
+					+ "username = '" + username + "'";
+					
+			result = statement.executeQuery(searchAccountSql);
+			
+			if(result == null)
+			{
+				return null;
+			}
+			
+			
+			// create User bean and return it
+			int userID = result.getInt("userID");
 			String password = result.getString("userPassword");
 			String question = result.getString("secQuestion");
 			String answer = result.getString("answer");
 			
-			//System.out.println(uniqueID + "  |  " + name + "  |  " + password + " | " + question +  "  |  " + answer);
 			user = new User(userID, username, password, question, answer, null);
-				
+			connection.close();
+
 		}
 		catch (SQLException e) 
 		{
@@ -31,48 +48,8 @@ public class LoginDAO {
 			
 			e.printStackTrace();
 		}
+		
 		return user;
-	}
-	
-	
-	private static ResultSet searchUser(String username)
-	{
-		ResultSet result = null;
-		try 
-		{
-			
-			Connection connection = DriverManager.getConnection(Settings.jdbcUrl);
-			java.sql.Statement statement = connection.createStatement();
-			
-			String searchAccountSql = "SELECT * FROM " + Settings.usernameTable
-					+ " WHERE " 
-					+ "username = '" + username + "'";
-					
-			result = statement.executeQuery(searchAccountSql);
-			connection.close();
-			
-		}
-		catch (SQLException e) 
-		{
-			System.out.println("Error in searching username");
-			
-			e.printStackTrace();	
-		}
-		
-		return  result;
-	}
-	
-	
-	public static User gettingUser(String username)
-	{
-		ResultSet result = searchUser(username);
-		
-		if(result == null)
-		{
-			return null;
-		}
-		
-		return getUser(result); 
-		
+
 	}
 }

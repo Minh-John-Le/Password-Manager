@@ -7,7 +7,7 @@ import GeneralSettings.Settings;
 
 public class UpdateAccountDAO {
 	
-	public static void updateAccountAppName(String userID, String accID, String newAppName)
+	public static void updateAccountAppName(int userID, int accID, String newAppName)
 	{
 		try 
 		{
@@ -38,7 +38,7 @@ public class UpdateAccountDAO {
 		}
 	} 
 	
-	public static void updateAccountUsername(String userID, String accID, String newAccUsername)
+	public static void updateAccountUsername(int userID, int accID, String newAccUsername)
 	{
 		try 
 		{
@@ -68,7 +68,7 @@ public class UpdateAccountDAO {
 		}
 	} 
 
-	public static void updateAccountPassword(String userID, String accID, String newPassword)
+	public static void updateAccountPassword(int userID, int accID, String newPassword)
 	{
 		try 
 		{
@@ -99,7 +99,7 @@ public class UpdateAccountDAO {
 		}
 	} 
 
-	public static void updateAccountEmail(String userID, String accID, String newEmail)
+	public static void updateAccountEmail(int userID, int accID, String newEmail)
 	{
 		try 
 		{
@@ -130,7 +130,7 @@ public class UpdateAccountDAO {
 		}
 	} 
 
-	public static void updateAccountCreationDay(String userID, String accID, String newCreationDay)
+	public static void updateAccountCreationDay(int userID, int accID, String newCreationDay)
 	{
 		try 
 		{
@@ -161,7 +161,7 @@ public class UpdateAccountDAO {
 		}
 	} 
 
-	public static void updateAccountExpiredDay(String userID, String accID, String newExpiredDay)
+	public static void updateAccountExpiredDay(int userID, int accID, String newExpiredDay)
 	{
 		try 
 		{
@@ -192,7 +192,7 @@ public class UpdateAccountDAO {
 		}
 	} 
 
-	public static void updateAccountDuration(String userID, String accID, String newDuration)
+	public static void updateAccountDuration(int userID, int accID, String newDuration)
 	{
 		try 
 		{

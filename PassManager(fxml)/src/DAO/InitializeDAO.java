@@ -2,13 +2,9 @@ package DAO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-
 import GeneralSettings.Settings;
-import application.Account;
-import application.User;
+
 
 public class InitializeDAO {
 	
@@ -18,7 +14,7 @@ public class InitializeDAO {
 			Connection connection = DriverManager.getConnection(Settings.jdbcUrl);		
 			java.sql.Statement statement = connection.createStatement();
 			String userTablesql = "CREATE TABLE IF NOT EXISTS " + Settings.usernameTable
-					+"(userID varchar(32) PRIMARY KEY, " 
+					+"(userID INTEGER PRIMARY KEY AUTOINCREMENT, " 
 					+ "username varchar(64), "
 					+"userPassword varchar(64), "
 					+"secQuestion varchar(256), "
@@ -28,8 +24,8 @@ public class InitializeDAO {
 			
 			
 			String accountTablesql = "CREATE TABLE IF NOT EXISTS " + Settings.accountTable + "("
-					+"userID varchar(32), "
-					+"accountID varchar(32) PRIMARY KEY, "
+					+"userID INTEGER, "
+					+"accountID INTEGER PRIMARY KEY AUTOINCREMENT, "
 					+"appName varchar(64), " 
 					+"accountUsername varchar(64), "
 					+"accountPass varchar(64), "
