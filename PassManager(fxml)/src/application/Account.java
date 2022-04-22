@@ -1,6 +1,8 @@
 package application;
 
 public class Account {
+	private String userID;
+	private String accID;
 	private String appName;
 	private String userName;
 	private String appPass;
@@ -9,10 +11,13 @@ public class Account {
 	private String datCreated;
 	private String duration;
 	
+	
 	public String getAppName() {
 		return appName;
 	}
-	 public Account(String name, String username ,String pass,String email,String creation,String expiration,String days){
+	 public Account(String userID, String accID, String name, String username ,String pass,String email,String creation,String expiration,String days){
+		this.userID = userID;
+		this.accID = accID;	 
 		this.appName = name;
 		this.appPass = pass;
 		this.userName = username;
@@ -59,5 +64,14 @@ public class Account {
 	}
 	public void setUserName(String username) {
 		this.userName = username;
+	}
+	
+	public String getUserID()
+	{
+		return this.userID;
+	}
+	public String getAccID()
+	{
+		return this.accID;
 	}
 }

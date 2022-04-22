@@ -3,14 +3,16 @@ package application;
 import java.util.List;
 
 public class User {
+	private String userID;
 	private String userName;
 	private String userPass;
 	private String secQuestion;
 	private String answer;
 	private List<Account> accountList;
 	
-	public User(String userName, String userPass, String secQuestion, String answer, List<Account> accountList) {
-		super();
+	public User(String userId, String userName, String userPass, String secQuestion, String answer, List<Account> accountList) {
+		
+		this.userID = userId;
 		this.userName = userName;
 		this.userPass = userPass;
 		this.secQuestion = secQuestion;
@@ -47,5 +49,10 @@ public class User {
 	}
 	public void setAnswer(String answer) {
 		this.answer = answer;
+	}
+	
+	public String getUserID()
+	{
+		return this.userID;
 	}
 }
