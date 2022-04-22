@@ -79,7 +79,7 @@
                               <Insets />
                            </HBox.margin>
                         </Label>
-                        <TextField fx:id="repeatedPAss" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="265.0" />
+                        <TextField fx:id="repeatedPass" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="265.0" />
                      </children>
                      <opaqueInsets>
                         <Insets />

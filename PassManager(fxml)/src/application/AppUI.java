@@ -89,7 +89,7 @@ public class AppUI {
 			return true;
 		return false;
 	}
-	//check if field is cleared 
+	//check if field is cleared //(don't need it, Van)
 	public Boolean isPasswordFieldCleared(String text) {
 		
 		if(text.isEmpty())

@@ -1,15 +1,15 @@
 
 package application;
 
-import java.beans.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
+import java.sql.Statement;
 
-import org.omg.CORBA.Environment;
+import javax.print.attribute.standard.ReferenceUriSchemesSupported;
 
 public class SQLiteDatabase {
 	private static String jdbcUrl = "jdbc:sqlite:applicationDb.db";
@@ -22,22 +22,18 @@ public class SQLiteDatabase {
 		
 		try 
 		{
-			
-			initializeDatabase();
+			initializeDatabase(); 
 			Connection connection = DriverManager.getConnection(jdbcUrl);				
-			java.sql.Statement statement = connection.createStatement();			
+			Statement statement = connection.createStatement();			
 //=======================================================================================================			
 			// test create new account
-			/*
 		     createNewUser("Minh Hung Le", "122345", "Who am I?", "John");
 		     createNewUser("Van Chuong", "122345", "Who am I?", "Chuong");
 		     createNewUser("ABC", "122345", "Who am I?", "ABC");
 		     updateUserInfo("ABC", "2222", "How are you?", "I am good" );
-		     createNewUser("Minh Hung ", "122345", "Who am I?", "John");
-		     createNewUser("Minh Hung ", "122345", "Who am I?", "John");
-		     */
-			
-			 createNewUser("Tim", "122345", "Who am I?", "Tim");
+		     createNewUser("Minh Hung Le", "122345", "Who am I?", "John");
+		     createNewUser("Minh Hung Le", "122345", "Who am I?", "John");
+		     
 		     deleteUser("VanChuong");
 					 
 		     String selectAllUsersql = "SELECT * FROM " + usernameTable;
@@ -119,11 +115,11 @@ public class SQLiteDatabase {
 	
 	
 	
-	public static void initializeDatabase() 
+	private static void initializeDatabase() 
 	{
 		try {
 			Connection connection = DriverManager.getConnection(jdbcUrl);		
-			java.sql.Statement statement = connection.createStatement();
+			Statement statement = connection.createStatement();
 			String userTablesql = "CREATE TABLE IF NOT EXISTS " + usernameTable
 					+"(userID varchar(32) PRIMARY KEY, " 
 					+ "username varchar(64), "
@@ -234,6 +230,24 @@ public class SQLiteDatabase {
 	/***
 	 * This method adding a new user into database
 	 */
+	public static ResultSet verifyLogin(String username, String userPasssword) {
+		
+		
+		String verifyString ="SELECT count(1) FROM ? WHERE username = '"+ username +"' AND userPassword = '" +userPasssword+"';";
+		try {
+			Connection connection = DriverManager.getConnection(jdbcUrl);
+			Statement statement = connection.createStatement();
+			ResultSet result = statement.executeQuery(verifyString);
+
+			return result;
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
 	public static void createNewUser(String username, String userPassword, String secQuestion, String answer)
 	{
 		try 
@@ -245,7 +259,7 @@ public class SQLiteDatabase {
 			}
 			
 			Connection connection = DriverManager.getConnection(jdbcUrl);
-			
+			String userID = UUID.randomUUID().toString().replace("-", "");
 	        // adding new user name into table
 	        String createNewUserSql = "INSERT INTO " + usernameTable 
 	        		+"(userID, username, userPassword, secQuestion, answer) " + "\n" 
@@ -253,7 +267,7 @@ public class SQLiteDatabase {
 			
 			// add data to table
 	        PreparedStatement createNewUserPs = connection.prepareStatement(createNewUserSql);
-	        String userID = UUID.randomUUID().toString().replace("-", "");
+	        
 	        createNewUserPs.setString(1, userID);
 	        createNewUserPs.setString(2, username);
 	        createNewUserPs.setString(3, userPassword);
@@ -286,7 +300,7 @@ public class SQLiteDatabase {
 		{
 			
 			Connection connection = DriverManager.getConnection(jdbcUrl);
-			java.sql.Statement statement = connection.createStatement();
+			Statement statement = connection.createStatement();
 			
 			String searchAccountSql = "SELECT * FROM " + accountTable
 					+ " WHERE " 
@@ -325,7 +339,7 @@ public class SQLiteDatabase {
 		{
 			
 			Connection connection = DriverManager.getConnection(jdbcUrl);
-			java.sql.Statement statement = connection.createStatement();
+			Statement statement = connection.createStatement();
 			
 			String searchAccountSql = "SELECT * FROM " + accountTable
 					+ " WHERE " 
@@ -345,14 +359,14 @@ public class SQLiteDatabase {
 		return  result;
 	}
 	
-	private static ResultSet searchUser(String username)
+	public static ResultSet searchUser(String username)
 	{
 		ResultSet result = null;
 		try 
 		{
 			
 			Connection connection = DriverManager.getConnection(jdbcUrl);
-			java.sql.Statement statement = connection.createStatement();
+			Statement statement = connection.createStatement();
 			
 			String searchAccountSql = "SELECT * FROM " + usernameTable
 					+ " WHERE " 
@@ -365,7 +379,7 @@ public class SQLiteDatabase {
 		{
 			System.out.println("Error in searching username");
 			
-			e.printStackTrace();	
+			e.printStackTrace();		
 		}
 		
 		return  result;
@@ -385,7 +399,7 @@ public class SQLiteDatabase {
 			String userID = searchUser(username).getString("userID");
 			
 			Connection connection = DriverManager.getConnection(jdbcUrl);
-			java.sql.Statement statement = connection.createStatement();
+			Statement statement = connection.createStatement();
 			
 			String deleteUserAllAccountSql = "DELETE FROM " + accountTable
 					+ " WHERE " 				
@@ -423,7 +437,7 @@ public class SQLiteDatabase {
 			}
 			
 			Connection connection = DriverManager.getConnection(jdbcUrl);
-			java.sql.Statement statement = connection.createStatement(); 
+			Statement statement = connection.createStatement(); 
 			String searchAccountSql = "SELECT * FROM " + usernameTable
 					+ " WHERE " 
 					+ "username = '" + username + "'";
@@ -560,14 +574,14 @@ public class SQLiteDatabase {
 	 * @param username
 	 * @return
 	 */
-	private static boolean isUserExist(String username)
+	public static boolean isUserExist(String username)
 	{
 		ResultSet result = null;
 		try 
 		{
 			
 			Connection connection = DriverManager.getConnection(jdbcUrl);
-			java.sql.Statement statement = connection.createStatement();
+			Statement statement = connection.createStatement();
 			
 	
 
@@ -609,7 +623,7 @@ public class SQLiteDatabase {
 			}
 			String accountID = searchAccount(userID, appName, accountUsername).getString("accountID");
 			Connection connection = DriverManager.getConnection(jdbcUrl);
-			java.sql.Statement statement = connection.createStatement();
+			Statement statement = connection.createStatement();
 			
 			String sql = "UPDATE " + accountTable
 					+ " SET " 
@@ -649,7 +663,7 @@ public class SQLiteDatabase {
 			}
 			
 			Connection connection = DriverManager.getConnection(jdbcUrl);
-			java.sql.Statement statement = connection.createStatement();
+			Statement statement = connection.createStatement();
 			
 			String sql = "UPDATE " + usernameTable
 					+ " SET " 
