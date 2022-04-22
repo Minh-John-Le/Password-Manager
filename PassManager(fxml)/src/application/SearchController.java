@@ -30,7 +30,7 @@ public class SearchController extends AppUI{
 	//and sends it to main menu. so the main menu would be able to 
 	//show account info associated with this user name
 	public ObservableList<Account> list = FXCollections.observableArrayList(
-			new Account("google","Johren87","1234","john_smith@gmail.com","01/01/2020","06/01/2020","180")
+			new Account(1,2,"google","Johren87","1234","john_smith@gmail.com","01/01/2020","06/01/2020","180")
 	);
 	@FXML
 	public void initialize() {

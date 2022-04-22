@@ -3,6 +3,7 @@ package application;
 import java.io.IOException;
 
 import DAO.SQLiteDatabase;
+import DAO.SignUpDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -33,7 +34,7 @@ public class SignupController extends AppUI{
 			String newAns = ans.getText();
 		
 			if(newPass.equals(newRepeatedPass)){
-				SQLiteDatabase.createNewUser(newUsername, newRepeatedPass, newQuest, newAns);
+				SignUpDAO.createNewUser(newUsername, newRepeatedPass, newQuest, newAns);
 			
 				alretMessege("Sign Up Succcessful!!");		
 				changeScene(event,fxml1);
