@@ -11,8 +11,7 @@ import GeneralSettings.Settings;
 
 public class AddAccountDAO {
 	
-	private static boolean isAccountExist(int userID, String appName, String accountUsername)
-	{
+	public static boolean isAccountExist(int userID, String appName, String accountUsername){
 		ResultSet result = null;
 		try 
 		{
@@ -22,7 +21,7 @@ public class AddAccountDAO {
 			
 			
 			// Find if account already exist
-			String sql = "SELECT * FROM " + Settings.accountTable
+			String sql = "SELECT count(1) FROM " + Settings.accountTable
 					+ " WHERE " 
 					
 					+ "userID = '" + userID + "'"
@@ -37,7 +36,7 @@ public class AddAccountDAO {
 			
 			result = statement.executeQuery(sql);
 			
-			if (result.next())
+			if (result.getInt(1) == 1)
 			{
 				connection.close();
 				return true;
