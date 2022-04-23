@@ -10,7 +10,7 @@ public class LoginController extends AppUI {
 	//title of the menu
 	private final String fxml1 = "MainMenu.fxml";
 	private final String fxml2 = "SignUpMenu.fxml";
-	
+	public static User user;
 	@FXML
 	private PasswordField password;
 	@FXML
@@ -35,15 +35,14 @@ public class LoginController extends AppUI {
 	public void click_login(ActionEvent event) throws IOException {
 		String username = getUsername().getText();
 		String password = getPassword().getText();
-		User user = null;
 		try {
-			
+			user = LoginDAO.getUser(username);
 			if(username.isEmpty() || password.isEmpty()) {
 				alretMessege("Please Enter UserName and Password!!!");
 				return;
 				
 			}
-			user = LoginDAO.getUser(username);
+			
 			if(user == null){
 				alretMessege("UserName is wrong or not exits!!!");
 				return;

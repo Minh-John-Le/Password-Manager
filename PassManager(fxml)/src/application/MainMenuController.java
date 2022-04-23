@@ -2,6 +2,8 @@ package application;
 	
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,24 +24,26 @@ public class MainMenuController extends AppUI {
 	private final String fxml5 = "ExpiredPassMenu.fxml";
 	private final String fxml6 = "AddAppMenu.fxml";
 	private final String fxml7 = "LogoutMenu.fxml";
-	
+	private final User user = LoginController.user;
 	@FXML
-	private Label user;
+	private Label userLabel;
 	@FXML private TableView<Account> table;
 	@FXML private TableColumn<Account ,String> appName;
 	@FXML private TableColumn<Account ,String> userName;
 	@FXML private TableColumn<Account , String> appPass;
-	
+	ArrayList accountList = DAO.SearchAccountDAO.getAllAccount(user.getUserID());
 
 	//this function set the user name that successfully logs in 
 	//and sends it to main menu. so the main menu would be able to 
 	//show account info associated with this user name
-	public ObservableList<Account> list = FXCollections.observableArrayList(
-			new Account(1,2,"google","Johren87","1234","john_smith@gmail.com","01/01/2020","06/01/2020","180"),
-			new Account(1,2,"Apple","Johr_647","4444","john_smith@gmail.com","02/01/2020","07/01/2020","180")
-	);
+	public ObservableList<Account> list;
+	
 	@FXML
 	public void initialize() {
+		list = FXCollections.observableArrayList(accountList);
+		
+		String labelString = user.getUserName();
+		userLabel.setText(labelString);
 	    //Initializing the table
 		appName.setCellValueFactory(new PropertyValueFactory<Account ,String> ("appName"));
 		userName.setCellValueFactory(new PropertyValueFactory<Account ,String> ("userName"));
@@ -58,7 +62,7 @@ public class MainMenuController extends AppUI {
 		changeScene(event,fxml2);
 	}
 	@FXML public void clickLogout(ActionEvent event) throws IOException{
-		if(alretConfirmation(text))
+		if(alretConfirmation(messege))
 			changeScene(event,fxml3);
 	}
 	@FXML public void clickSearch(ActionEvent event) throws IOException{
