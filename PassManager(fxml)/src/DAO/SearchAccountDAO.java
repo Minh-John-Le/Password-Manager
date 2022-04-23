@@ -67,37 +67,34 @@ public class SearchAccountDAO {
 			
 			Connection connection = DriverManager.getConnection(Settings.jdbcUrl);
 			java.sql.Statement statement = connection.createStatement();
-			String searchAccountSql;
-			if(appName != null && accountUsername != null) {
-				 searchAccountSql = "SELECT * FROM " + Settings.accountTable
-						+ " WHERE " 
-						+ "userID = '" + userID + "'"
-						+ " AND " 
-						
-						+ "(appName = '" + appName + "'"
-						+ " OR " 
-						+ "accountUsername = '" + accountUsername + "');";
-				
-			}
-			else if(appName == null) {
-				 searchAccountSql = "SELECT * FROM " + Settings.accountTable
-						+ " WHERE " 
-						+ "userID = '" + userID + "'"
-						+ " AND " 
-						+ "accountUsername = '" + accountUsername + "');";
-				
-			}
-			else {
+			String searchAccountSql = null;
+			
+			
+			if(accountUsername != null && appName == null){
 				searchAccountSql = "SELECT * FROM " + Settings.accountTable
 						+ " WHERE " 
 						+ "userID = '" + userID + "'"
 						+ " AND " 
-						
-						+ "appName = '" + appName + "';";
-				
+						+ "accountUsername LIKE '%" + accountUsername + "%';";
 			}
+			else if(appName != null && accountUsername == null ) {
+				searchAccountSql = "SELECT * FROM " + Settings.accountTable
+						+ " WHERE " 
+						+ "userID = '" + userID + "'"
+						+ " AND " 
+						+ "appName LIKE '%" + appName + "%';";
+			}
+			else {
+				 searchAccountSql = "SELECT * FROM " + Settings.accountTable
+							+ " WHERE " 
+							+ "userID = '" + userID + "'"
+							+ " AND " 
+							+ "(appName LIKE '%" + appName + "%'"
+							+ " AND " 
+							+ "accountUsername LIKE '%" + accountUsername + "%');";
+					
+				}
 			
-				
 			
 			ResultSet result = statement.executeQuery(searchAccountSql);
 			
