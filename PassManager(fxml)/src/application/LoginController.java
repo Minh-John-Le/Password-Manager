@@ -1,13 +1,10 @@
 package application;
-
 import java.io.IOException;
-
-import DAO.SQLiteDatabase;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-
+import DAO.LoginDAO;
 
 public class LoginController extends AppUI {
 	//title of the menu
@@ -36,11 +33,27 @@ public class LoginController extends AppUI {
 	@FXML
 	//check the password and then call main menu if successful
 	public void click_login(ActionEvent event) throws IOException {
+		String username = getUsername().getText();
+		String password = getPassword().getText();
+		User user = null;
 		try {
-
-				
-
 			
+			if(username.isEmpty() || password.isEmpty()) {
+				alretMessege("Please Enter UserName and Password!!!");
+				return;
+				
+			}
+			user = LoginDAO.getUser(username);
+			if(user == null){
+				alretMessege("UserName is wrong or not exits!!!");
+				return;
+				}
+			
+			if(user.getUserPass().equals(password)) {
+				changeScene(event,fxml1);
+			}
+				
+	
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

@@ -1,31 +1,23 @@
 package application;
 
-import java.util.List;
-
 public class User {
 	private int userID;
 	private String userName;
 	private String userPass;
 	private String secQuestion;
 	private String answer;
-	private List<Account> accountList;
 	
-	public User(int userId, String userName, String userPass, String secQuestion, String answer, List<Account> accountList) {
+	
+	public User(int userId, String userName, String userPass, String secQuestion, String answer) {
 		
 		this.userID = userId;
 		this.userName = userName;
 		this.userPass = userPass;
 		this.secQuestion = secQuestion;
 		this.answer = answer;
-		this.accountList = accountList;
+		
 	}
-	
-	public List<Account> getAccountList() {
-		return accountList;
-	}
-	public void setAccountList(List<Account> accountList) {
-		this.accountList = accountList;
-	}
+
 	public String getUserName() {
 		return userName;
 	}

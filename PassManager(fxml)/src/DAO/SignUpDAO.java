@@ -10,7 +10,7 @@ import java.util.UUID;
 import GeneralSettings.Settings;
 
 public class SignUpDAO {
-	private static boolean isUserExist(String username)
+	public static boolean isUserExist(String username)
 	{
 		ResultSet result = null;
 		try 
@@ -19,8 +19,6 @@ public class SignUpDAO {
 			Connection connection = DriverManager.getConnection(Settings.jdbcUrl);
 			java.sql.Statement statement = connection.createStatement();
 			
-	
-
 
 			// Find if account already exist
 			String findUserSql = "SELECT * FROM " + Settings.usernameTable

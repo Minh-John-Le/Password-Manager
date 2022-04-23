@@ -32,7 +32,11 @@ public class SignupController extends AppUI{
 			String newRepeatedPass = repeatedPass.getText();
 			String newQuest = quest.getText();
 			String newAns = ans.getText();
-		
+			if(SignUpDAO.isUserExist(newUsername)){
+				alretMessege("User Already Exist!!!");
+				return;
+				
+			}
 			if(newPass.equals(newRepeatedPass)){
 				SignUpDAO.createNewUser(newUsername, newRepeatedPass, newQuest, newAns);
 			
