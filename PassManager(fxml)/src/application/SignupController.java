@@ -26,21 +26,38 @@ public class SignupController extends AppUI{
 	
 	//it returns back app info menu
 	public void click_submit(ActionEvent event) throws IOException {
-		try {
+		try 
+		{
+
+			
+			
+	
 			String newUsername = username.getText();
 			String newPass = pass.getText();
 			String newRepeatedPass = repeatedPass.getText();
 			String newQuest = quest.getText();
 			String newAns = ans.getText();
+			boolean canSignUp = false;
 		
 			if(newPass.equals(newRepeatedPass)){
-				SignUpDAO.createNewUser(newUsername, newRepeatedPass, newQuest, newAns);
+				canSignUp = SignUpDAO.createNewUser(newUsername, newRepeatedPass, newQuest, newAns);
 			
-				alretMessege("Sign Up Succcessful!!");		
-				changeScene(event,fxml1);
-			
+				if(!canSignUp)
+				{
+					alretMessege("Username is already exist!");
+				}
+				else
+				{
+					alretMessege("Sign Up Succcessful!!");		
+					changeScene(event,fxml1);
+				}
+				
 			}
-			else alretMessege("Password and RepeatedPassword don't match");
+			else 
+			{
+				alretMessege("Password and RepeatedPassword don't match");
+			}
+			
 			
 		}
 		catch(Exception e) {

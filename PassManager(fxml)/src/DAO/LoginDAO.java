@@ -18,19 +18,25 @@ public class LoginDAO {
 			
 			Connection connection = DriverManager.getConnection(Settings.jdbcUrl);
 			java.sql.Statement statement = connection.createStatement();
+			String isExistSQL = "SELECT count(1) FROM " + Settings.usernameTable
+					+ " WHERE " 
+					+ "username = '" + username + "'";
+			ResultSet isExist = statement.executeQuery(isExistSQL);
 			
-			// Search for user
+			
+			if(isExist.getInt(1) == 0)
+			{
+				connection.close();
+				return null;
+			}
+			
+			
 			String searchAccountSql = "SELECT * FROM " + Settings.usernameTable
 					+ " WHERE " 
 					+ "username = '" + username + "'";
 					
 			result = statement.executeQuery(searchAccountSql);
-			
-			if(result == null)
-			{
-				return null;
-			}
-			
+
 			
 			// create User bean and return it
 			int userID = result.getInt("userID");
@@ -38,18 +44,19 @@ public class LoginDAO {
 			String question = result.getString("secQuestion");
 			String answer = result.getString("answer");
 			
-			user = new User(userID, username, password, question, answer, null);
+			user = new User(userID, username, password, question, answer);
 			connection.close();
+			return user;
 
 		}
 		catch (SQLException e) 
 		{
+			
 			System.out.println("Error in getting user name List");
 			
 			e.printStackTrace();
 		}
 		
 		return user;
-
 	}
 }

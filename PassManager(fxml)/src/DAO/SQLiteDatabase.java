@@ -38,9 +38,9 @@ public class SQLiteDatabase {
 		     SignUpDAO.createNewUser("Minh Hung Le", "122345", "Who am I?", "John");
 		     SignUpDAO.createNewUser("Minh Hung Le", "122345", "Who am I?", "John");
 		     
-		     User currentUser = LoginDAO.getUser("Van Chuong");
+		     User currentUser = LoginDAO.getUser("1231");
 		     
-		     DeleteUserDAO.deleteUser(currentUser.getUserID());
+		    // System.out.println("This is user pass = " + currentUser.getUserPass());
 		     
 		     Connection connection = DriverManager.getConnection(jdbcUrl);				
 				Statement statement = connection.createStatement();				 
@@ -64,11 +64,11 @@ public class SQLiteDatabase {
 //=============================================================================================================
 			 //Test adding new account
 			
-			AddAccountDAO.addNewAccount(1, "Google", "username1","password1", "email1","04/12/22","04/12/22","100");
-			AddAccountDAO.addNewAccount(1, "Google", "username2","password1", "email1","04/12/22","04/12/22","100");
-			AddAccountDAO.addNewAccount(1, "Google", "username3","password1", "email1","04/12/22","04/12/22","100");
-			AddAccountDAO.addNewAccount(1, "Google", "username1","password1", "email1","04/12/22","04/12/22","100");
-			AddAccountDAO.addNewAccount(1, "Google", "username1","password1", "email1","04/12/22","04/12/22","100");
+			AddAccountDAO.addNewAccount(17, "Google", "username1","password1", "email1","04/12/22","04/12/22","100");
+			AddAccountDAO.addNewAccount(17, "Google", "username2","password1", "email1","04/12/22","04/12/22","100");
+			AddAccountDAO.addNewAccount(17, "Google", "username3","password1", "email1","04/12/22","04/12/22","100");
+			AddAccountDAO.addNewAccount(17, "Google", "username1","password1", "email1","04/12/22","04/12/22","100");
+			AddAccountDAO.addNewAccount(17, "Google", "username1","password1", "email1","04/12/22","04/12/22","100");
 			//DeleteAccountDAO.deleteAccount(1,6);
 			//DeleteUserDAO.deleteUser(1);
 			
@@ -94,7 +94,7 @@ public class SQLiteDatabase {
 			
 //==================================================================================
 			
-			ArrayList<Account> accounts = (SearchAccountDAO.getAccount(1,"google", "")); 
+			ArrayList<Account> accounts = (SearchAccountDAO.getAccount(17,"google", "")); 
 			
 			for (int i = 0; i < accounts.size(); i++)
 			{

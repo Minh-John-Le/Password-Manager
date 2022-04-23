@@ -73,9 +73,9 @@ public class SearchAccountDAO {
 					+ "userID = '" + userID + "'"
 					+ " AND " 
 					
-					+ "(appName = '" + appName + "'" + " COLLATE NOCASE "
+					+ "(appName LIKE '%" + appName + "%'" + " COLLATE NOCASE "
 					+ " OR " 
-					+ "accountUsername = '" + accountUsername + "'" + " COLLATE NOCASE)";
+					+ "accountUsername LIKE '%" + accountUsername + "%'" + " COLLATE NOCASE)";
 				
 			
 			ResultSet result = statement.executeQuery(searchAccountSql);

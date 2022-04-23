@@ -1,7 +1,5 @@
 package application;
 
-import java.util.List;
-
 public class User {
 	private int userID;
 	private String userName;

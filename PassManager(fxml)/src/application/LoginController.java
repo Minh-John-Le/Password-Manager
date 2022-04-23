@@ -2,7 +2,9 @@ package application;
 
 import java.io.IOException;
 
-import DAO.SQLiteDatabase;
+import DAO.LoginDAO;
+import DAO.SearchAccountDAO;
+import DAO.SignUpDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
@@ -13,6 +15,7 @@ public class LoginController extends AppUI {
 	//title of the menu
 	private final String fxml1 = "MainMenu.fxml";
 	private final String fxml2 = "SignUpMenu.fxml";
+	private final String fxml3 = "AskUsernameMenu.fxml";
 	
 	@FXML
 	private PasswordField password;
@@ -36,11 +39,38 @@ public class LoginController extends AppUI {
 	@FXML
 	//check the password and then call main menu if successful
 	public void click_login(ActionEvent event) throws IOException {
-		try {
-
-				
-
+		
 			
+		String username = getUsername().getText();
+		String password = getPassword().getText();
+		try {
+			User user = LoginDAO.getUser(username);
+			
+			if(username.isEmpty() || password.isEmpty()) 
+			{
+				alretMessege("Please Enter UserName and Password!!!");
+				return;			
+			}
+			
+			if(user == null)
+			{
+				alretMessege("UserName is wrong or not exits!!!");
+				return;
+			}
+			
+			if(user.getUserPass().equals(password))
+			{
+				
+				// Give the current user to Main Menu
+				MainMenuController.currentUser = user;
+				MainMenuController.allAccounts = SearchAccountDAO.getAllAccount(user.getUserID());
+				changeScene(event,fxml1);
+				return;
+			}
+			
+			alretMessege("Wrong Password. Try Again !!!");
+				
+	
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -48,9 +78,12 @@ public class LoginController extends AppUI {
 	@FXML
 	//load sign up menu
 	public void click_signup(ActionEvent event) throws IOException {
-		try {
+		try 
+		{	
 			changeScene(event,fxml2);
-		} catch(Exception e) {
+		} 
+		catch(Exception e) 
+		{
 			e.printStackTrace();
 		}
 	}
@@ -59,16 +92,9 @@ public class LoginController extends AppUI {
 	//calls forget password menu
 	public void click_forgetPass(ActionEvent event) throws IOException {
 
-	}
 	
-	//check user password
-	//this code is just for testing propose. should be edited later on
-	//password is PasswordFiled type which shows password in ******.
-	//other logic related to check the password should be placed in this function
-	public Boolean checkUserPassword() {
-		//if(password.getText().compareTo("")==0 || username.getText().compareTo("nima")==0)
-			return true;
-		//return false;
+	
+	changeScene(event,fxml3);
 
 	}
 

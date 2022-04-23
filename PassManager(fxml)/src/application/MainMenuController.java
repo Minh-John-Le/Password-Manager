@@ -2,6 +2,8 @@ package application;
 	
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,13 +26,17 @@ public class MainMenuController extends AppUI {
 	private final String fxml7 = "LogoutMenu.fxml";
 	
 	@FXML
-	private Label user;
+	private Label userLabel;
 	@FXML private TableView<Account> table;
 	@FXML private TableColumn<Account ,String> appName;
 	@FXML private TableColumn<Account ,String> userName;
 	@FXML private TableColumn<Account , String> appPass;
 	
-
+	// beans Object
+	
+	public static User currentUser = null;
+	public static ArrayList<Account> allAccounts = null;
+	
 	//this function set the user name that successfully logs in 
 	//and sends it to main menu. so the main menu would be able to 
 	//show account info associated with this user name
@@ -41,10 +47,11 @@ public class MainMenuController extends AppUI {
 	@FXML
 	public void initialize() {
 	    //Initializing the table
+		ObservableList<Account> accList = FXCollections.observableArrayList(allAccounts);
 		appName.setCellValueFactory(new PropertyValueFactory<Account ,String> ("appName"));
 		userName.setCellValueFactory(new PropertyValueFactory<Account ,String> ("userName"));
 		appPass.setCellValueFactory(new PropertyValueFactory<Account ,String> ("appPass"));
-		table.setItems(list);
+		table.setItems(accList);
 		table.getSelectionModel().selectFirst();
 	}
 	@FXML public void clickEdit(ActionEvent event) throws IOException{
@@ -73,4 +80,8 @@ public class MainMenuController extends AppUI {
 	@FXML public void onCloseRequest(ActionEvent event) throws IOException{
 		changeScene(event,fxml7);
 	}
+	
+
+	
+	
 }
