@@ -7,9 +7,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedList;
+import java.util.Locale;
 import java.util.UUID;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.print.attribute.standard.ReferenceUriSchemesSupported;
 
@@ -20,7 +27,7 @@ public class SQLiteDatabase {
 	private static String jdbcUrl = "jdbc:sqlite:applicationDb.db";
 	private static String usernameTable = "userInfoTable";
 	private static String accountTable = "accountInfoTable";
-	public static void main(String[] args)
+	public static void main(String[] args) throws ParseException
 	{
 		String databaseName = "John";
 		
@@ -94,7 +101,7 @@ public class SQLiteDatabase {
 			
 //==================================================================================
 			
-			ArrayList<Account> accounts = (SearchAccountDAO.getAccount(17,"google", "")); 
+			ArrayList<Account> accounts = (SearchAccountDAO.getAccount(17,"", "")); 
 			
 			for (int i = 0; i < accounts.size(); i++)
 			{
@@ -104,8 +111,10 @@ public class SQLiteDatabase {
 				String applicationName = currentAccount.getAppName();
 				String accountName = currentAccount.getUserName();
 				String password = currentAccount.getAppPass();
+				String day = currentAccount.getDateCreated();
+				String end = currentAccount.getDateExpired();
 				
-				System.out.println(userID + "  |  " +  accID + "  |  " + applicationName + "  |  " + accountName + " | " + password);
+				System.out.println(userID + "  |  " +  accID + "  |  " + applicationName + "  |  " + accountName + " | " + password + " | " + day + " | " + end);
 			}
 			
 			 String path = System.getProperty("user.dir");
@@ -113,7 +122,28 @@ public class SQLiteDatabase {
 		     System.out.println("Working Directory = " + path);
 			
 		     
+		     
+		     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");  
+		     LocalDate now = LocalDate.now();
+		     String dat = now.toString().replace("-", "/");
+		     LocalDate future = LocalDate.now().plusDays(12);
+		     System.out.println("dat = " + dat);
+		     
+		     
+
+
+		     //Date date = formatter.parse(dat);
+		     LocalDate date = LocalDate.parse(dat,dtf);
+		    
+		     System.out.println(dtf.format(date));  
+		     System.out.println(dtf.format(future));
 				
+		     
+		    ///==================
+		    // test String format
+		     String testString = "123123aa...1";
+		     testString = testString.replaceAll("[^0-9]", "");
+		     System.out.println(Integer.parseInt("1"));
 			 
 		} 
 		catch (SQLException e) 

@@ -5,14 +5,12 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.UUID;
 
 import GeneralSettings.Settings;
 
 public class AddAccountDAO {
 	
-	private static boolean isAccountExist(int userID, String appName, String accountUsername)
-	{
+	private static boolean isAccountExist(int userID, String appName, String accountUsername){
 		ResultSet result = null;
 		try 
 		{
@@ -22,14 +20,14 @@ public class AddAccountDAO {
 			
 			
 			// Find if account already exist
-			String sql = "SELECT * FROM " + Settings.accountTable
+			String sql = "SELECT count(1) FROM " + Settings.accountTable
 					+ " WHERE " 
 					
 					+ "userID = '" + userID + "'"
 					
 					+ " AND " 
 					
-					+ "appName = '" + appName + "'"
+					+ "appName = '" + appName + "'" + " COLLATE NOCASE "
 					
 					+ " AND " 
 					
@@ -37,7 +35,7 @@ public class AddAccountDAO {
 			
 			result = statement.executeQuery(sql);
 			
-			if (result.next())
+			if (result.getInt(1) > 0)
 			{
 				connection.close();
 				return true;

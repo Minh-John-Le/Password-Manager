@@ -4,6 +4,8 @@ package application;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import DAO.SearchAccountDAO;
+import GeneralSettings.Settings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -34,19 +36,13 @@ public class MainMenuController extends AppUI {
 	
 	// beans Object
 	
-	public static User currentUser = null;
 	public static ArrayList<Account> allAccounts = null;
 	
-	//this function set the user name that successfully logs in 
-	//and sends it to main menu. so the main menu would be able to 
-	//show account info associated with this user name
-	public ObservableList<Account> list = FXCollections.observableArrayList(
-			new Account(1,2,"google","Johren87","1234","john_smith@gmail.com","01/01/2020","06/01/2020","180"),
-			new Account(1,2,"Apple","Johr_647","4444","john_smith@gmail.com","02/01/2020","07/01/2020","180")
-	);
+
 	@FXML
 	public void initialize() {
 	    //Initializing the table
+		allAccounts = SearchAccountDAO.getAccount(Settings.currentUserID, "", "");
 		ObservableList<Account> accList = FXCollections.observableArrayList(allAccounts);
 		appName.setCellValueFactory(new PropertyValueFactory<Account ,String> ("appName"));
 		userName.setCellValueFactory(new PropertyValueFactory<Account ,String> ("userName"));
@@ -68,7 +64,8 @@ public class MainMenuController extends AppUI {
 		if(alretConfirmation(text))
 			changeScene(event,fxml3);
 	}
-	@FXML public void clickSearch(ActionEvent event) throws IOException{
+	@FXML public void clickSearch(ActionEvent event) throws IOException
+	{
 		changeScene(event,fxml4);
 	}
 	@FXML public void clickExpired(ActionEvent event) throws IOException{

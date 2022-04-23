@@ -38,7 +38,7 @@ public class Account {
 	public void setDateExpired(String dateExpited) {
 		this.dateExpired = dateExpited;
 	}
-	public String getDatCreated() {
+	public String getDateCreated() {
 		return datCreated;
 	}
 	public void setDatCreated(String datCreated) {

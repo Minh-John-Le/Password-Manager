@@ -5,6 +5,7 @@ import java.io.IOException;
 import DAO.LoginDAO;
 import DAO.SearchAccountDAO;
 import DAO.SignUpDAO;
+import GeneralSettings.Settings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
@@ -46,24 +47,24 @@ public class LoginController extends AppUI {
 		try {
 			User user = LoginDAO.getUser(username);
 			
+			// Empty pass and username
 			if(username.isEmpty() || password.isEmpty()) 
 			{
 				alretMessege("Please Enter UserName and Password!!!");
 				return;			
 			}
 			
+			// Cannot find the username in system
 			if(user == null)
 			{
 				alretMessege("UserName is wrong or not exits!!!");
 				return;
 			}
 			
+			// Success log in
 			if(user.getUserPass().equals(password))
 			{
-				
-				// Give the current user to Main Menu
-				MainMenuController.currentUser = user;
-				MainMenuController.allAccounts = SearchAccountDAO.getAllAccount(user.getUserID());
+				Settings.currentUserID = user.getUserID();
 				changeScene(event,fxml1);
 				return;
 			}
