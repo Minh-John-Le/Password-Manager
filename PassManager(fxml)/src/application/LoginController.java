@@ -50,8 +50,10 @@ public class LoginController extends AppUI {
 				}
 			
 			if(user.getUserPass().equals(password)) {
+				
 				changeScene(event,fxml1);
 			}
+			else alretMessege("Wrong Password. Try Again !!!");
 				
 	
 		} catch(Exception e) {
