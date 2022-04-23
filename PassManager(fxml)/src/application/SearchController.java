@@ -2,6 +2,7 @@ package application;
 
 import javafx.fxml.FXML;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,27 +14,32 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class SearchController extends AppUI{
+	private User user = LoginController.user;
 	private final String text = "The password is copied.";
 	@FXML
-	private Label user;
+	private Label userLabel;
 	@FXML
-	private TextField Application;
+	private TextField application;
 	@FXML
-	private TextField Username;
+	private TextField username;
 	@FXML private TableView<Account> table;
 	@FXML private TableColumn<Account ,String> appName;
 	@FXML private TableColumn<Account ,String> userName;
 	@FXML private TableColumn<Account , String> appPass;
+	ArrayList<Account> allAccountList = DAO.SearchAccountDAO.getAllAccount(user.getUserID());
 	
 
 	//this function set the user name that successfully logs in 
 	//and sends it to main menu. so the main menu would be able to 
 	//show account info associated with this user name
-	public ObservableList<Account> list = FXCollections.observableArrayList(
-			new Account(1,2,"google","Johren87","1234","john_smith@gmail.com","01/01/2020","06/01/2020","180")
-	);
+	public ObservableList<Account> list;
+	public ObservableList<Account> searchList;
 	@FXML
 	public void initialize() {
+		list = FXCollections.observableArrayList(allAccountList);
+		
+		String labelString = user.getUserName();
+		userLabel.setText(labelString);
 		appName.setCellValueFactory(new PropertyValueFactory<Account ,String> ("appName"));
 		userName.setCellValueFactory(new PropertyValueFactory<Account ,String> ("userName"));
 		appPass.setCellValueFactory(new PropertyValueFactory<Account ,String> ("appPass"));
@@ -62,9 +68,19 @@ public class SearchController extends AppUI{
 		changeScene(event,"EditInfoMenu.fxml");
 	}
 	@FXML public void clickSearch(ActionEvent event) throws IOException {
+		String applicationString = application.getText();
+		String usernameString = username.getText();
+		ArrayList<Account> searchAccountList =DAO.SearchAccountDAO.getAccount(user.getUserID(),applicationString,usernameString);
 		//update the table
-		changeScene(event,"SearchMenu.fxml");
-
+		searchList = FXCollections.observableArrayList(searchAccountList);
+		
+		String labelString = user.getUserName();
+		userLabel.setText(labelString);
+		appName.setCellValueFactory(new PropertyValueFactory<Account ,String> ("appName"));
+		userName.setCellValueFactory(new PropertyValueFactory<Account ,String> ("userName"));
+		appPass.setCellValueFactory(new PropertyValueFactory<Account ,String> ("appPass"));
+		table.setItems(searchList);
+		table.getSelectionModel().selectFirst();
 	}
 
 }

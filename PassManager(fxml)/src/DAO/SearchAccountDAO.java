@@ -67,15 +67,36 @@ public class SearchAccountDAO {
 			
 			Connection connection = DriverManager.getConnection(Settings.jdbcUrl);
 			java.sql.Statement statement = connection.createStatement();
+			String searchAccountSql;
+			if(appName != null && accountUsername != null) {
+				 searchAccountSql = "SELECT * FROM " + Settings.accountTable
+						+ " WHERE " 
+						+ "userID = '" + userID + "'"
+						+ " AND " 
+						
+						+ "(appName = '" + appName + "'"
+						+ " OR " 
+						+ "accountUsername = '" + accountUsername + "');";
+				
+			}
+			else if(appName == null) {
+				 searchAccountSql = "SELECT * FROM " + Settings.accountTable
+						+ " WHERE " 
+						+ "userID = '" + userID + "'"
+						+ " AND " 
+						+ "accountUsername = '" + accountUsername + "');";
+				
+			}
+			else {
+				searchAccountSql = "SELECT * FROM " + Settings.accountTable
+						+ " WHERE " 
+						+ "userID = '" + userID + "'"
+						+ " AND " 
+						
+						+ "appName = '" + appName + "';";
+				
+			}
 			
-			String searchAccountSql = "SELECT * FROM " + Settings.accountTable
-					+ " WHERE " 
-					+ "userID = '" + userID + "'"
-					+ " AND " 
-					
-					+ "(appName = '" + appName + "'" + " COLLATE NOCASE "
-					+ " OR " 
-					+ "accountUsername = '" + accountUsername + "'" + " COLLATE NOCASE)";
 				
 			
 			ResultSet result = statement.executeQuery(searchAccountSql);

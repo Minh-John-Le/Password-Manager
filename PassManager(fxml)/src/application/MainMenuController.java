@@ -31,7 +31,7 @@ public class MainMenuController extends AppUI {
 	@FXML private TableColumn<Account ,String> appName;
 	@FXML private TableColumn<Account ,String> userName;
 	@FXML private TableColumn<Account , String> appPass;
-	ArrayList accountList = DAO.SearchAccountDAO.getAllAccount(user.getUserID());
+	ArrayList<Account> accountList = DAO.SearchAccountDAO.getAllAccount(user.getUserID());
 
 	//this function set the user name that successfully logs in 
 	//and sends it to main menu. so the main menu would be able to 
