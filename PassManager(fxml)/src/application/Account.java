@@ -8,7 +8,7 @@ public class Account {
 	private String appPass;
 	private String email;
 	private String dateExpired;
-	private String datCreated;
+	private String dateCreated;
 	private String duration;
 	
 	
@@ -23,7 +23,7 @@ public class Account {
 		this.userName = username;
 		this.email = email;
 		this.dateExpired = expiration;
-		this.datCreated = creation;
+		this.dateCreated = creation;
 		this.duration = days;
 	 }
 	public String getEmail() {
@@ -39,10 +39,10 @@ public class Account {
 		this.dateExpired = dateExpited;
 	}
 	public String getDateCreated() {
-		return datCreated;
+		return dateCreated;
 	}
 	public void setDatCreated(String datCreated) {
-		this.datCreated = datCreated;
+		this.dateCreated = dateCreated;
 	}
 	public String getDuration() {
 		return duration;

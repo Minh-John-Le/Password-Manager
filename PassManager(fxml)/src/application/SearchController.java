@@ -14,6 +14,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
 
 public class SearchController extends AppUI{
 	private final String text = "The password is copied.";
@@ -26,7 +28,7 @@ public class SearchController extends AppUI{
 	@FXML private TableView<Account> table;
 	@FXML private TableColumn<Account ,String> appName;
 	@FXML private TableColumn<Account ,String> userName;
-	@FXML private TableColumn<Account , String> appPass;
+	@FXML private TableColumn<Account , String> dateExpired;
 	
 	// beans Object
 	public static ArrayList<Account> searchAccountList = new ArrayList<Account>();
@@ -40,31 +42,54 @@ public class SearchController extends AppUI{
 		ObservableList<Account> searchAccounts = FXCollections.observableArrayList(searchAccountList);
 		appName.setCellValueFactory(new PropertyValueFactory<Account ,String> ("appName"));
 		userName.setCellValueFactory(new PropertyValueFactory<Account ,String> ("userName"));
-		appPass.setCellValueFactory(new PropertyValueFactory<Account ,String> ("appPass"));
+		dateExpired.setCellValueFactory(new PropertyValueFactory<Account ,String> ("dateExpired"));
 		table.setItems(searchAccounts);
 		table.getSelectionModel().selectFirst();
 	}
 
 	@FXML public void clickCopy(ActionEvent event) throws IOException {
 		// copy
-		alretMessege(text);
-		changeScene(event,"MainMenu.fxml");
+		
+		// Get password
+		int index = table.getSelectionModel().getSelectedIndex();
+		if (index < 0)
+		{
+			return;
+		}
+		String myPassword = searchAccountList.get(index).getAppPass();
+		
+		// save password to clipboard
+		final Clipboard clipboard = Clipboard.getSystemClipboard();
+		final ClipboardContent content = new ClipboardContent();
+		content.putString(myPassword);
+		clipboard.setContent(content);
+		
+		// annouce user password have been save to clipboard
+		alretMessege(text + myPassword);
+		
 	}
 	@FXML public void clickMain(ActionEvent event) throws IOException {
 		// back to main menu
 		changeScene(event,"MainMenu.fxml");
 	}
+	
+	
 	@FXML public void clickLogout(ActionEvent event) throws IOException {
 		//ask for confirmation and sign out
 		//update database
-		if(alretConfirmation(text)) {
-		changeScene(event,"LoginMenu.fxml");
+		if(alretConfirmation("Do you want to Quit?")) 
+		{
+			changeScene(event,"LoginMenu.fxml");
 		}
 	}
+	
+	
 	@FXML public void clickEdit(ActionEvent event) throws IOException {
 		//update the table
 		changeScene(event,"EditInfoMenu.fxml");
 	}
+	
+	
 	@FXML public void clickSearch(ActionEvent event) throws IOException {
 		String application = Application.getText();
 		String username = Username.getText();
@@ -78,7 +103,7 @@ public class SearchController extends AppUI{
 		ObservableList<Account> allAccountlist = FXCollections.observableArrayList(searchAccountList);
 		appName.setCellValueFactory(new PropertyValueFactory<Account ,String> ("appName"));
 		userName.setCellValueFactory(new PropertyValueFactory<Account ,String> ("userName"));
-		appPass.setCellValueFactory(new PropertyValueFactory<Account ,String> ("appPass"));
+		dateExpired.setCellValueFactory(new PropertyValueFactory<Account ,String> ("dateExpired"));
 		table.setItems(allAccountlist);
 		table.getSelectionModel().selectFirst();
 

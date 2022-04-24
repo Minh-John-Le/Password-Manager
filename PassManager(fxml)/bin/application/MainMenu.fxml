@@ -49,7 +49,7 @@
                      <columns>
                         <TableColumn fx:id="appName" prefWidth="86.66667938232422" text="Application" />
                         <TableColumn fx:id="userName" prefWidth="99.33332824707031" text="Username" />
-                        <TableColumn fx:id="appPass" prefWidth="105.66665649414062" text="Password" />
+                        <TableColumn fx:id="expiredDate" prefWidth="105.66665649414062" text="Expired Date" />
                      </columns>
                   </TableView>
                </children>

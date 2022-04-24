@@ -14,10 +14,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
 
 
 public class MainMenuController extends AppUI {
-	private final String text = "The password is copied.?";
+	private final String text = "Sucess copy this pasword to clipboard: ";
 	private final String messege = "The Record is Copied?";
 	private final String fxml1 = "AppInfoMenu.fxml";
 	private final String fxml2 = "SettingMenu.fxml";
@@ -32,11 +34,11 @@ public class MainMenuController extends AppUI {
 	@FXML private TableView<Account> table;
 	@FXML private TableColumn<Account ,String> appName;
 	@FXML private TableColumn<Account ,String> userName;
-	@FXML private TableColumn<Account , String> appPass;
+	@FXML private TableColumn<Account , String> expiredDate;
 	
 	// beans Object
 	
-	public static ArrayList<Account> allAccounts = null;
+	public static ArrayList<Account> allAccounts = new ArrayList<Account>();
 	
 
 	@FXML
@@ -46,7 +48,7 @@ public class MainMenuController extends AppUI {
 		ObservableList<Account> accList = FXCollections.observableArrayList(allAccounts);
 		appName.setCellValueFactory(new PropertyValueFactory<Account ,String> ("appName"));
 		userName.setCellValueFactory(new PropertyValueFactory<Account ,String> ("userName"));
-		appPass.setCellValueFactory(new PropertyValueFactory<Account ,String> ("appPass"));
+		expiredDate.setCellValueFactory(new PropertyValueFactory<Account ,String> ("dateExpired"));
 		table.setItems(accList);
 		table.getSelectionModel().selectFirst();
 	}
@@ -55,8 +57,27 @@ public class MainMenuController extends AppUI {
 
 	}
 	@FXML public void clickCopy(ActionEvent event){
-		alretMessege(text);
+		
+		// Get password
+		int index = table.getSelectionModel().getSelectedIndex();
+		
+		if (index < 0)
+		{
+			return;
+		}
+		String myPassword = allAccounts.get(index).getAppPass();
+		
+		// save password to clipboard
+		final Clipboard clipboard = Clipboard.getSystemClipboard();
+		final ClipboardContent content = new ClipboardContent();
+		content.putString(myPassword);
+		clipboard.setContent(content);
+		
+		// annouce user password have been save to clipboard
+		alretMessege(text + myPassword);
 	}
+	
+	
 	@FXML public void clickSetting(ActionEvent event) throws IOException{
 		changeScene(event,fxml2);
 	}
