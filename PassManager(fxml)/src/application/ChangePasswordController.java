@@ -9,7 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 public class ChangePasswordController extends AppUI{
 	
-	private final String fxml2 ="GeneratePassMenu.fxml";
+
 	@FXML
 	private TextField oldPass;
 	@FXML
@@ -23,6 +23,8 @@ public class ChangePasswordController extends AppUI{
 	//The data comes from The database,it should be connected to database
 	public void initialize() {
 		oldPass.setText(Settings.selectedAccount.getAppPass());
+		newPass.setText(Settings.tempAccount.getAppPass());
+		repeatePass.setText(Settings.tempAccount.getAppPass());
 	}
 
 	@FXML
@@ -67,17 +69,23 @@ public class ChangePasswordController extends AppUI{
 		UpdateAccountDAO.updateAccountExpiredDay(userID, accID, newExpiredDay);
 		
 		Settings.selectedAccount = UpdateAccountDAO.getAccount(userID, accID);
+		Settings.tempAccount = new Account(-1,-1, "","","","","","","");
 		changeScene(event, Settings.EditingAccountScene);
 	}
 	@FXML
 	//it returns back app info menu
-	public void clickCancel(ActionEvent event) throws IOException {
+	public void clickCancel(ActionEvent event) throws IOException 
+	{
+		Settings.tempAccount = new Account(-1,-1, "","","","","","","");
 		changeScene(event, Settings.EditingAccountScene);
 	}		
 	@FXML
 	//it returns back app info menu
-	public void clickGenerator(ActionEvent event) throws IOException {
-		changeScene(event,fxml2);
+	public void clickGenerator(ActionEvent event) throws IOException 
+	{
+		Settings.tempAccount.setAppPass(newPass.getText());
+		GeneratePassController.previousScene = "ChangePasswordMenu.fxml";
+		changeScene(event, Settings.PassGeneratorScene);
 	}
 
 

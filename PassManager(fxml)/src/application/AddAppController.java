@@ -29,6 +29,17 @@ public class AddAppController extends AppUI{
 	
 
 	@FXML
+	private void initialize()
+	{
+		
+		username.setText(Settings.tempAccount.getUserName());
+		pass.setText(Settings.tempAccount.getAppPass());
+		repeatedPass.setText(Settings.tempAccount.getAppPass());
+		email.setText(Settings.tempAccount.getEmail());
+		duration.setText(Settings.tempAccount.getDuration());
+		appName.setText(Settings.tempAccount.getAppName());
+	}
+	@FXML
 	//provide logic behind deleting data and updating the database
 	//it returns to main menu after deleting the data
 	public void click_submit(ActionEvent event) throws IOException 
@@ -87,6 +98,8 @@ public class AddAppController extends AppUI{
 		if(isCreatedAccount)
 		{
 			alretMessege("Sucessful create new account!");
+			// set tempt account
+			Settings.tempAccount = new Account(-1,-1, "","","","","","","");
 			changeScene(event,fxml2);
 			return;
 		}
@@ -96,11 +109,19 @@ public class AddAppController extends AppUI{
 	@FXML
 	//it returns back app info menu
 	public void click_cancel(ActionEvent event) throws IOException {
+		Settings.tempAccount = new Account(-1,-1, "","","","","","","");
 		changeScene(event,fxml2);
 	}
 	@FXML
 	//it returns back app info menu
-	public void click_generatePass(ActionEvent event) throws IOException {
+	public void click_generatePass(ActionEvent event) throws IOException
+	{
+		Settings.tempAccount.setAppName(appName.getText());
+		Settings.tempAccount.setAppPass(pass.getText());
+		Settings.tempAccount.setEmail(email.getText());
+		Settings.tempAccount.setUserName(username.getText());
+		Settings.tempAccount.setDuration(duration.getText());
+		GeneratePassController.previousScene = Settings.AddAccountScene;
 		changeScene(event,fxml1);
 	}
 	

@@ -17,7 +17,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
+import PasswordGenerator.*;
 import javax.print.attribute.standard.ReferenceUriSchemesSupported;
 
 import application.Account;
@@ -148,6 +148,10 @@ public class SQLiteDatabase {
 		     testString = testString.replaceAll("[^0-9]", "");
 		     System.out.println(Integer.parseInt("1"));
 			 
+		     
+		     //====================
+		     String genTest = PasswordGenerator.generatePassword(1,2,3,4);
+		     System.out.println(genTest);
 		} 
 		catch (SQLException e) 
 		{

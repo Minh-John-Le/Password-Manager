@@ -14,7 +14,7 @@ public class Settings {
 	// Bean can
 	public static Account selectedAccount = null;
 	public static User currentUser = null;
-	
+	public static Account tempAccount = new Account(-1,-1, "","","","","","","");
 	
 	
 	// Scene Setting
@@ -27,5 +27,7 @@ public class Settings {
 	public static final String ChangeAppNameScene = "ChangeAppNameMenu.fxml";
 	public static final String LoginScene = "LoginMenu.fxml";
 	public static final String UserProfileScene = "SettingMenu.fxml";
+	public static final String PassGeneratorScene = "GeneratePassMenu.fxml";
+	public static final String AddAccountScene = "AddAppMenu.fxml";
 	
 }
