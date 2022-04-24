@@ -2,6 +2,7 @@ package application;
 
 import java.io.IOException;
 
+import GeneralSettings.Settings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
@@ -21,23 +22,26 @@ public class SettingController extends AppUI{
 	//here is a sample showing the UI works
 	//The data comes from The database,it should be connected to database
 	@FXML public void initialize() {
-
-		username.setText("john_master");
-		pass.setText("34254GQEf");
+		String usernameString = Settings.currentUser.getUserName();
+		String passwordString = Settings.currentUser.getUserPass();
+		String questString = Settings.currentUser.getSecQuestion();
+		String ansString = Settings.currentUser.getAnswer();
 		
-		quest.setText("What is you last time you went to a trip abroad?");
+		username.setText(usernameString);
+		pass.setText(passwordString);
+		
+		quest.setText(questString);
 		//this is so important to be in code. it let the question to fit properly in the textfield
 		quest.setWrapText(true);
-		ans.setText("2021");
+		ans.setText(ansString);
 		}
-	@FXML public void click_back(ActionEvent event) throws IOException {
+	@FXML public void click_back(ActionEvent event) throws IOException 
+	{
 		// back to main menu
-		changeScene(event,"MainMenu.fxml");
+		changeScene(event, Settings.MainScene);
 	}
-	@FXML public void click_changeUsername(ActionEvent event) throws IOException {
-		// back to main menu
-		changeScene(event,"ChangeUsernameMenu.fxml");
-	}
+
+	
 	@FXML public void click_changePass(ActionEvent event) throws IOException {
 		// back to main menu
 		changeScene(event,"ChangePasswordMenu.fxml");

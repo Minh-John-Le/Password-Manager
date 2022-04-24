@@ -9,7 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 public class ChangePasswordController extends AppUI{
 	
-	private final String fxml2 ="PassGeneratorMenu.fxml";
+	private final String fxml2 ="GeneratePassMenu.fxml";
 	@FXML
 	private TextField oldPass;
 	@FXML

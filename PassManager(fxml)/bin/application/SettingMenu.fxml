@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="370.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SettingController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="370.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SettingController">
    <children>
       <GridPane layoutX="7.0" layoutY="2.0" prefHeight="333.0" prefWidth="434.0" AnchorPane.topAnchor="2.0">
          <columnConstraints>
@@ -108,9 +108,6 @@
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>
-                     <children>
-                        <Button alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#click_changeUsername" prefHeight="25.0" prefWidth="65.0" text="Change" />
-                     </children>
                   </HBox>
                   <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="70.0">
                      <VBox.margin>

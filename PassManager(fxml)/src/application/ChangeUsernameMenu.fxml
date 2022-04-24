@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="320.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ChangeUsernameController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="320.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ChangeUsernameController">
    <children>
       <GridPane layoutX="2.0" prefHeight="320.0" prefWidth="450.0" AnchorPane.leftAnchor="2.0" AnchorPane.topAnchor="0.0">
          <columnConstraints>
@@ -82,7 +82,7 @@
             </VBox>
          </children>
       </GridPane>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="78.0" layoutY="10.0" prefHeight="55.0" prefWidth="247.0" text="Change Userame" AnchorPane.leftAnchor="113.0" AnchorPane.topAnchor="0.0">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="78.0" layoutY="10.0" prefHeight="55.0" prefWidth="247.0" text="Change Username" wrapText="true" AnchorPane.leftAnchor="113.0" AnchorPane.topAnchor="0.0">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
