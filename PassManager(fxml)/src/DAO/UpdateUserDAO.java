@@ -2,39 +2,55 @@ package DAO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import GeneralSettings.Settings;
+import application.Account;
+import application.User;
 
 public class UpdateUserDAO {
 	
-	public static void updateUserPassword(String userID, String newPassword)
+	public static User getUser(int userID)
 	{
+		User user = null;
 		try 
 		{
 			
 			Connection connection = DriverManager.getConnection(Settings.jdbcUrl);
 			java.sql.Statement statement = connection.createStatement();
+			String searchAccountSql = null;
 			
-			String sql = "UPDATE " + Settings.usernameTable
-					+ " SET " 
-					+ "userPassword = '" + newPassword + "'"
-
-					+ " WHERE " 
-					+ "userID = '" + userID + "'";
 			
-			statement.executeUpdate(sql);
+			searchAccountSql = "SELECT * FROM " + Settings.usernameTable
+						+ " WHERE " 
+						+ "userID = '" + userID + "'";
+			
+			
+			// create User bean and return it
+			ResultSet result = statement.executeQuery(searchAccountSql);
+			
+			String username = result.getString("username");
+			String password = result.getString("userPassword");
+			String question = result.getString("secQuestion");
+			String answer = result.getString("answer");
+			
+			user = new User(userID, username, password, question, answer);
+			connection.close();
+			return user;
 
 		}
 		catch (SQLException e) 
 		{
-			System.out.println("Error in editing user password");
+			System.out.println("Error in searching user by userID");
 			
 			e.printStackTrace();	
 		}
+		
+		return user;
 	}
 	
-	public static void UpdateUserSecQuestion(String userID, String newQuestion)
+	public static void UpdateUserSecQuestion(int userID, String newQuestion)
 	{
 		try 
 		{
@@ -62,7 +78,7 @@ public class UpdateUserDAO {
 	}
 	
 	
-	public static void UpdateUserAnswer(String userID, String newAnswer)
+	public static void UpdateUserAnswer(int userID, String newAnswer)
 	{
 		try 
 		{

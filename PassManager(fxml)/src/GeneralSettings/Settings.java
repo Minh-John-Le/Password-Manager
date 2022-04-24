@@ -24,6 +24,8 @@ public class Settings {
 	public static final String AskUsernameScene = "AskUsernameMenu.fxml";
 	public static final String EditingAccountScene = "EditInfoMenu.fxml";
 	public static final String SearchScene = "SearchMenu.fxml";
-	
 	public static final String ChangeAppNameScene = "ChangeAppNameMenu.fxml";
+	public static final String LoginScene = "LoginMenu.fxml";
+	public static final String UserProfileScene = "SettingMenu.fxml";
+	
 }

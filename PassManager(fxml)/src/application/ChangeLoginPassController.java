@@ -9,7 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
 public class ChangeLoginPassController extends AppUI {
-	private final String fxml = "LoginMenu.fxml";
+	
 	@FXML
 	private TextField oldPass;
 	@FXML
@@ -17,6 +17,7 @@ public class ChangeLoginPassController extends AppUI {
 	@FXML
 	private TextField repeatePass;
 
+	public static String previousScene = Settings.LoginScene;
 	@FXML 
 	public void initialize() 
 	{
@@ -36,7 +37,7 @@ public class ChangeLoginPassController extends AppUI {
 		{	
 			ResetPasswordDAO.updateUserPassword(userID, newPassString);
 			alretMessege("Sucessful change password!");
-			changeScene(event,fxml);
+			changeScene(event, previousScene);
 			return;
 		}
 		alretMessege("password and repeat password do not match!");
@@ -44,7 +45,7 @@ public class ChangeLoginPassController extends AppUI {
 	}
 	@FXML
 	public void clickCancel(ActionEvent event) throws IOException {
-		changeScene(event,fxml);
+		changeScene(event, previousScene);
 	}		
 
 }

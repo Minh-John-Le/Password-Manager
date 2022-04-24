@@ -97,8 +97,9 @@ public class LoginController extends AppUI {
 	
 	@FXML
 	//calls forget password menu
-	public void click_forgetPass(ActionEvent event) throws IOException {
-
+	public void click_forgetPass(ActionEvent event) throws IOException 
+	{
+	ChangeLoginPassController.previousScene = Settings.LoginScene;
 	changeScene(event, Settings.AskUsernameScene);
 
 	}
