@@ -1,10 +1,13 @@
 package application;
 import java.io.IOException;
+
+import DAO.UpdateAccountDAO;
+import GeneralSettings.Settings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 public class ChangeEmailController extends AppUI{
-	private final String fxml = "AppInfoMenu.fxml";
+
 	@FXML
 	private TextField oldEmail;
 	@FXML
@@ -17,21 +20,36 @@ public class ChangeEmailController extends AppUI{
 	//here is a sample showing the UI works
 	//The data comes from The database,it should be connected to database
 	public void initialize() {
-		oldEmail.setText("John_Smith@gmail.com");
+		oldEmail.setText(Settings.selectedAccount.getEmail());
 	}
 
 	@FXML
 	//provide logic behind deleting data and updating the database
 	//it returns to app info
-	public void clickSubmit(ActionEvent event) throws IOException {
-		//save new pass and update the database
-		changeScene(event,fxml);
+	public void clickSubmit(ActionEvent event) throws IOException
+	{
+		String newEmailString = newEmail.getText().trim();
+		String repeatedEmailString = repeateEmail.getText().trim();
+		int accID = Settings.selectedAccount.getAccID();
+		int userID = Settings.currentUser.getUserID();
+		
+		// Check if new application name is empty
+		if (!newEmailString.equals(repeatedEmailString))
+		{
+			alretMessege("Email and repeated Email do not match!");
+			return;
+		}
+				
+		UpdateAccountDAO.updateAccountEmail(userID, accID, newEmailString);
+		Settings.selectedAccount = UpdateAccountDAO.getAccount(userID, accID);
+		changeScene(event, Settings.EditingAccountScene);
 	}
 
 	@FXML
 	//it returns back app info menu
-	public void clickCancel(ActionEvent event) throws IOException {
-		changeScene(event,fxml);
+	public void clickCancel(ActionEvent event) throws IOException 
+	{
+		changeScene(event, Settings.EditingAccountScene);
 	}		
 
 

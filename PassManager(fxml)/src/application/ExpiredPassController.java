@@ -53,7 +53,7 @@ public class ExpiredPassController extends AppUI{
 		}
 		// give info mation to edit Info Controller
 		EditInfoController.previousScene = Settings.ExpiredPasswordScene;
-		EditInfoController.selectedAccount = account;
+		Settings.selectedAccount = account;
 		
 		changeScene(event, Settings.EditingAccountScene);
 	}

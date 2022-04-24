@@ -71,7 +71,7 @@ public class MainMenuController extends AppUI {
 		}
 		// give info mation to edit Info Controller
 		EditInfoController.previousScene = Settings.MainScene;
-		EditInfoController.selectedAccount = account;
+		Settings.selectedAccount = account;
 		
 		changeScene(event, Settings.EditingAccountScene);
 	}

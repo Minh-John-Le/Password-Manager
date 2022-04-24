@@ -69,8 +69,7 @@ public class AddAccountDAO {
 				return false;
 			}
 			
-			
-			
+				
 
 			String addAccountsql = "INSERT INTO " + Settings.accountTable + 
 					"(userID, accountID, appName, accountUsername, accountPass, "
