@@ -106,7 +106,7 @@
                         <Image url="@../../user.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="user" prefHeight="30.0" prefWidth="125.0" text="user">
+                  <Label fx:id="userLabel" prefHeight="30.0" prefWidth="125.0" text="user">
                      <padding>
                         <Insets left="10.0" />
                      </padding>

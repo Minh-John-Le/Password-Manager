@@ -10,7 +10,7 @@ import javafx.scene.control.TextField;
 
 public class SignupController extends AppUI{
 	private final String fxml1= "LoginMenu.fxml";
-	private final String fxml2= "GeneratePassMenu.fxml";
+
 	@FXML
 	private TextField username;
 	@FXML
@@ -21,22 +21,19 @@ public class SignupController extends AppUI{
 	private TextField quest;
 	@FXML
 	private TextField ans;
+	
+	
 	@FXML
-	
-	
 	//it returns back app info menu
 	public void click_submit(ActionEvent event) throws IOException {
 		try 
 		{
 
-			
-			
-	
-			String newUsername = username.getText();
-			String newPass = pass.getText();
-			String newRepeatedPass = repeatedPass.getText();
-			String newQuest = quest.getText();
-			String newAns = ans.getText();
+			String newUsername = username.getText().trim();
+			String newPass = pass.getText().trim();
+			String newRepeatedPass = repeatedPass.getText().trim();
+			String newQuest = quest.getText().trim();
+			String newAns = ans.getText().trim();
 			boolean canSignUp = false;
 		
 			if(newPass.equals(newRepeatedPass)){
@@ -66,14 +63,16 @@ public class SignupController extends AppUI{
 		
 		
 	}
+	
+	
+	
 	@FXML
 	//it returns back app info menu
-	public void click_cancel(ActionEvent event) throws IOException {
+	public void click_cancel(ActionEvent event) throws IOException 
+	{
 		alretMessege("See you again!!!");
 		changeScene(event,fxml1);
 	}
-	public void click_generatePass(ActionEvent event) throws IOException {
-		changeScene(event,fxml2);
-	}
+	
 
 }

@@ -1,4 +1,5 @@
 package GeneralSettings;
+import application.User;
 
 public class Settings {
 	public static final String jdbcUrl = "jdbc:sqlite:applicationDb.db";
@@ -11,7 +12,7 @@ public class Settings {
 	
 	
 	// User setting
-	public static int currentUserID = -1;
+	public static User currentUser = null;
 	
 	
 }

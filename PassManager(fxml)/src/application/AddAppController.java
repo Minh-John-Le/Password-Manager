@@ -81,7 +81,7 @@ public class AddAppController extends AppUI{
 		
 		
 		
-		boolean isCreatedAccount = AddAccountDAO.addNewAccount(Settings.currentUserID, appNameString, accountUsernameString,
+		boolean isCreatedAccount = AddAccountDAO.addNewAccount(Settings.currentUser.getUserID(), appNameString, accountUsernameString,
 				accountPassString, emailString, newCreatedDay, newExpiredDay, String.valueOf(newDuration));
 		
 		if(isCreatedAccount)

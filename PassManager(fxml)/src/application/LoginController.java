@@ -42,20 +42,20 @@ public class LoginController extends AppUI {
 	public void click_login(ActionEvent event) throws IOException {
 		
 			
-		String username = getUsername().getText();
-		String password = getPassword().getText();
+		String username = getUsername().getText().trim();
+		String password = getPassword().getText().trim();
 		try {
 			User user = LoginDAO.getUser(username);
 			
 			// Empty pass and username
-			if(username.isEmpty() || password.isEmpty()) 
+			if (username.isEmpty() || password.isEmpty()) 
 			{
 				alretMessege("Please Enter UserName and Password!!!");
 				return;			
 			}
 			
 			// Cannot find the username in system
-			if(user == null)
+			if (user == null)
 			{
 				alretMessege("UserName is wrong or not exits!!!");
 				return;
@@ -64,7 +64,7 @@ public class LoginController extends AppUI {
 			// Success log in
 			if(user.getUserPass().equals(password))
 			{
-				Settings.currentUserID = user.getUserID();
+				Settings.currentUser = user;
 				changeScene(event,fxml1);
 				return;
 			}

@@ -20,7 +20,7 @@ import javafx.scene.input.ClipboardContent;
 public class SearchController extends AppUI{
 	private final String text = "The password is copied.";
 	@FXML
-	private Label user;
+	private Label userLabel;
 	@FXML
 	private TextField Application;
 	@FXML
@@ -39,6 +39,8 @@ public class SearchController extends AppUI{
 	//show account info associated with this user name
 	@FXML
 	public void initialize() {
+		userLabel.setText(Settings.currentUser.getUserName());
+		
 		ObservableList<Account> searchAccounts = FXCollections.observableArrayList(searchAccountList);
 		appName.setCellValueFactory(new PropertyValueFactory<Account ,String> ("appName"));
 		userName.setCellValueFactory(new PropertyValueFactory<Account ,String> ("userName"));
@@ -95,7 +97,7 @@ public class SearchController extends AppUI{
 		String username = Username.getText();
 		
 		ArrayList<Account> accountList = 
-				SearchAccountDAO.getAccount(Settings.currentUserID,application,username);
+				SearchAccountDAO.getAccount(Settings.currentUser.getUserID(),application,username);
 		//update the table
 		SearchController.searchAccountList = accountList;
 		

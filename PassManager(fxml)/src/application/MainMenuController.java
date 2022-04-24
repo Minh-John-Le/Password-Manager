@@ -20,7 +20,6 @@ import javafx.scene.input.ClipboardContent;
 
 public class MainMenuController extends AppUI {
 	private final String text = "Sucess copy this pasword to clipboard: ";
-	private final String messege = "The Record is Copied?";
 	private final String fxml1 = "AppInfoMenu.fxml";
 	private final String fxml2 = "SettingMenu.fxml";
 	private final String fxml3 = "LoginMenu.fxml";
@@ -43,8 +42,11 @@ public class MainMenuController extends AppUI {
 
 	@FXML
 	public void initialize() {
+		// Fill in username field
+		userLabel.setText(Settings.currentUser.getUserName());
+		
 	    //Initializing the table
-		allAccounts = SearchAccountDAO.getAccount(Settings.currentUserID, "", "");
+		allAccounts = SearchAccountDAO.getAccount(Settings.currentUser.getUserID(), "", "");
 		ObservableList<Account> accList = FXCollections.observableArrayList(allAccounts);
 		appName.setCellValueFactory(new PropertyValueFactory<Account ,String> ("appName"));
 		userName.setCellValueFactory(new PropertyValueFactory<Account ,String> ("userName"));
