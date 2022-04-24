@@ -39,8 +39,12 @@ public class SearchController extends AppUI{
 	//show account info associated with this user name
 	@FXML
 	public void initialize() {
+		// Set user name
 		userLabel.setText(Settings.currentUser.getUserName());
+		//get all account
+		searchAccountList = SearchAccountDAO.getAccount(Settings.currentUser.getUserID(), "", "");
 		
+		// Fill in table
 		ObservableList<Account> searchAccounts = FXCollections.observableArrayList(searchAccountList);
 		appName.setCellValueFactory(new PropertyValueFactory<Account ,String> ("appName"));
 		userName.setCellValueFactory(new PropertyValueFactory<Account ,String> ("userName"));
@@ -50,15 +54,13 @@ public class SearchController extends AppUI{
 	}
 
 	@FXML public void clickCopy(ActionEvent event) throws IOException {
-		// copy
-		
-		// Get password
-		int index = table.getSelectionModel().getSelectedIndex();
-		if (index < 0)
+		Account account = table.getSelectionModel().getSelectedItem();
+		if (account == null)
 		{
 			return;
 		}
-		String myPassword = searchAccountList.get(index).getAppPass();
+
+		String myPassword = account.getAppPass();
 		
 		// save password to clipboard
 		final Clipboard clipboard = Clipboard.getSystemClipboard();
@@ -72,7 +74,7 @@ public class SearchController extends AppUI{
 	}
 	@FXML public void clickMain(ActionEvent event) throws IOException {
 		// back to main menu
-		changeScene(event,"MainMenu.fxml");
+		changeScene(event, Settings.MainScene);
 	}
 	
 	
@@ -86,9 +88,19 @@ public class SearchController extends AppUI{
 	}
 	
 	
-	@FXML public void clickEdit(ActionEvent event) throws IOException {
-		//update the table
-		changeScene(event,"EditInfoMenu.fxml");
+	@FXML public void clickEdit(ActionEvent event) throws IOException 
+	{
+		// get selected account
+		Account account = table.getSelectionModel().getSelectedItem();
+		if (account == null)
+		{
+			return;
+		}
+		// give info mation to edit Info Controller
+		EditInfoController.previousScene = Settings.SearchScene;
+		EditInfoController.selectedAccount = account;
+		
+		changeScene(event, Settings.EditingAccountScene);
 	}
 	
 	

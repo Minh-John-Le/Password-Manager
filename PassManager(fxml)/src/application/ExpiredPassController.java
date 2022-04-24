@@ -1,5 +1,6 @@
 package application;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -44,16 +45,17 @@ public class ExpiredPassController extends AppUI{
 		table.setItems(accList);
 		table.getSelectionModel().selectFirst();
 	}
-	@FXML public void click_Edit(ActionEvent event){
-		try 
+	@FXML public void click_Edit(ActionEvent event) throws IOException{
+		Account account = table.getSelectionModel().getSelectedItem();
+		if (account == null)
 		{
-			
-			changeScene(event,"AppInfoMenu.fxml");
+			return;
 		}
-		catch(Exception e) 
-		{
-			e.printStackTrace();
-		}
+		// give info mation to edit Info Controller
+		EditInfoController.previousScene = Settings.ExpiredPasswordScene;
+		EditInfoController.selectedAccount = account;
+		
+		changeScene(event, Settings.EditingAccountScene);
 	}
 	
 	@FXML public void click_Logout(ActionEvent event){

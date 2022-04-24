@@ -6,8 +6,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import DAO.LoginDAO;
-import DAO.SearchAccountDAO;
-import DAO.SignUpDAO;
 import GeneralSettings.Settings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,9 +15,7 @@ import javafx.scene.control.TextField;
 
 public class LoginController extends AppUI {
 	//title of the menu
-	private final String fxml1 = "MainMenu.fxml";
-	private final String fxml2 = "SignUpMenu.fxml";
-	private final String fxml3 = "AskUsernameMenu.fxml";
+
 	
 	@FXML
 	private PasswordField password;
@@ -70,11 +66,11 @@ public class LoginController extends AppUI {
 				Settings.currentUser = user;
 				if(!hasExpiredPassword(user))
 				{
-					changeScene(event,fxml1);
+					changeScene(event, Settings.MainScene);
 				}
 				else
 				{
-					changeScene(event,Settings.expiredPasswordScene);
+					changeScene(event,Settings.ExpiredPasswordScene);
 				}
 				return;
 			}
@@ -91,7 +87,7 @@ public class LoginController extends AppUI {
 	public void click_signup(ActionEvent event) throws IOException {
 		try 
 		{	
-			changeScene(event,fxml2);
+			changeScene(event, Settings.SignUpScene);
 		} 
 		catch(Exception e) 
 		{
@@ -103,7 +99,7 @@ public class LoginController extends AppUI {
 	//calls forget password menu
 	public void click_forgetPass(ActionEvent event) throws IOException {
 
-	changeScene(event,fxml3);
+	changeScene(event, Settings.AskUsernameScene);
 
 	}
 

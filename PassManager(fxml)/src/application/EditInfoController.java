@@ -2,6 +2,7 @@ package application;
 
 import java.io.IOException;
 
+import GeneralSettings.Settings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -22,29 +23,49 @@ public class EditInfoController extends AppUI{
 	private TextField expirationDate;
 	@FXML
 	private TextField day;
-
+	
+	// previous scene settings
+	public static String previousScene = Settings.MainScene;
+	public static Account selectedAccount = null;
 
 
 	//initializer fill out the menu with the app information
 	//here is a sample showing the UI works
 	//The data comes from The database,it should be connected to database
-	@FXML public void initialize() {
-		appName.setText("Google");
-		email.setText("john.smith@Gmail.com");
-		username.setText("john_Smith78");
-		pass.setText("yht34QEf");
-		creationDate.setText("03/01/2022");
-		expirationDate.setText("09/01/2022");
-		day.setText("180");
+	@FXML 
+	public void initialize() 
+	{
+		if (selectedAccount == null)
+		{
+			return;
 		}
+		
+		String appNameString = selectedAccount.getAppName();
+		String emailString = selectedAccount.getEmail();
+		String usernameString = selectedAccount.getUserName();
+		String passwordString = selectedAccount.getAppPass();
+		String creationDateString = selectedAccount.getDateCreated();
+		String expirationDateString = selectedAccount.getDateExpired();
+		String durationString = selectedAccount.getDuration();
+		
+		
+		appName.setText(appNameString);
+		email.setText(emailString);
+		username.setText(usernameString);
+		pass.setText(passwordString);
+		creationDate.setText(creationDateString);
+		expirationDate.setText(expirationDateString);
+		day.setText(durationString);
+	}
+	
 	@FXML public void click_Back(ActionEvent event) throws IOException {
 		// back to main menu
-		changeScene(event,"SearchMenu.fxml");
+		changeScene(event, previousScene);
 	}
 	@FXML public void click_Delete(ActionEvent event) throws IOException {
 		//ask for confirmation
 		if(alretConfirmation(text)) {
-		changeScene(event,"MainMenu.fxml");
+		changeScene(event, previousScene);
 		
 		//logic behind deleting data and updating the database
 		

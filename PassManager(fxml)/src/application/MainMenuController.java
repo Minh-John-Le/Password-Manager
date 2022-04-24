@@ -20,10 +20,9 @@ import javafx.scene.input.ClipboardContent;
 
 public class MainMenuController extends AppUI {
 	private final String text = "Sucess copy this pasword to clipboard: ";
-	private final String fxml1 = "AppInfoMenu.fxml";
 	private final String fxml2 = "SettingMenu.fxml";
 	private final String fxml3 = "LoginMenu.fxml";
-	private final String fxml4 = "SearchMenu.fxml";
+
 	private final String fxml5 = "ExpiredPassMenu.fxml";
 	private final String fxml6 = "AddAppMenu.fxml";
 	private final String fxml7 = "LogoutMenu.fxml";
@@ -54,20 +53,47 @@ public class MainMenuController extends AppUI {
 		table.setItems(accList);
 		table.getSelectionModel().selectFirst();
 	}
-	@FXML public void clickEdit(ActionEvent event) throws IOException{
-		changeScene(event,fxml1);
-
-	}
-	@FXML public void clickCopy(ActionEvent event){
-		
-		// Get password
-		int index = table.getSelectionModel().getSelectedIndex();
-		
-		if (index < 0)
+	
+	
+	/**
+	 * This method for getting to editing scene for selected account
+	 * @param event
+	 * @throws IOException
+	 */
+	@FXML 
+	public void clickEdit(ActionEvent event) throws IOException
+	{
+		// get selected account
+		Account account = table.getSelectionModel().getSelectedItem();
+		if (account == null)
 		{
 			return;
 		}
-		String myPassword = allAccounts.get(index).getAppPass();
+		// give info mation to edit Info Controller
+		EditInfoController.previousScene = Settings.MainScene;
+		EditInfoController.selectedAccount = account;
+		
+		changeScene(event, Settings.EditingAccountScene);
+	}
+	
+	
+	
+	
+	/**
+	 * This method copy the password of selected account to clipboard
+	 * @param event
+	 */
+	@FXML public void clickCopy(ActionEvent event){
+		
+		// Get password
+
+		Account account = table.getSelectionModel().getSelectedItem();
+		if (account == null)
+		{
+			return;
+		}
+
+		String myPassword = account.getAppPass();
 		
 		// save password to clipboard
 		final Clipboard clipboard = Clipboard.getSystemClipboard();
@@ -89,7 +115,7 @@ public class MainMenuController extends AppUI {
 	}
 	@FXML public void clickSearch(ActionEvent event) throws IOException
 	{
-		changeScene(event,fxml4);
+		changeScene(event, Settings.SearchScene);
 	}
 	@FXML public void clickExpired(ActionEvent event) throws IOException{
 		changeScene(event,fxml5);
@@ -100,8 +126,6 @@ public class MainMenuController extends AppUI {
 	@FXML public void onCloseRequest(ActionEvent event) throws IOException{
 		changeScene(event,fxml7);
 	}
-	
-
 	
 	
 }
