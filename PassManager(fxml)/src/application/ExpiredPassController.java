@@ -1,5 +1,12 @@
 package application;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+
+import DAO.ExpiredPasswordDAO;
+import DAO.SearchAccountDAO;
+import GeneralSettings.Settings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,35 +19,43 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class ExpiredPassController extends AppUI{
 	private final String text = "Do You Want To Logout?";
 	@FXML
-	private Label user;
+	private Label userLabel;
 	@FXML private TableView<Account> table;
 	@FXML private TableColumn<Account ,String> appName;
 	@FXML private TableColumn<Account ,String> userName;
-	@FXML private TableColumn<Account , String> appPass;
+	@FXML private TableColumn<Account , String> expiredDate;
 	
 
-	//this function set the user name that successfully logs in 
-	//and sends it to main menu. so the main menu would be able to 
-	//show account info associated with this user name
-	public ObservableList<Account> list = FXCollections.observableArrayList(
-			new Account(1,2,"google","Johren87","1234","john_smith@gmail.com","01/01/2020","06/01/2020","180")
-	);
 	@FXML
-	public void initialize() {
+	public void initialize() 
+	{
+		// set user name
+		userLabel.setText(Settings.currentUser.getUserName());
+		
+		// Get expire password
+		ArrayList<Account> allAccount = ExpiredPasswordDAO.getAccount(Settings.currentUser.getUserID(), "", "");
+		ArrayList<Account> expAccountList = getExpiredAccount(allAccount);
+		
+		// Set up table
+		ObservableList<Account> accList = FXCollections.observableArrayList(expAccountList);
 		appName.setCellValueFactory(new PropertyValueFactory<Account ,String> ("appName"));
 		userName.setCellValueFactory(new PropertyValueFactory<Account ,String> ("userName"));
-		appPass.setCellValueFactory(new PropertyValueFactory<Account ,String> ("appPass"));
-		table.setItems(list);
+		expiredDate.setCellValueFactory(new PropertyValueFactory<Account ,String> ("dateExpired"));
+		table.setItems(accList);
 		table.getSelectionModel().selectFirst();
 	}
 	@FXML public void click_Edit(ActionEvent event){
-		try {
+		try 
+		{
 			
 			changeScene(event,"AppInfoMenu.fxml");
-		} catch(Exception e) {
+		}
+		catch(Exception e) 
+		{
 			e.printStackTrace();
 		}
 	}
+	
 	@FXML public void click_Logout(ActionEvent event){
 		try {
 			if(alretConfirmation(text))
@@ -64,5 +79,26 @@ public class ExpiredPassController extends AppUI{
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * This method return the list of account that get expired
+	 */
+	private ArrayList<Account> getExpiredAccount(ArrayList<Account> accountList)
+	{
+		ArrayList<Account> expAccountList = new ArrayList<Account>();
+		LocalDate today = LocalDate.now();
+		for (Account account : accountList)
+		{
+			String expDateString = account.getDateExpired();
+			DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd"); 
+			LocalDate expDate = LocalDate.parse(expDateString,dateFormat);
+			
+			if (expDate.compareTo(today) <= 0)
+			{
+				expAccountList.add(account);
+			}
+		}
+		return expAccountList;
 	}
 }

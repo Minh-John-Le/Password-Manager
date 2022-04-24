@@ -53,7 +53,7 @@
                <columns>
                   <TableColumn fx:id="appName" prefWidth="86.66667938232422" text="Application" />
                   <TableColumn fx:id="userName" prefWidth="99.33332824707031" text="Username" />
-                  <TableColumn fx:id="dateExpired" prefWidth="105.66665649414062" text="Expired Date" />
+                  <TableColumn fx:id="dateExpired" prefWidth="105.66665649414062" text="Exp Date" />
                </columns>
                <opaqueInsets>
                   <Insets />

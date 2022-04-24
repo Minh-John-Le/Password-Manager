@@ -18,7 +18,7 @@ import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 
 public class SearchController extends AppUI{
-	private final String text = "The password is copied.";
+	private final String text = "Sucess copy this pasword to clipboard: ";
 	@FXML
 	private Label userLabel;
 	@FXML
@@ -79,7 +79,7 @@ public class SearchController extends AppUI{
 	@FXML public void clickLogout(ActionEvent event) throws IOException {
 		//ask for confirmation and sign out
 		//update database
-		if(alretConfirmation("Do you want to Quit?")) 
+		if(alretConfirmation("Do you want to log out?")) 
 		{
 			changeScene(event,"LoginMenu.fxml");
 		}

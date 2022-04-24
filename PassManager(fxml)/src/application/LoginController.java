@@ -1,6 +1,9 @@
 package application;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 import DAO.LoginDAO;
 import DAO.SearchAccountDAO;
@@ -65,7 +68,14 @@ public class LoginController extends AppUI {
 			if(user.getUserPass().equals(password))
 			{
 				Settings.currentUser = user;
-				changeScene(event,fxml1);
+				if(!hasExpiredPassword(user))
+				{
+					changeScene(event,fxml1);
+				}
+				else
+				{
+					changeScene(event,Settings.expiredPasswordScene);
+				}
 				return;
 			}
 			
@@ -93,8 +103,6 @@ public class LoginController extends AppUI {
 	//calls forget password menu
 	public void click_forgetPass(ActionEvent event) throws IOException {
 
-	
-	
 	changeScene(event,fxml3);
 
 	}
@@ -109,4 +117,30 @@ public class LoginController extends AppUI {
 		password.clear();
 	}
 
+/**
+ * this method check if an account have expired password
+ * @param user
+ * @return
+ */
+	
+	private boolean hasExpiredPassword(User user)
+	{
+		ArrayList<Account> allAccount = LoginDAO.getAccount(user.getUserID(), "" , "");
+		LocalDate today = LocalDate.now();
+		
+		for (Account account : allAccount)
+		{
+
+			String expDateString = account.getDateExpired();
+			DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd"); 
+			LocalDate expDate = LocalDate.parse(expDateString,dateFormat);
+			
+			if (expDate.compareTo(today) <= 0)
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
 }

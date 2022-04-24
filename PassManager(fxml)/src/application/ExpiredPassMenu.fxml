@@ -41,7 +41,7 @@
                <columns>
                   <TableColumn fx:id="appName" prefWidth="86.66667938232422" text="Application" />
                   <TableColumn fx:id="userName" prefWidth="99.33332824707031" text="Username" />
-                  <TableColumn fx:id="appPass" prefWidth="105.66665649414062" text="Password" />
+                  <TableColumn fx:id="expiredDate" prefWidth="105.66665649414062" text="Exp Date" />
                </columns>
             </TableView>
          </children>
@@ -91,7 +91,7 @@
                         <Image url="@../../user.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="user" prefHeight="30.0" prefWidth="125.0" text="user">
+                  <Label fx:id="userLabel" prefHeight="30.0" prefWidth="125.0" text="user">
                      <padding>
                         <Insets left="10.0" />
                      </padding>

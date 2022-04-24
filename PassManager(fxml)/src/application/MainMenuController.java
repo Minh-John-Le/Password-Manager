@@ -84,7 +84,7 @@ public class MainMenuController extends AppUI {
 		changeScene(event,fxml2);
 	}
 	@FXML public void clickLogout(ActionEvent event) throws IOException{
-		if(alretConfirmation(text))
+		if(alretConfirmation("Do you want to log out?"))
 			changeScene(event,fxml3);
 	}
 	@FXML public void clickSearch(ActionEvent event) throws IOException

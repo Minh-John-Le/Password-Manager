@@ -41,7 +41,7 @@ public class Account {
 	public String getDateCreated() {
 		return dateCreated;
 	}
-	public void setDatCreated(String datCreated) {
+	public void setDateCreated(String dateCreated) {
 		this.dateCreated = dateCreated;
 	}
 	public String getDuration() {

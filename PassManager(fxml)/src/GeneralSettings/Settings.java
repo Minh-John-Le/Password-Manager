@@ -15,4 +15,6 @@ public class Settings {
 	public static User currentUser = null;
 	
 	
+	public static final String expiredPasswordScene = "ExpiredPassMenu.fxml";
+	
 }

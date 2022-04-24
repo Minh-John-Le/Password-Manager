@@ -8,61 +8,9 @@ import java.util.ArrayList;
 
 import GeneralSettings.Settings;
 import application.Account;
-import application.User;
 
-public class LoginDAO {
-	
-	public static User getUser(String username)
-	{
-		ResultSet result = null;
-		User user = null;
-		try 
-		{
-			
-			Connection connection = DriverManager.getConnection(Settings.jdbcUrl);
-			java.sql.Statement statement = connection.createStatement();
-			String isExistSQL = "SELECT count(1) FROM " + Settings.usernameTable
-					+ " WHERE " 
-					+ "username = '" + username + "'";
-			ResultSet isExist = statement.executeQuery(isExistSQL);
-			
-			
-			if(isExist.getInt(1) == 0)
-			{
-				connection.close();
-				return null;
-			}
-			
-			
-			String searchAccountSql = "SELECT * FROM " + Settings.usernameTable
-					+ " WHERE " 
-					+ "username = '" + username + "'";
-					
-			result = statement.executeQuery(searchAccountSql);
-
-			
-			// create User bean and return it
-			int userID = result.getInt("userID");
-			String password = result.getString("userPassword");
-			String question = result.getString("secQuestion");
-			String answer = result.getString("answer");
-			
-			user = new User(userID, username, password, question, answer);
-			connection.close();
-			return user;
-
-		}
-		catch (SQLException e) 
-		{
-			
-			System.out.println("Error in getting user name List");
-			
-			e.printStackTrace();
-		}
-		
-		return user;
-	}
-
+public class ExpiredPasswordDAO 
+{
 	public static ArrayList<Account> getAccount(int userID, String appName, String accountUsername)
 	{
 		ArrayList<Account> accountList = new ArrayList<Account>();
@@ -135,6 +83,4 @@ public class LoginDAO {
 		
 		return accountList;
 	}
-
-
 }

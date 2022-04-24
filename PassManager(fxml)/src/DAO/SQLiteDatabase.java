@@ -70,13 +70,16 @@ public class SQLiteDatabase {
 			
 //=============================================================================================================
 			 //Test adding new account
-			
+			/*
 			AddAccountDAO.addNewAccount(17, "Google", "username1","password1", "email1","04/12/22","04/12/22","100");
 			AddAccountDAO.addNewAccount(17, "Google", "username2","password1", "email1","04/12/22","04/12/22","100");
 			AddAccountDAO.addNewAccount(17, "Google", "username3","password1", "email1","04/12/22","04/12/22","100");
 			AddAccountDAO.addNewAccount(17, "Google", "username1","password1", "email1","04/12/22","04/12/22","100");
 			AddAccountDAO.addNewAccount(17, "Google", "username1","password1", "email1","04/12/22","04/12/22","100");
-			//DeleteAccountDAO.deleteAccount(1,6);
+			*/
+			DeleteAccountDAO.deleteAccount(17,16);
+			DeleteAccountDAO.deleteAccount(17,17);
+			DeleteAccountDAO.deleteAccount(17,18);
 			//DeleteUserDAO.deleteUser(1);
 			
 			// Selecting database
