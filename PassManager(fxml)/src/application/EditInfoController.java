@@ -136,7 +136,6 @@ public class EditInfoController extends AppUI{
 		
 		if (!passString.equals(Settings.selectedAccount.getAppPass()))
 		{
-			alretMessege("This was executed");
 			updatePasswordInfomation(userID, accID, passString);
 			
 		}
@@ -172,7 +171,7 @@ public class EditInfoController extends AppUI{
 	private void updatePasswordInfomation(int userID, int accID, String newPassString )
 	{
 		LocalDate today = LocalDate.now();	
-		String durationString = Settings.selectedAccount.getDuration();
+		String durationString = day.getText();
 		
 		int duration = Integer.parseInt(durationString);
 		LocalDate future = LocalDate.now().plusDays(duration);		

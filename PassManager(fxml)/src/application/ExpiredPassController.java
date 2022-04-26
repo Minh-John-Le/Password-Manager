@@ -18,7 +18,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ExpiredPassController extends AppUI{
-	private final String text = "Do You Want To Logout?";
+	private final String logOutText = "Do you want to log out?";
 	@FXML
 	private Label userLabel;
 	@FXML private TableView<Account> table;
@@ -70,8 +70,11 @@ public class ExpiredPassController extends AppUI{
 	
 	@FXML public void click_Logout(ActionEvent event){
 		try {
-			if(alretConfirmation(text))
-			closeStage(event,text);
+			if(alretConfirmation(logOutText))
+			{
+				changeScene(event, Settings.LoginScene);
+			}
+				
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -79,7 +82,7 @@ public class ExpiredPassController extends AppUI{
 	@FXML public void click_Main(ActionEvent event){
 		try {
 			
-			changeScene(event,"MainMenu.fxml");
+			changeScene(event, Settings.MainScene);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -87,7 +90,7 @@ public class ExpiredPassController extends AppUI{
 	@FXML public void click_Setting(ActionEvent event){
 		try {
 			
-			changeScene(event,"SettingMenu.fxml");
+			changeScene(event, Settings.UserProfileScene);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

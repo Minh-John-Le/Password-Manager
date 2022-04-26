@@ -83,7 +83,7 @@ public class SearchController extends AppUI{
 		//update database
 		if(alretConfirmation("Do you want to log out?")) 
 		{
-			changeScene(event,"LoginMenu.fxml");
+			changeScene(event, Settings.LoginScene);
 		}
 	}
 	

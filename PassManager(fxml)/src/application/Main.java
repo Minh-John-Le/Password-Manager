@@ -8,12 +8,12 @@ package application;
 import java.io.IOException;
 
 import DAO.InitializeDAO;
+import GeneralSettings.Settings;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
 public class Main   extends Application{
 	private final String title = "Password Management System";
-	private final String fxml = "LoginMenu.fxml";
 	private AppUI newLogin;
 	 
     //this is the starting point of the program
@@ -21,7 +21,7 @@ public class Main   extends Application{
 	public void start(Stage primaryStage) throws IOException {
 		
 		newLogin = new AppUI();
-		newLogin.setStage(fxml,title);
+		newLogin.setStage(Settings.LoginScene,title);
 	}
 	public static void main(String[] args) {
 			InitializeDAO.initializeDatabase();

@@ -8,8 +8,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 public class ResetPassQuestionController extends AppUI  {
-	private final String fxml1 = "LoginMenu.fxml";
-	private final String fxml2 = "ChangeLoginPassMenu.fxml";
+
 	@FXML
 	private TextArea username;
 	@FXML
@@ -36,7 +35,7 @@ public class ResetPassQuestionController extends AppUI  {
 		
 		if (answer.equals(inputAnswer))
 		{
-			changeScene(event,fxml2);
+			changeScene(event, Settings.ResetLogInPasswordScene);
 			return;
 		}
 		
@@ -47,7 +46,7 @@ public class ResetPassQuestionController extends AppUI  {
 	//it returns back app info menu
 	public void click_cancel(ActionEvent event) throws IOException 
 	{
-		changeScene(event,fxml1);
+		changeScene(event, Settings.LoginScene);
 	}
 
 }

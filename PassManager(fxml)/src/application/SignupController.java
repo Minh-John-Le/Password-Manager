@@ -4,12 +4,12 @@ import java.io.IOException;
 
 import DAO.SQLiteDatabase;
 import DAO.SignUpDAO;
+import GeneralSettings.Settings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
 public class SignupController extends AppUI{
-	private final String fxml1= "LoginMenu.fxml";
 
 	@FXML
 	private TextField username;
@@ -46,7 +46,7 @@ public class SignupController extends AppUI{
 				else
 				{
 					alretMessege("Sign Up Succcessful!!");		
-					changeScene(event,fxml1);
+					changeScene(event, Settings.LoginScene);
 				}
 				
 			}
@@ -63,15 +63,13 @@ public class SignupController extends AppUI{
 		
 		
 	}
-	
-	
+		
 	
 	@FXML
 	//it returns back app info menu
 	public void click_cancel(ActionEvent event) throws IOException 
 	{
-		alretMessege("See you again!!!");
-		changeScene(event,fxml1);
+		changeScene(event, Settings.LoginScene);
 	}
 	
 

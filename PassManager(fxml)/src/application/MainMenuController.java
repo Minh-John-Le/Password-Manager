@@ -3,7 +3,6 @@ package application;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
 import DAO.SearchAccountDAO;
 import GeneralSettings.Settings;
 import javafx.collections.FXCollections;
@@ -20,12 +19,7 @@ import javafx.scene.input.ClipboardContent;
 
 public class MainMenuController extends AppUI {
 	private final String text = "Sucess copy this pasword to clipboard: ";
-	private final String fxml2 = "SettingMenu.fxml";
-	private final String fxml3 = "LoginMenu.fxml";
 
-	private final String fxml5 = "ExpiredPassMenu.fxml";
-	private final String fxml6 = "AddAppMenu.fxml";
-	private final String fxml7 = "LogoutMenu.fxml";
 	
 	@FXML
 	private Label userLabel;
@@ -117,25 +111,23 @@ public class MainMenuController extends AppUI {
 	
 	
 	@FXML public void clickSetting(ActionEvent event) throws IOException{
-		changeScene(event,fxml2);
+		changeScene(event, Settings.UserProfileScene);
 	}
 	@FXML public void clickLogout(ActionEvent event) throws IOException{
 		if(alretConfirmation("Do you want to log out?"))
-			changeScene(event,fxml3);
+			changeScene(event, Settings.MainScene);
 	}
 	@FXML public void clickSearch(ActionEvent event) throws IOException
 	{
 		changeScene(event, Settings.SearchScene);
 	}
 	@FXML public void clickExpired(ActionEvent event) throws IOException{
-		changeScene(event,fxml5);
+		changeScene(event, Settings.ExpiredPasswordScene);
 	}
 	@FXML public void clickAdd(ActionEvent event) throws IOException{
-		changeScene(event,fxml6);
+		changeScene(event, Settings.AddAccountScene);
 	}
-	@FXML public void onCloseRequest(ActionEvent event) throws IOException{
-		changeScene(event,fxml7);
-	}
+
 	
 	
 }

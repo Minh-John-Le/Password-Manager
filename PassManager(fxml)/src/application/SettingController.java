@@ -49,15 +49,15 @@ public class SettingController extends AppUI{
 	{
 		// back to main menu
 		ChangeLoginPassController.previousScene = Settings.UserProfileScene;
-		changeScene(event,"ChangeLoginPassMenu.fxml");
+		changeScene(event, Settings.ResetLogInPasswordScene);
 	}
 	@FXML public void click_changeQuest(ActionEvent event) throws IOException {
 		// back to main menu
-		changeScene(event,"ChangeQuestionMenu.fxml");
+		changeScene(event, Settings.ChangeQuestionScene);
 	}
 	@FXML public void click_changeAns(ActionEvent event) throws IOException {
 		// back to main menu
-		changeScene(event,"ChangeAnswerMenu.fxml");
+		changeScene(event, Settings.ChangeAnswerScene);
 	}
 	@FXML public void click_delete(ActionEvent event) throws IOException {
 		// back to main menu

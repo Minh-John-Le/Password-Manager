@@ -12,8 +12,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
 public class AddAppController extends AppUI{
-	private final String fxml1 = "GeneratePassMenu.fxml";
-	private final String fxml2 = "MainMenu.fxml";
+
 	@FXML
 	private TextField username;
 	@FXML
@@ -100,7 +99,7 @@ public class AddAppController extends AppUI{
 			alretMessege("Sucessful create new account!");
 			// set tempt account
 			Settings.tempAccount = new Account(-1,-1, "","","","","","","");
-			changeScene(event,fxml2);
+			changeScene(event, Settings.MainScene);
 			return;
 		}
 		
@@ -110,7 +109,7 @@ public class AddAppController extends AppUI{
 	//it returns back app info menu
 	public void click_cancel(ActionEvent event) throws IOException {
 		Settings.tempAccount = new Account(-1,-1, "","","","","","","");
-		changeScene(event,fxml2);
+		changeScene(event, Settings.MainScene);
 	}
 	@FXML
 	//it returns back app info menu
@@ -122,7 +121,7 @@ public class AddAppController extends AppUI{
 		Settings.tempAccount.setUserName(username.getText());
 		Settings.tempAccount.setDuration(duration.getText());
 		GeneratePassController.previousScene = Settings.AddAccountScene;
-		changeScene(event,fxml1);
+		changeScene(event, Settings.PassGeneratorScene);
 	}
 	
 }

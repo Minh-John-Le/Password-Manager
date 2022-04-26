@@ -18,16 +18,19 @@ public class Settings {
 	
 	
 	// Scene Setting
-	public static final String ExpiredPasswordScene = "ExpiredPassMenu.fxml";
-	public static final String MainScene = "MainMenu.fxml";
-	public static final String SignUpScene ="SignUpMenu.fxml";
-	public static final String AskUsernameScene = "AskUsernameMenu.fxml";
-	public static final String EditingAccountScene = "EditInfoMenu.fxml";
-	public static final String SearchScene = "SearchMenu.fxml";
-	public static final String ChangeAppNameScene = "ChangeAppNameMenu.fxml";
-	public static final String LoginScene = "LoginMenu.fxml";
-	public static final String UserProfileScene = "SettingMenu.fxml";
-	public static final String PassGeneratorScene = "GeneratePassMenu.fxml";
-	public static final String AddAccountScene = "AddAppMenu.fxml";
+	public static final String ExpiredPasswordScene = "/View/ExpiredPassMenu.fxml";
+	public static final String MainScene = "/View/MainMenu.fxml";
+	public static final String SignUpScene ="/View/SignUpMenu.fxml";
+	public static final String AskUsernameScene = "/View/AskUsernameMenu.fxml";
+	public static final String EditingAccountScene = "/View/EditInfoMenu.fxml";
+	public static final String SearchScene = "/View/SearchMenu.fxml";
+	public static final String LoginScene = "/View/LoginMenu.fxml";
+	public static final String UserProfileScene = "/View/SettingMenu.fxml";	
+	public static final String PassGeneratorScene = "/View/GeneratePassMenu.fxml";	
+	public static final String AddAccountScene = "/View/AddAppMenu.fxml";	
+	public static final String ResetPassQuestionScene = "/View/ResetPassQuestionMenu.fxml";
 	
+	public static final String ResetLogInPasswordScene = "/View/ChangeLoginPassMenu.fxml";
+	public static final String ChangeQuestionScene = "/View/ChangeQuestionMenu.fxml";
+	public static final String ChangeAnswerScene = "/View/ChangeAnswerMenu.fxml";
 }
