@@ -35,7 +35,31 @@ public class SignupController extends AppUI{
 			String newQuest = quest.getText().trim();
 			String newAns = ans.getText().trim();
 			boolean canSignUp = false;
-		
+			
+			if (newUsername.equals(""))
+			{
+				alretMessege("Username cannot be empty!");		
+				return;
+			}
+			
+			if (newPass.equals(""))
+			{
+				alretMessege("Password cannot be empty!");		
+				return;
+			}
+			
+			if (newQuest.equals(""))
+			{
+				alretMessege("Question cannot be empty!");		
+				return;
+			}
+			
+			if (newAns.equals(""))
+			{
+				alretMessege("Answer cannot be empty!");		
+				return;
+			}
+			
 			if(newPass.equals(newRepeatedPass)){
 				canSignUp = SignUpDAO.createNewUser(newUsername, newRepeatedPass, newQuest, newAns);
 			
