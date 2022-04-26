@@ -31,6 +31,11 @@ public class ChangeQuestionController extends AppUI {
 		int userID = Settings.currentUser.getUserID();
 		String newQuestString = newQuest.getText().trim();
 		
+		if (newQuestString.equals(""))
+		{
+			alretMessege("Qeustion cannot be empty!");
+			return;
+		}
 		//save new pass and update the database
 		UpdateUserDAO.UpdateUserSecQuestion(userID, newQuestString);
 		Settings.currentUser = UpdateUserDAO.getUser(userID);

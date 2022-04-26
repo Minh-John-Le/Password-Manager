@@ -100,6 +100,15 @@ public class SearchController extends AppUI{
 		EditInfoController.previousScene = Settings.SearchScene;
 		Settings.selectedAccount = account;
 		
+		Account tempAccount = Settings.tempAccount;
+		tempAccount.setAppName(account.getAppName());
+		tempAccount.setUserName(account.getUserName());
+		tempAccount.setEmail(account.getEmail());
+		tempAccount.setAppPass(account.getAppPass());
+		tempAccount.setDuration(account.getDuration());
+		tempAccount.setDateCreated(account.getDateCreated());
+		tempAccount.setDateExpired(account.getDateExpired());
+		
 		changeScene(event, Settings.EditingAccountScene);
 	}
 	

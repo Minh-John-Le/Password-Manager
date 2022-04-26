@@ -31,6 +31,12 @@ public class ChangeAnswerController extends AppUI{
 		int userID = Settings.currentUser.getUserID();
 		String newAnsString = newAns.getText().trim();
 		
+		
+		if (newAnsString.equals(""))
+		{
+			alretMessege("Answer cannot be empty!");
+			return;
+		}
 		//save new pass and update the database
 		UpdateUserDAO.UpdateUserAnswer(userID, newAnsString);
 		Settings.currentUser = UpdateUserDAO.getUser(userID);

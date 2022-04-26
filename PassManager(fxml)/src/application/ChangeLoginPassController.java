@@ -32,10 +32,16 @@ public class ChangeLoginPassController extends AppUI {
 		String newPassString = newPass.getText().trim();
 		String repeatePassString = repeatePass.getText().trim();
 		int userID = Settings.currentUser.getUserID();
+		if (newPassString.equals(""))
+		{
+			alretMessege("Password cannot be empty!");
+			return;
+		}
 		
 		if (newPassString.equals(repeatePassString))
 		{	
 			ResetPasswordDAO.updateUserPassword(userID, newPassString);
+			Settings.currentUser.setUserPass(newPassString);  
 			alretMessege("Sucessful change password!");
 			changeScene(event, previousScene);
 			return;

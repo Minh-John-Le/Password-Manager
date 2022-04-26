@@ -1,8 +1,10 @@
 package application;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 import DAO.DeleteAccountDAO;
+import DAO.UpdateAccountDAO;
 import GeneralSettings.Settings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,7 +29,6 @@ public class EditInfoController extends AppUI{
 	
 	// previous scene settings
 	public static String previousScene = Settings.MainScene;
-	public static Account selectedAccount = null;
 
 
 	//initializer fill out the menu with the app information
@@ -36,19 +37,18 @@ public class EditInfoController extends AppUI{
 	@FXML 
 	public void initialize() 
 	{
-		selectedAccount = Settings.selectedAccount;
-		if (selectedAccount == null)
+		if (Settings.tempAccount == null)
 		{
 			return;
 		}
 		
-		String appNameString = selectedAccount.getAppName();
-		String emailString = selectedAccount.getEmail();
-		String usernameString = selectedAccount.getUserName();
-		String passwordString = selectedAccount.getAppPass();
-		String creationDateString = selectedAccount.getDateCreated();
-		String expirationDateString = selectedAccount.getDateExpired();
-		String durationString = selectedAccount.getDuration();
+		String appNameString = Settings.tempAccount.getAppName();
+		String emailString = Settings.tempAccount.getEmail();
+		String usernameString = Settings.tempAccount.getUserName();
+		String passwordString = Settings.tempAccount.getAppPass();
+		String creationDateString = Settings.tempAccount.getDateCreated();
+		String expirationDateString = Settings.tempAccount.getDateExpired();
+		String durationString = Settings.tempAccount.getDuration();
 		
 		
 		appName.setText(appNameString);
@@ -74,32 +74,116 @@ public class EditInfoController extends AppUI{
 		//ask for confirmation
 		if(alretConfirmation(deleteWarningText))
 		{
-			DeleteAccountDAO.deleteAccount(selectedAccount.getUserID(), selectedAccount.getAccID());
+			DeleteAccountDAO.deleteAccount(Settings.selectedAccount.getUserID(), Settings.selectedAccount.getAccID());
 			changeScene(event, previousScene);
 		}
 		
 	}
 	
-
-	@FXML public void click_changeAppName(ActionEvent event) throws IOException {
-		//open change App Name menu
-		changeScene(event,"ChangeAppNameMenu.fxml");
-	}
-	
-	@FXML public void click_changeEmail(ActionEvent event) throws IOException {
-		//open change Email menu
-		changeScene(event,"ChangeEmailMenu.fxml");
-	}
-	
-	@FXML public void click_changeUsername(ActionEvent event) throws IOException {
-		//open change Username menu
-		changeScene(event,"ChangeUsernameMenu.fxml");
-	}
-	@FXML public void click_changePass(ActionEvent event) throws IOException {
+	@FXML 
+	public void click_submit(ActionEvent event) throws IOException {
 		//open change Pass menu
-		changeScene(event,"ChangePasswordMenu.fxml");
+		String appNameString = appName.getText().trim();
+		String userNameString = username.getText().trim();
+		String emailString = email.getText().trim();
+		String passString = pass.getText().trim();
+		String durationString = day.getText().trim();
+		
+		int userID = Settings.currentUser.getUserID();
+		int accID = Settings.selectedAccount.getAccID();
+		
+		
+
+		// Check if new application name is empty
+		if (appNameString.equals(""))
+		{
+			alretMessege("Application cannot be empty!");
+			return;
+		}
+		
+		if (userNameString.equals(""))
+		{
+			alretMessege("Username cannot be empty!");
+			return;
+		}
+		
+		if (passString.equals(""))
+		{
+			alretMessege("Password cannot be empty!");
+			return;
+		}
+		
+		// verify if account exist
+		boolean isAccountExist = UpdateAccountDAO.isAccountExist(userID, appNameString, userNameString);
+		
+		// if old user name then we don't check for account Exist
+		if (Settings.selectedAccount.getAppName().equals(appNameString)
+			&& Settings.selectedAccount.getUserName().equals(userNameString))
+		{
+			isAccountExist = false;
+		}
+		
+		if (isAccountExist)
+		{
+			alretMessege("application and account name pair already exist! Please choose new application or username name");
+			return;
+		}
+		
+		UpdateAccountDAO.updateAccountAppName(userID, accID, appNameString);
+		UpdateAccountDAO.updateAccountUsername(userID, accID, userNameString);
+		UpdateAccountDAO.updateAccountEmail(userID, accID, emailString);
+		UpdateAccountDAO.updateAccountDuration(userID, accID, durationString);
+		
+		if (!passString.equals(Settings.selectedAccount.getAppPass()))
+		{
+			alretMessege("This was executed");
+			updatePasswordInfomation(userID, accID, passString);
+			
+		}
+		
+		Settings.selectedAccount = UpdateAccountDAO.getAccount(userID, accID);
+		changeScene(event, previousScene);
 	}
-	@FXML public void click_changeDuration(ActionEvent event) throws IOException {
-		//open change Duration menu
+	@FXML public void click_generatePass(ActionEvent event) throws IOException {
+		// go to pass generation scene
+		String appNameString = appName.getText().trim();
+		String userNameString = username.getText().trim();
+		String emailString = email.getText().trim();
+		String passString = pass.getText().trim();
+		String durationString = day.getText().trim();
+		
+		Account tempAccount = Settings.tempAccount;
+		tempAccount.setAppName(appNameString);
+		tempAccount.setUserName(userNameString);
+		tempAccount.setEmail(emailString);
+		tempAccount.setAppPass(passString);
+		tempAccount.setDuration(durationString);
+		
+		GeneratePassController.previousScene = Settings.EditingAccountScene;
+		changeScene(event, Settings.PassGeneratorScene);
+	}
+	
+	/**
+	 * This method update the password, create day and expire day
+	 * @param userID
+	 * @param accID
+	 * @param newPassString
+	 */
+	private void updatePasswordInfomation(int userID, int accID, String newPassString )
+	{
+		LocalDate today = LocalDate.now();	
+		String durationString = Settings.selectedAccount.getDuration();
+		
+		int duration = Integer.parseInt(durationString);
+		LocalDate future = LocalDate.now().plusDays(duration);		
+		
+		String newCreatedDay = today.toString().replace("-", "/");
+		String newExpiredDay = future.toString().replace("-", "/");
+			
+		
+		// update password , created day and expired day
+		UpdateAccountDAO.updateAccountPassword(userID, accID, newPassString);
+		UpdateAccountDAO.updateAccountCreationDay(userID, accID, newCreatedDay);
+		UpdateAccountDAO.updateAccountExpiredDay(userID, accID, newExpiredDay);
 	}
 }

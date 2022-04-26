@@ -60,7 +60,6 @@ public class GeneratePassController extends AppUI{
 		String digitString = "0" + intValue.getText().replaceAll("[^0-9]", "").trim();
 		
 
-		
 		int numLower = Integer.parseInt(lowerString);
 		int numUpper = Integer.parseInt(upperString);
 		int numSpecial = Integer.parseInt(specialString);

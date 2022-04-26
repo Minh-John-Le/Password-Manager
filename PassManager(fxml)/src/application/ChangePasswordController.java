@@ -52,8 +52,7 @@ public class ChangePasswordController extends AppUI{
 		
 		
 		// calculate current day, duration and expired day
-		LocalDate today = LocalDate.now();
-		
+		LocalDate today = LocalDate.now();	
 		String durationString = Settings.selectedAccount.getDuration();
 		int duration = Integer.parseInt(durationString);
 		

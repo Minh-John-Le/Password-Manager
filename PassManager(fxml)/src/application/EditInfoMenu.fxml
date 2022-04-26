@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="396.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.EditInfoController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="396.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.EditInfoController">
    <children>
       <GridPane layoutX="2.0" prefHeight="396.0" prefWidth="450.0" AnchorPane.topAnchor="0.0">
          <columnConstraints>
@@ -26,8 +26,18 @@
          <children>
             <VBox prefHeight="59.0" prefWidth="401.0" GridPane.rowIndex="2">
                <children>
-                  <HBox alignment="CENTER" prefHeight="25.0" prefWidth="100.0" spacing="10.0">
+                  <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="100.0" spacing="10.0">
                      <children>
+                        <Button alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#click_submit" prefHeight="25.0" prefWidth="65.0" text="Submit">
+                           <HBox.margin>
+                              <Insets left="30.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#click_generatePass" prefHeight="25.0" prefWidth="95.0" text="Generate Pass">
+                           <HBox.margin>
+                              <Insets left="30.0" />
+                           </HBox.margin>
+                        </Button>
                         <Button alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#click_Back" prefHeight="25.0" prefWidth="65.0" text="Back">
                            <HBox.margin>
                               <Insets left="20.0" />
@@ -51,12 +61,7 @@
                               <Insets />
                            </HBox.margin>
                         </Label>
-                        <TextField fx:id="appName" editable="false" prefHeight="25.0" prefWidth="185.0" />
-                        <Button alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#click_changeAppName" prefHeight="25.0" prefWidth="65.0" text="Change">
-                           <HBox.margin>
-                              <Insets left="30.0" />
-                           </HBox.margin>
-                        </Button>
+                        <TextField fx:id="appName" editable="true" prefHeight="25.0" prefWidth="185.0" />
                      </children>
                      <VBox.margin>
                         <Insets bottom="10.0" />
@@ -69,12 +74,7 @@
                               <Insets />
                            </HBox.margin>
                         </Label>
-                        <TextField fx:id="email" editable="false" prefHeight="25.0" prefWidth="185.0" />
-                        <Button alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#click_changeEmail" prefHeight="25.0" prefWidth="65.0" text="Change">
-                           <HBox.margin>
-                              <Insets left="30.0" />
-                           </HBox.margin>
-                        </Button>
+                        <TextField fx:id="email" editable="true" prefHeight="25.0" prefWidth="185.0" />
                      </children>
                      <opaqueInsets>
                         <Insets bottom="10.0" />
@@ -90,12 +90,7 @@
                               <Insets />
                            </HBox.margin>
                         </Label>
-                        <TextField fx:id="username" editable="false" prefHeight="25.0" prefWidth="185.0" />
-                        <Button alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#click_changeUsername" prefHeight="25.0" prefWidth="65.0" text="Change">
-                           <HBox.margin>
-                              <Insets left="30.0" />
-                           </HBox.margin>
-                        </Button>
+                        <TextField fx:id="username" editable="true" prefHeight="25.0" prefWidth="185.0" />
                      </children>
                      <VBox.margin>
                         <Insets bottom="10.0" />
@@ -108,12 +103,7 @@
                               <Insets />
                            </HBox.margin>
                         </Label>
-                        <TextField fx:id="pass" editable="false" prefHeight="25.0" prefWidth="185.0" />
-                        <Button alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#click_changePass" prefHeight="25.0" prefWidth="65.0" text="Change">
-                           <HBox.margin>
-                              <Insets left="30.0" />
-                           </HBox.margin>
-                        </Button>
+                        <TextField fx:id="pass" editable="true" prefHeight="25.0" prefWidth="185.0" />
                      </children>
                      <VBox.margin>
                         <Insets bottom="10.0" />
@@ -151,7 +141,7 @@
                                     <Insets top="5.0" />
                                  </HBox.margin>
                               </Label>
-                              <TextField fx:id="day" editable="false" prefHeight="25.0" prefWidth="41.0" />
+                              <TextField fx:id="day" editable="true" prefHeight="25.0" prefWidth="41.0" />
                               <Label prefHeight="17.0" prefWidth="38.0" text=" Day(s)">
                                  <HBox.margin>
                                     <Insets top="5.0" />
@@ -162,11 +152,6 @@
                               <Insets bottom="10.0" />
                            </padding>
                         </HBox>
-                        <Button alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#click_changeDuration" prefHeight="25.0" prefWidth="65.0" text="Change">
-                           <HBox.margin>
-                              <Insets left="30.0" />
-                           </HBox.margin>
-                        </Button>
                      </children>
                   </HBox>
                </children>

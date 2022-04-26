@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="320.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ChangeLoginPassController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="320.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ChangeLoginPassController">
    <children>
       <GridPane layoutX="2.0" prefHeight="320.0" prefWidth="450.0" AnchorPane.leftAnchor="2.0" AnchorPane.topAnchor="0.0">
          <columnConstraints>
@@ -78,7 +78,7 @@
                   </HBox>
                   <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="300.0">
                      <children>
-                        <Label prefHeight="17.0" prefWidth="202.0" text="Repeate Password :">
+                        <Label prefHeight="17.0" prefWidth="202.0" text="Repeat Password :">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
