@@ -33,12 +33,13 @@ public class ChangeQuestionController extends AppUI {
 		
 		if (newQuestString.equals(""))
 		{
-			alretMessege("Qeustion cannot be empty!");
+			alretMessege("Question cannot be empty!");
 			return;
 		}
 		//save new pass and update the database
 		UpdateUserDAO.UpdateUserSecQuestion(userID, newQuestString);
 		Settings.currentUser = UpdateUserDAO.getUser(userID);
+		alretMessege("Sucessful change security question!");
 		changeScene(event, Settings.UserProfileScene);
 	}
 	@FXML

@@ -40,6 +40,7 @@ public class ChangeAnswerController extends AppUI{
 		//save new pass and update the database
 		UpdateUserDAO.UpdateUserAnswer(userID, newAnsString);
 		Settings.currentUser = UpdateUserDAO.getUser(userID);
+		alretMessege("Sucessful change security answer!");
 		changeScene(event, Settings.UserProfileScene);
 	}
 	@FXML

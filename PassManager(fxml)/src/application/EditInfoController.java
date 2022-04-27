@@ -125,7 +125,7 @@ public class EditInfoController extends AppUI{
 		
 		if (isAccountExist)
 		{
-			alretMessege("application and account name pair already exist! Please choose new application or username name");
+			alretMessege("Application and account name pair already exist! Please choose new application or username name");
 			return;
 		}
 		
@@ -141,6 +141,7 @@ public class EditInfoController extends AppUI{
 		}
 		
 		Settings.selectedAccount = UpdateAccountDAO.getAccount(userID, accID);
+		alretMessege("Application information was edited!");
 		changeScene(event, previousScene);
 	}
 	@FXML public void click_generatePass(ActionEvent event) throws IOException {

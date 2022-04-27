@@ -52,20 +52,20 @@ public class AddAppController extends AppUI{
 		
 		if (accountUsernameString.equals(""))
 		{
-			alretMessege("username cannot be empty");
+			alretMessege("Username cannot be empty");
 			return;
 		}
 		
 		
 		if (!accountPassString.equals(repeatedPassString))
 		{		
-			alretMessege("password and repeated password not match!");
+			alretMessege("Password and repeated password not match!");
 			return;
 		}
 		
 		if (accountPassString.equals(""))
 		{
-			alretMessege("password and repeated password cannot be empty");
+			alretMessege("Password and repeated password cannot be empty");
 			return;
 		}
 		
