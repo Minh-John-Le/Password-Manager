@@ -103,7 +103,7 @@
                <children>
                   <ImageView fitHeight="30.0" fitWidth="30.0">
                      <image>
-                        <Image url="@../../user.png" />
+                        <Image url="@/View/user.png" />
                      </image>
                   </ImageView>
                   <Label fx:id="userLabel" prefHeight="30.0" prefWidth="125.0" text="user">
