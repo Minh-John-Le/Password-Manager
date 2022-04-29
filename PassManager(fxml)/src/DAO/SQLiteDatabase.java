@@ -31,7 +31,7 @@ public class SQLiteDatabase {
 	{
 		String databaseName = "John";
 		
-		
+		 
 		try 
 		{
 			InitializeDAO.initializeDatabase(); 
