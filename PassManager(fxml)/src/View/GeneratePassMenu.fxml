@@ -27,7 +27,7 @@
                <children>
                   <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="159.0">
                      <children>
-                        <Label prefHeight="17.0" prefWidth="117.0" text="Number Of Integer :">
+                        <Label prefHeight="17.0" prefWidth="117.0" text="Number Of Digits :">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>

@@ -11,6 +11,18 @@ public class Account {
 	private String dateCreated;
 	private String duration;
 	
+	public Account()
+	{
+		this.userID = -1;
+		this.accID = -1;	 
+		this.appName = "";
+		this.appPass = "";
+		this.userName = "";
+		this.email = "";
+		this.dateExpired = "";
+		this.dateCreated = "";
+		this.duration = "";
+	}
 	
 	public String getAppName() {
 		return appName;

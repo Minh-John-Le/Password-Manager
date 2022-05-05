@@ -125,6 +125,10 @@ public class MainMenuController extends AppUI {
 		changeScene(event, Settings.ExpiredPasswordScene);
 	}
 	@FXML public void clickAdd(ActionEvent event) throws IOException{
+		
+		Settings.tempAccount = new Account();
+		Settings.selectedAccount = new Account();
+		
 		changeScene(event, Settings.AddAccountScene);
 	}
 

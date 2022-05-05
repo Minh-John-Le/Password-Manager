@@ -18,8 +18,6 @@ public class AddAppController extends AppUI{
 	@FXML
 	private TextField pass;
 	@FXML
-	private TextField repeatedPass;
-	@FXML
 	private TextField email;
 	@FXML
 	private TextField duration;
@@ -33,7 +31,6 @@ public class AddAppController extends AppUI{
 		
 		username.setText(Settings.tempAccount.getUserName());
 		pass.setText(Settings.tempAccount.getAppPass());
-		repeatedPass.setText(Settings.tempAccount.getAppPass());
 		email.setText(Settings.tempAccount.getEmail());
 		duration.setText(Settings.tempAccount.getDuration());
 		appName.setText(Settings.tempAccount.getAppName());
@@ -46,9 +43,27 @@ public class AddAppController extends AppUI{
 		String appNameString = appName.getText().trim();
 		String accountUsernameString = username.getText().trim();
 		String accountPassString = pass.getText();
-		String repeatedPassString = repeatedPass.getText().trim();
 		String emailString = email.getText().trim();
 		String durationString = duration.getText().replaceAll("[^0-9]", "").trim();
+		
+		if (appNameString.equals(""))
+		{
+			
+			alretMessege("application name cannot be empty");
+			return;				
+		}
+		
+		if (durationString.equals(""))
+		{
+			alretMessege("Duration cannot be empty!");
+			return;	
+		}
+		
+		if (durationString.length() < duration.getText().length())
+		{
+			alretMessege("Duration cannot contains any character!");
+			return;
+		}
 		
 		if (accountUsernameString.equals(""))
 		{
@@ -57,15 +72,9 @@ public class AddAppController extends AppUI{
 		}
 		
 		
-		if (!accountPassString.equals(repeatedPassString))
-		{		
-			alretMessege("Password and repeated password not match!");
-			return;
-		}
-		
 		if (accountPassString.equals(""))
 		{
-			alretMessege("Password and repeated password cannot be empty");
+			alretMessege("Password cannot be empty");
 			return;
 		}
 		

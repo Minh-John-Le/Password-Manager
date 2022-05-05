@@ -62,6 +62,8 @@ public class EditInfoController extends AppUI{
 	
 	@FXML public void click_Back(ActionEvent event) throws IOException {
 		// back to previos scene
+		Settings.tempAccount = new Account();
+		Settings.selectedAccount = new Account();
 		changeScene(event, previousScene);
 	}
 	
@@ -141,6 +143,9 @@ public class EditInfoController extends AppUI{
 		}
 		
 		Settings.selectedAccount = UpdateAccountDAO.getAccount(userID, accID);
+		
+		Settings.tempAccount = new Account();
+		Settings.selectedAccount = new Account();
 		alretMessege("Application information was edited!");
 		changeScene(event, previousScene);
 	}

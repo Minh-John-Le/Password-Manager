@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="396.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AddAppController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="396.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AddAppController">
    <children>
       <GridPane layoutX="2.0" prefHeight="396.0" prefWidth="450.0" AnchorPane.topAnchor="0.0">
          <columnConstraints>
@@ -84,7 +84,7 @@
                   </HBox>
                   <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="302.0">
                      <children>
-                        <Label prefHeight="17.0" prefWidth="202.0" text="New Password :">
+                        <Label prefHeight="17.0" prefWidth="202.0" text="Password :">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
@@ -93,27 +93,6 @@
                      </children>
                      <VBox.margin>
                         <Insets bottom="10.0" />
-                     </VBox.margin>
-                  </HBox>
-                  <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="300.0">
-                     <children>
-                        <Label prefHeight="17.0" prefWidth="202.0" text="Repeate Password :">
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </Label>
-                        <TextField fx:id="repeatedPass" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="265.0" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="26.0" prefWidth="300.0" spacing="15.0">
-                     <children>
-                        <Button alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#click_generatePass" prefHeight="25.0" prefWidth="139.0" text="Generate Password">
-                           <HBox.margin>
-                              <Insets left="120.0" />
-                           </HBox.margin></Button>
-                     </children>
-                     <VBox.margin>
-                        <Insets top="10.0" />
                      </VBox.margin>
                   </HBox>
                   <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="300.0">
@@ -130,12 +109,26 @@
                            </HBox.margin>
                         </Label>
                      </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="26.0" prefWidth="300.0" spacing="15.0">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="300.0">
                      <padding>
                         <Insets bottom="10.0" />
                      </padding>
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
+                     <children>
+                        <Button alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#click_generatePass" prefHeight="25.0" prefWidth="162.0" text="Generate Password">
+                           <HBox.margin>
+                              <Insets left="120.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
                   </HBox>
                </children>
                <GridPane.margin>
