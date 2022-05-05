@@ -22,6 +22,7 @@ import javax.print.attribute.standard.ReferenceUriSchemesSupported;
 
 import application.Account;
 import application.User;
+import edu.sjsu.yazdankhah.crypto.util.PassUtil;
 
 public class SQLiteDatabase {
 	private static String jdbcUrl = "jdbc:sqlite:applicationDb.db";
@@ -152,6 +153,10 @@ public class SQLiteDatabase {
 		     //====================
 		     String genTest = PasswordGenerator.generatePassword(1,2,3,4);
 		     System.out.println(genTest);
+		     
+		     PassUtil passUtil = new PassUtil();
+		     System.out.println(passUtil.encrypt("1"));		     
+		     //System.out.println(passUtil.decrypt("6ab1e556e4628c505cad095783d2b5e6"));
 		} 
 		catch (SQLException e) 
 		{
