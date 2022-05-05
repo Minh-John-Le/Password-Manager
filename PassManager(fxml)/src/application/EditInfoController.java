@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import DAO.DeleteAccountDAO;
 import DAO.UpdateAccountDAO;
 import GeneralSettings.Settings;
+import edu.sjsu.yazdankhah.crypto.util.PassUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -49,7 +50,6 @@ public class EditInfoController extends AppUI{
 		String creationDateString = Settings.tempAccount.getDateCreated();
 		String expirationDateString = Settings.tempAccount.getDateExpired();
 		String durationString = Settings.tempAccount.getDuration();
-		
 		
 		appName.setText(appNameString);
 		email.setText(emailString);

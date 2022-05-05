@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 
 import DAO.AddAccountDAO;
 import GeneralSettings.Settings;
+import edu.sjsu.yazdankhah.crypto.util.PassUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -24,7 +25,6 @@ public class AddAppController extends AppUI{
 	@FXML
 	private TextField appName;
 	
-
 	@FXML
 	private void initialize()
 	{
@@ -117,7 +117,7 @@ public class AddAppController extends AppUI{
 	@FXML
 	//it returns back app info menu
 	public void click_cancel(ActionEvent event) throws IOException {
-		Settings.tempAccount = new Account(-1,-1, "","","","","","","");
+		Settings.tempAccount = new Account();
 		changeScene(event, Settings.MainScene);
 	}
 	@FXML

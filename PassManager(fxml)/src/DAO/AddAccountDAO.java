@@ -7,9 +7,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import GeneralSettings.Settings;
+import edu.sjsu.yazdankhah.crypto.util.PassUtil;
 
 public class AddAccountDAO {
-	
+	private static PassUtil passUtil = new PassUtil();
 	private static boolean isAccountExist(int userID, String appName, String accountUsername){
 		ResultSet result = null;
 		try 
@@ -58,7 +59,7 @@ public class AddAccountDAO {
 	{
 		try 
 		{
-			
+			String encryptedPass = passUtil.encrypt(accountPass);
 			Connection connection = DriverManager.getConnection(Settings.jdbcUrl);
 			java.sql.Statement statement = connection.createStatement(); 		
 
@@ -79,11 +80,11 @@ public class AddAccountDAO {
 			
 			// add data to table
 	        PreparedStatement addAccountPstmt = connection.prepareStatement(addAccountsql);
-		
+	        
 	        addAccountPstmt.setInt(1, userID);
 	        addAccountPstmt.setString(3, appName);
 	        addAccountPstmt.setString(4, accountUsername);
-	        addAccountPstmt.setString(5, accountPass);
+	        addAccountPstmt.setString(5, encryptedPass);
 	        addAccountPstmt.setString(6, email);
 	        addAccountPstmt.setString(7, dateCreated);
 	        addAccountPstmt.setString(8, dateExpire);

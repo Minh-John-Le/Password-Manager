@@ -27,16 +27,14 @@ public class GeneratePassController extends AppUI{
 	private Label passLength;
 	
 	public static String previousScene = Settings.EditingAccountScene;
+	
 	@FXML
-	//provide logic behind deleting data and updating the database
-	//it returns to app info
 	public void click_cancel(ActionEvent event) throws IOException {
 		//back to app info
 		changeScene(event, previousScene);
 	}
+	
 	@FXML
-	//provide logic behind deleting data and updating the database
-	//it returns to app info
 	public void click_use(ActionEvent event) throws IOException
 	{
 		//save new pass and update the database

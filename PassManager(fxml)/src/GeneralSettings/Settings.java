@@ -1,6 +1,7 @@
 package GeneralSettings;
 import application.Account;
 import application.User;
+import edu.sjsu.yazdankhah.crypto.util.PassUtil;
 
 public class Settings {
 	// DAO Settings
@@ -54,4 +55,7 @@ public class Settings {
 	public static final String ResetLogInPasswordScene = "/View/ChangeLoginPassMenu.fxml";
 	public static final String ChangeQuestionScene = "/View/ChangeQuestionMenu.fxml";
 	public static final String ChangeAnswerScene = "/View/ChangeAnswerMenu.fxml";
+	
+	//
+	public static final PassUtil passUtil = new PassUtil();
 }

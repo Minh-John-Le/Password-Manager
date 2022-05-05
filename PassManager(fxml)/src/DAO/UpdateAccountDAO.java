@@ -8,9 +8,10 @@ import java.util.ArrayList;
 
 import GeneralSettings.Settings;
 import application.Account;
+import edu.sjsu.yazdankhah.crypto.util.PassUtil;
 
 public class UpdateAccountDAO {
-	
+	private static PassUtil passUtil = new PassUtil();
 	public static void updateAccountAppName(int userID, int accID, String newAppName)
 	{
 		try 
@@ -75,13 +76,13 @@ public class UpdateAccountDAO {
 	{
 		try 
 		{
-			
+			String password = passUtil.encrypt(newPassword);
 			Connection connection = DriverManager.getConnection(Settings.jdbcUrl);
 			java.sql.Statement statement = connection.createStatement();
 			
 			String sql = "UPDATE " + Settings.accountTable
 					+ " SET " 
-					+ "accountPass = '" + newPassword + "'" 
+					+ "accountPass = '" + password + "'" 
 				
 					+ " WHERE " 
 					+ "userID = '" + userID + "'"
@@ -252,6 +253,7 @@ public class UpdateAccountDAO {
 				String applicationName = result.getString("appName");
 				String accountName = result.getString("accountUsername");
 				String password = result.getString("accountPass");
+				password = passUtil.decrypt(password);
 				String email = result.getString("email");
 				String dateCreated = result.getString("dateCreated");
 				String dateExpire = result.getString("dateExpire");				
