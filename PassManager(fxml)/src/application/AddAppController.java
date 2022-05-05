@@ -107,7 +107,7 @@ public class AddAppController extends AppUI{
 		{
 			alretMessege("Sucessful create new account!");
 			// set tempt account
-			Settings.tempAccount = new Account(-1,-1, "","","","","","","");
+			Settings.tempAccount = new Account();
 			changeScene(event, Settings.MainScene);
 			return;
 		}
