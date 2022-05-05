@@ -6,6 +6,7 @@ import GeneralSettings.Settings;
 import PasswordGenerator.PasswordGenerator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
@@ -21,9 +22,9 @@ public class GeneratePassController extends AppUI{
 	@FXML
 	private TextField special;
 	@FXML
-	private TextField newPass;
+	private Label newPass;
 	@FXML
-	private TextField passLength;
+	private Label passLength;
 	
 	public static String previousScene = Settings.EditingAccountScene;
 	@FXML
