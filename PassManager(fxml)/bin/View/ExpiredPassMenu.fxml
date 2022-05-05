@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="395.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ExpiredPassController">
+   <children>
+      <GridPane layoutX="123.0" layoutY="107.0" prefHeight="256.0" prefWidth="293.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="362.66665267944336" minHeight="0.0" prefHeight="10.333340962727846" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <HBox prefHeight="22.0" prefWidth="292.0" GridPane.rowIndex="1">
+               <children>
+                  <Button fx:id="edit" alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#click_Edit" prefHeight="25.0" prefWidth="65.0" text="Edit">
+                     <HBox.margin>
+                        <Insets left="100.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <GridPane.margin>
+                  <Insets top="10.0" />
+               </GridPane.margin>
+            </HBox>
+            <TableView fx:id="table" prefHeight="181.0" prefWidth="293.0">
+               <columns>
+                  <TableColumn fx:id="appName" prefWidth="86.66667938232422" text="Application" />
+                  <TableColumn fx:id="userName" prefWidth="99.33332824707031" text="Username" />
+                  <TableColumn fx:id="expiredDate" prefWidth="105.66665649414062" text="Exp Date" />
+               </columns>
+            </TableView>
+         </children>
+      </GridPane>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="55.0" prefWidth="191.0" text="Expired Password" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="10.0">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <GridPane layoutX="8.0" layoutY="10.0" prefHeight="396.0" prefWidth="163.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="90.33333969116211" minHeight="10.0" prefHeight="46.00000508626302" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="97.99999173482259" minHeight="10.0" prefHeight="50.99999491373698" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="59.33334350585939" minHeight="45.0" prefHeight="52.33333333333334" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="30.0" minHeight="45.0" prefHeight="0.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="30.0" minHeight="45.0" prefHeight="0.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="30.0" minHeight="45.0" prefHeight="0.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="56.66667683919269" minHeight="45.0" prefHeight="49.99998982747394" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="81.33333333333331" minHeight="55.99998982747394" prefHeight="62.66667683919269" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Button alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#click_Main" prefHeight="25.0" prefWidth="65.0" text="Main" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets left="40.0" />
+               </GridPane.margin>
+            </Button>
+            <Button alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#click_Setting" prefHeight="25.0" prefWidth="65.0" text="Setting" GridPane.rowIndex="5">
+               <GridPane.margin>
+                  <Insets left="40.0" />
+               </GridPane.margin>
+            </Button>
+            <Button alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#click_Logout" prefHeight="25.0" prefWidth="65.0" text="Log out" GridPane.rowIndex="6">
+               <GridPane.margin>
+                  <Insets left="40.0" />
+               </GridPane.margin>
+            </Button>
+            <HBox alignment="CENTER_LEFT" fillHeight="false" prefHeight="51.0" prefWidth="100.0" GridPane.rowIndex="1">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <children>
+                  <ImageView fitHeight="30.0" fitWidth="30.0">
+                     <image>
+                        <Image url="@../../user.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="userLabel" prefHeight="30.0" prefWidth="125.0" text="user">
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </HBox>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>
