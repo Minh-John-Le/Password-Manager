@@ -155,8 +155,8 @@ public class SQLiteDatabase {
 		     System.out.println(genTest);
 		     
 		     PassUtil passUtil = new PassUtil();
-		     System.out.println(passUtil.encrypt("1"));		     
-		     //System.out.println(passUtil.decrypt("6ab1e556e4628c505cad095783d2b5e6"));
+		     //System.out.println(passUtil.encrypt("1"));		     
+		     System.out.println(passUtil.decrypt("6ab1e556e4628c505cad095783d2b5e6"));
 		} 
 		catch (SQLException e) 
 		{

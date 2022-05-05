@@ -45,6 +45,7 @@ public class LoginDAO {
 			// create User bean and return it
 			int userID = result.getInt("userID");
 			String password = result.getString("userPassword");
+			password = passUtil.decrypt(password);
 			String question = result.getString("secQuestion");
 			String answer = result.getString("answer");
 			

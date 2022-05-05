@@ -8,15 +8,16 @@ import java.sql.SQLException;
 import java.util.UUID;
 
 import GeneralSettings.Settings;
+import edu.sjsu.yazdankhah.crypto.util.PassUtil;
 
 public class SignUpDAO {
 
-	
+	private static PassUtil passUtil = new PassUtil();
 	public static boolean createNewUser(String username, String userPassword, String secQuestion, String answer)
 	{
 		try 
 		{
-			
+			String encryptedPass = passUtil.encrypt(userPassword);
 			Connection connection = DriverManager.getConnection(Settings.jdbcUrl);
 			java.sql.Statement statement = connection.createStatement();
 			
@@ -44,7 +45,7 @@ public class SignUpDAO {
 	        
 	        //createNewUserPs.setString(1, userID);
 	        createNewUserPs.setString(2, username);
-	        createNewUserPs.setString(3, userPassword);
+	        createNewUserPs.setString(3, encryptedPass);
 	        createNewUserPs.setString(4, secQuestion); 
 	        createNewUserPs.setString(5, answer); 
 	        createNewUserPs.executeUpdate();

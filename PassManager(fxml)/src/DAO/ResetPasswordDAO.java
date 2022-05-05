@@ -7,8 +7,10 @@ import java.sql.SQLException;
 
 import GeneralSettings.Settings;
 import application.User;
+import edu.sjsu.yazdankhah.crypto.util.PassUtil;
 
 public class ResetPasswordDAO {
+	private static PassUtil passUtil = new PassUtil();
 	public static User getUser(String username)
 	{
 		ResultSet result = null;
@@ -41,6 +43,7 @@ public class ResetPasswordDAO {
 			// create User bean and return it
 			int userID = result.getInt("userID");
 			String password = result.getString("userPassword");
+			password = passUtil.decrypt(password);
 			String question = result.getString("secQuestion");
 			String answer = result.getString("answer");
 			
@@ -64,13 +67,13 @@ public class ResetPasswordDAO {
 	{
 		try 
 		{
-			
+			String encryptedPass = passUtil.encrypt(newPassword);
 			Connection connection = DriverManager.getConnection(Settings.jdbcUrl);
 			java.sql.Statement statement = connection.createStatement();
 			
 			String sql = "UPDATE " + Settings.usernameTable
 					+ " SET " 
-					+ "userPassword = '" + newPassword + "' " 
+					+ "userPassword = '" + encryptedPass + "' " 
 
 					+ " WHERE " 
 					+ "userID = '" + userID + "'";

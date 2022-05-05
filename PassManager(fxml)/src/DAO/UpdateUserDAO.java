@@ -8,9 +8,10 @@ import java.sql.SQLException;
 import GeneralSettings.Settings;
 import application.Account;
 import application.User;
+import edu.sjsu.yazdankhah.crypto.util.PassUtil;
 
 public class UpdateUserDAO {
-	
+	private static PassUtil passUtil = new PassUtil();
 	public static User getUser(int userID)
 	{
 		User user = null;
@@ -32,6 +33,7 @@ public class UpdateUserDAO {
 			
 			String username = result.getString("username");
 			String password = result.getString("userPassword");
+			password = passUtil.decrypt(password);
 			String question = result.getString("secQuestion");
 			String answer = result.getString("answer");
 			
