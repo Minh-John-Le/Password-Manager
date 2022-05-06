@@ -26,14 +26,24 @@ public class GeneratePassController extends AppUI{
 	@FXML
 	private Label passLength;
 	
-	public static String previousScene = Settings.EditingAccountScene;
+	public static String previousScene = Settings.EditingAccountScene; // this hold the previous scene
 	
+	/**
+	 * This password get user back to previous page
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	public void click_cancel(ActionEvent event) throws IOException {
 		//back to app info
 		changeScene(event, previousScene);
 	}
 	
+	/**
+	 * This method get user back to previous page while copy new generated password to clipboard
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	public void click_use(ActionEvent event) throws IOException
 	{
@@ -51,6 +61,12 @@ public class GeneratePassController extends AppUI{
 		// go back to previous scene
 		changeScene(event, previousScene);
 	}
+	
+	/**
+	 * This password get user input and generate appropriate password
+	 * @param event
+	 * @throws IOException
+	 */
 	public void click_generatePass(ActionEvent event) throws IOException {
 		//generate new pass 
 		String lowerString = "0" + lower.getText().replaceAll("[^0-9]", "").trim();

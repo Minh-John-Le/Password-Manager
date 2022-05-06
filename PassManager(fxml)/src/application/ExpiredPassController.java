@@ -45,7 +45,15 @@ public class ExpiredPassController extends AppUI{
 		table.setItems(accList);
 		table.getSelectionModel().selectFirst();
 	}
-	@FXML public void click_Edit(ActionEvent event) throws IOException{
+	
+	/**
+	 * This method prompt user to editing page 
+	 * @param event
+	 * @throws IOException
+	 */
+	@FXML 
+	public void click_Edit(ActionEvent event) throws IOException
+	{
 		Account account = table.getSelectionModel().getSelectedItem();
 		if (account == null)
 		{
@@ -55,7 +63,8 @@ public class ExpiredPassController extends AppUI{
 		EditInfoController.previousScene = Settings.ExpiredPasswordScene;
 		Settings.selectedAccount = account;
 
-
+		// deep copy selected account info to temporary account
+		// In order to display in account info page
 		Account tempAccount = Settings.tempAccount;
 		tempAccount.setAppName(account.getAppName());
 		tempAccount.setUserName(account.getUserName());
@@ -68,7 +77,13 @@ public class ExpiredPassController extends AppUI{
 		changeScene(event, Settings.EditingAccountScene);
 	}
 	
-	@FXML public void click_Logout(ActionEvent event){
+	/**
+	 * This method allow user to get back to log in page
+	 * @param event
+	 */
+	@FXML 
+	public void click_Logout(ActionEvent event)
+	{
 		try {
 			if(alretConfirmation(logOutText))
 			{
@@ -79,7 +94,14 @@ public class ExpiredPassController extends AppUI{
 			e.printStackTrace();
 		}
 	}
-	@FXML public void click_Main(ActionEvent event){
+	
+	/**
+	 * This method get user back to main page
+	 * @param event
+	 */
+	@FXML 
+	public void click_Main(ActionEvent event)
+	{
 		try {
 			
 			changeScene(event, Settings.MainScene);
@@ -87,7 +109,14 @@ public class ExpiredPassController extends AppUI{
 			e.printStackTrace();
 		}
 	}
-	@FXML public void click_Setting(ActionEvent event){
+	
+	/**
+	 * This method get user to Master profile page
+	 * @param event
+	 */
+	@FXML 
+	public void click_Setting(ActionEvent event)
+	{
 		try {
 			
 			changeScene(event, Settings.UserProfileScene);

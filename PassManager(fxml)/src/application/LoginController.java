@@ -35,17 +35,22 @@ public class LoginController extends AppUI {
 	public void initialize() throws IOException {
 		
 	}
-
+	
+	/**
+	 * This method check user input and let user log in thier account
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
-	//check the password and then call main menu if successful
 	public void click_login(ActionEvent event) throws IOException {
-		
-			
+		// get data from text field		
 		String username = getUsername().getText().trim();
 		String password = getPassword().getText().trim();
 		try {
 			User user = LoginDAO.getUser(username);
 			
+			//=====================================================================================
+			// Validation check
 			// Empty pass and username
 			if (username.isEmpty() || password.isEmpty()) 
 			{
@@ -59,6 +64,8 @@ public class LoginController extends AppUI {
 				alretMessege("UserName is wrong or not exits!!!");
 				return;
 			}
+			
+			//=====================================================================================
 			
 			// Success log in
 			if(user.getUserPass().equals(password))
@@ -82,8 +89,13 @@ public class LoginController extends AppUI {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * This method get user to sign up page
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
-	//load sign up menu
 	public void click_signup(ActionEvent event) throws IOException {
 		try 
 		{	
@@ -95,8 +107,12 @@ public class LoginController extends AppUI {
 		}
 	}
 	
+	/**
+	 * This method get user to forget password
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
-	//calls forget password menu
 	public void click_forgetPass(ActionEvent event) throws IOException 
 	{
 	ChangeLoginPassController.previousScene = Settings.LoginScene;
@@ -114,12 +130,11 @@ public class LoginController extends AppUI {
 		password.clear();
 	}
 
-/**
- * this method check if an account have expired password
- * @param user
- * @return
- */
-	
+	/**
+	 * this method check if an account have expired password
+	 * @param user
+	 * @return
+	 */
 	private boolean hasExpiredPassword(User user)
 	{
 		ArrayList<Account> allAccount = LoginDAO.getAccount(user.getUserID(), "" , "");

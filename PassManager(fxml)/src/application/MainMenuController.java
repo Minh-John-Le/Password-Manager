@@ -79,15 +79,14 @@ public class MainMenuController extends AppUI {
 		
 		changeScene(event, Settings.EditingAccountScene);
 	}
-	
-	
-	
-	
+		
 	/**
-	 * This method copy the password of selected account to clipboard
+	 * This method copy the password of selected account to clip board
 	 * @param event
 	 */
-	@FXML public void clickCopy(ActionEvent event){
+	@FXML 
+	public void clickCopy(ActionEvent event)
+	{
 		
 		// Get password
 
@@ -109,22 +108,59 @@ public class MainMenuController extends AppUI {
 		alretMessege(text + myPassword);
 	}
 	
-	
-	@FXML public void clickSetting(ActionEvent event) throws IOException{
+	/**
+	 * This method get user to master profile page
+	 * @param event
+	 * @throws IOException
+	 */
+	@FXML 
+	public void clickSetting(ActionEvent event) throws IOException
+	{
 		changeScene(event, Settings.UserProfileScene);
 	}
-	@FXML public void clickLogout(ActionEvent event) throws IOException{
+	
+	/**
+	 * This method get user to log in page
+	 * @param event
+	 * @throws IOException
+	 */
+	@FXML 
+	public void clickLogout(ActionEvent event) throws IOException
+	{
 		if(alretConfirmation("Do you want to log out?"))
 			changeScene(event, Settings.LoginScene);
 	}
-	@FXML public void clickSearch(ActionEvent event) throws IOException
+	
+	/**
+	 * This method get user to searching page
+	 * @param event
+	 * @throws IOException
+	 */
+	@FXML 
+	public void clickSearch(ActionEvent event) throws IOException
 	{
 		changeScene(event, Settings.SearchScene);
 	}
-	@FXML public void clickExpired(ActionEvent event) throws IOException{
+	
+	/**
+	 * This method get user to expired password page
+	 * @param event
+	 * @throws IOException
+	 */
+	@FXML 
+	public void clickExpired(ActionEvent event) throws IOException
+	{
 		changeScene(event, Settings.ExpiredPasswordScene);
 	}
-	@FXML public void clickAdd(ActionEvent event) throws IOException{
+	
+	/**
+	 * This method get user to adding new application page
+	 * @param event
+	 * @throws IOException
+	 */
+	@FXML 
+	public void clickAdd(ActionEvent event) throws IOException
+	{
 		
 		Settings.tempAccount = new Account();
 		Settings.selectedAccount = new Account();	

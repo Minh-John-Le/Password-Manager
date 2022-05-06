@@ -8,13 +8,15 @@ import java.sql.SQLException;
 import GeneralSettings.Settings;
 
 public class DeleteUserDAO {
-	
+	/**
+	 * This method remove a user from database
+	 * @param userID
+	 */
 	public static void deleteUser(int userID)
 	{
 		try 
 		{
-
-			
+			// Connect to database
 			Connection connection = DriverManager.getConnection(Settings.jdbcUrl);
 			java.sql.Statement statement = connection.createStatement();
 			
@@ -39,7 +41,5 @@ public class DeleteUserDAO {
 			e.printStackTrace();	
 		}
 	}
-		
-		
-	
+
 }

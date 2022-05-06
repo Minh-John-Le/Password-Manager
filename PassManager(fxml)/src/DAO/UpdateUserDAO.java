@@ -12,6 +12,11 @@ import edu.sjsu.yazdankhah.crypto.util.PassUtil;
 
 public class UpdateUserDAO {
 	private static PassUtil passUtil = new PassUtil();
+	/**
+	 * This method get user based on user ID
+	 * @param userID
+	 * @return
+	 */
 	public static User getUser(int userID)
 	{
 		User user = null;
@@ -52,6 +57,11 @@ public class UpdateUserDAO {
 		return user;
 	}
 	
+	/**
+	 * This method update user security question in database
+	 * @param userID
+	 * @param newQuestion
+	 */
 	public static void UpdateUserSecQuestion(int userID, String newQuestion)
 	{
 		try 
@@ -79,7 +89,11 @@ public class UpdateUserDAO {
 	
 	}
 	
-	
+	/**
+	 * This method update user answer in database
+	 * @param userID
+	 * @param newAnswer
+	 */
 	public static void UpdateUserAnswer(int userID, String newAnswer)
 	{
 		try 

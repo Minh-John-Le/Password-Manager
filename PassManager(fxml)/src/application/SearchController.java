@@ -34,11 +34,12 @@ public class SearchController extends AppUI{
 	public static ArrayList<Account> searchAccountList = new ArrayList<Account>();
 	
 	
-	//this function set the user name that successfully logs in 
-	//and sends it to main menu. so the main menu would be able to 
-	//show account info associated with this user name
+	/**
+	 * This method fill in the page with all searchAccount
+	 */
 	@FXML
-	public void initialize() {
+	public void initialize() 
+	{
 		// Set user name
 		userLabel.setText(Settings.currentUser.getUserName());
 		//get all account
@@ -53,7 +54,15 @@ public class SearchController extends AppUI{
 		table.getSelectionModel().selectFirst();
 	}
 
-	@FXML public void clickCopy(ActionEvent event) throws IOException {
+	/**
+	 * This method get the password from selected account 
+	 * Then copy this password to clip board
+	 * @param event
+	 * @throws IOException
+	 */
+	@FXML 
+	public void clickCopy(ActionEvent event) throws IOException 
+	{
 		Account account = table.getSelectionModel().getSelectedItem();
 		if (account == null)
 		{
@@ -62,7 +71,7 @@ public class SearchController extends AppUI{
 
 		String myPassword = account.getAppPass();
 		
-		// save password to clipboard
+		// save password to clip board
 		final Clipboard clipboard = Clipboard.getSystemClipboard();
 		final ClipboardContent content = new ClipboardContent();
 		content.putString(myPassword);
@@ -72,13 +81,27 @@ public class SearchController extends AppUI{
 		alretMessege(text + myPassword);
 		
 	}
-	@FXML public void clickMain(ActionEvent event) throws IOException {
+	
+	/**
+	 * This method return user back to main menu
+	 * @param event
+	 * @throws IOException
+	 */
+	@FXML 
+	public void clickMain(ActionEvent event) throws IOException 
+	{
 		// back to main menu
 		changeScene(event, Settings.MainScene);
 	}
 	
-	
-	@FXML public void clickLogout(ActionEvent event) throws IOException {
+	/**
+	 * This method return user to Log In page
+	 * @param event
+	 * @throws IOException
+	 */
+	@FXML
+	public void clickLogout(ActionEvent event) throws IOException 
+	{
 		//ask for confirmation and sign out
 		//update database
 		if(alretConfirmation("Do you want to log out?")) 
@@ -87,7 +110,11 @@ public class SearchController extends AppUI{
 		}
 	}
 	
-	
+	/**
+	 * This method get user to editing account page for selected accounts
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML public void clickEdit(ActionEvent event) throws IOException 
 	{
 		// get selected account
@@ -96,10 +123,12 @@ public class SearchController extends AppUI{
 		{
 			return;
 		}
-		// give info mation to edit Info Controller
+		// give information to edit Info Controller
 		EditInfoController.previousScene = Settings.SearchScene;
 		Settings.selectedAccount = account;
 		
+		// Deep copy all information from the selected account to temp account
+		// In order to display information in Editing account page
 		Account tempAccount = Settings.tempAccount;
 		tempAccount.setAppName(account.getAppName());
 		tempAccount.setUserName(account.getUserName());
@@ -112,8 +141,14 @@ public class SearchController extends AppUI{
 		changeScene(event, Settings.EditingAccountScene);
 	}
 	
-	
-	@FXML public void clickSearch(ActionEvent event) throws IOException {
+	/** 
+	 * This method update the table with the result from searching
+	 * @param event
+	 * @throws IOException
+	 */
+	@FXML 
+	public void clickSearch(ActionEvent event) throws IOException 
+	{
 		String application = Application.getText();
 		String username = Username.getText();
 		

@@ -6,6 +6,14 @@ public class PasswordGenerator {
     private static final String DIGITS = "0123456789";
     private static final String PUNCTUATION = "!@#$%&*()_+-=[]|,./?><";
     
+    /**
+     * This method generate a password String based on user customize
+     * @param numLow
+     * @param numUpper
+     * @param numSpecial
+     * @param numDigits
+     * @return
+     */
 	public static String generatePassword(int numLow, int numUpper, int numSpecial, int numDigits)
 	{
 		StringBuilder result = new StringBuilder("");

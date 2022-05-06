@@ -11,6 +11,12 @@ import edu.sjsu.yazdankhah.crypto.util.PassUtil;
 
 public class ResetPasswordDAO {
 	private static PassUtil passUtil = new PassUtil();
+	
+	/**
+	 * This method get user based on user name
+	 * @param username
+	 * @return
+	 */
 	public static User getUser(String username)
 	{
 		ResultSet result = null;
@@ -43,7 +49,7 @@ public class ResetPasswordDAO {
 			// create User bean and return it
 			int userID = result.getInt("userID");
 			String password = result.getString("userPassword");
-			password = passUtil.decrypt(password);
+			password = passUtil.decrypt(password); // Decypt the password
 			String question = result.getString("secQuestion");
 			String answer = result.getString("answer");
 			
@@ -63,11 +69,16 @@ public class ResetPasswordDAO {
 		return user;
 	}
 	
+	/**
+	 * This method update user password in database
+	 * @param userID
+	 * @param newPassword
+	 */
 	public static void updateUserPassword(int userID, String newPassword)
 	{
 		try 
 		{
-			String encryptedPass = passUtil.encrypt(newPassword);
+			String encryptedPass = passUtil.encrypt(newPassword); // Encrypt new password
 			Connection connection = DriverManager.getConnection(Settings.jdbcUrl);
 			java.sql.Statement statement = connection.createStatement();
 			

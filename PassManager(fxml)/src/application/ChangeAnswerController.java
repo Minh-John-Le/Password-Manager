@@ -14,17 +14,23 @@ public class ChangeAnswerController extends AppUI{
 	private TextField oldAns;
 	@FXML
 	private TextField newAns;
+	
+	
+	/**
+	 * This method initialize the scene with old answer from database
+	 */
 	@FXML 
-	//initializer fill out the menu with the app information
-	//here is a sample showing the UI works
-	//The data comes from The database,it should be connected to database
 	public void initialize() {
 		oldAns.setText(Settings.currentUser.getAnswer());
 	}
 
+	
+	/**
+	 * This method update user new answer for master profile
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
-	//provide logic behind deleting data and updating the database
-	//it returns to app info
 	public void click_submit(ActionEvent event) throws IOException 
 	{
 		//save new pass and update the database
@@ -43,8 +49,13 @@ public class ChangeAnswerController extends AppUI{
 		alretMessege("Sucessful change security answer!");
 		changeScene(event, Settings.UserProfileScene);
 	}
+	
+	/**
+	 * This method return user back to previous page
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
-	//it returns back app info menu
 	public void click_cancel(ActionEvent event) throws IOException {
 		changeScene(event, Settings.UserProfileScene);
 	}

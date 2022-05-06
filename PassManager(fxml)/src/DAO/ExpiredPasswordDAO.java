@@ -13,6 +13,15 @@ import edu.sjsu.yazdankhah.crypto.util.PassUtil;
 public class ExpiredPasswordDAO 
 {
 	private static PassUtil passUtil = new PassUtil();
+	
+	/**
+	 * This method search for account based on Application name and account user name
+	 * The searching algorithm following "AND" logic
+	 * @param userID
+	 * @param appName
+	 * @param accountUsername
+	 * @return return all search account
+	 */
 	public static ArrayList<Account> getAccount(int userID, String appName, String accountUsername)
 	{
 		ArrayList<Account> accountList = new ArrayList<Account>();

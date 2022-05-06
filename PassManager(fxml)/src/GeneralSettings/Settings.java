@@ -56,6 +56,5 @@ public class Settings {
 	public static final String ChangeQuestionScene = "/View/ChangeQuestionMenu.fxml";
 	public static final String ChangeAnswerScene = "/View/ChangeAnswerMenu.fxml";
 	
-	//
-	public static final PassUtil passUtil = new PassUtil();
+
 }

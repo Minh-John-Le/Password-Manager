@@ -18,6 +18,10 @@ public class ChangeLoginPassController extends AppUI {
 	private TextField repeatePass;
 
 	public static String previousScene = Settings.LoginScene;
+	
+	/**
+	 * This method fill in old password field with the user current password
+	 */
 	@FXML 
 	public void initialize() 
 	{
@@ -26,6 +30,11 @@ public class ChangeLoginPassController extends AppUI {
 		
 	}
 
+	/**
+	 * This method update user password
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	public void clickSubmit(ActionEvent event) throws IOException 
 	{
@@ -49,6 +58,13 @@ public class ChangeLoginPassController extends AppUI {
 		alretMessege("password and repeat password do not match!");
 		
 	}
+	
+	
+	/**
+	 * This method return user to previous page
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	public void clickCancel(ActionEvent event) throws IOException {
 		changeScene(event, previousScene);

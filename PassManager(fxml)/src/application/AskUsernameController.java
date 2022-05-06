@@ -13,10 +13,13 @@ public class AskUsernameController extends AppUI {
 
 	@FXML
 	private TextField username;
+
+	/**
+	 * This method verified if user name exist in database
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
-
-
-
 	public void click_submit(ActionEvent event) throws IOException 
 	{
 		String userString = username.getText().trim();
@@ -34,8 +37,12 @@ public class AskUsernameController extends AppUI {
 		
 	}
 	
+	/**
+	 * This method return user to log in page
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
-	//it returns back app info menu
 	public void click_cancel(ActionEvent event) throws IOException {
 		changeScene(event, Settings.LoginScene);
 	}

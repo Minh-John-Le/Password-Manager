@@ -13,11 +13,19 @@ import edu.sjsu.yazdankhah.crypto.util.PassUtil;
 public class SignUpDAO {
 
 	private static PassUtil passUtil = new PassUtil();
+	/**
+	 * This method add new user into database
+	 * @param username
+	 * @param userPassword
+	 * @param secQuestion
+	 * @param answer
+	 * @return
+	 */
 	public static boolean createNewUser(String username, String userPassword, String secQuestion, String answer)
 	{
 		try 
 		{
-			String encryptedPass = passUtil.encrypt(userPassword);
+			String encryptedPass = passUtil.encrypt(userPassword); // Encypt user password
 			Connection connection = DriverManager.getConnection(Settings.jdbcUrl);
 			java.sql.Statement statement = connection.createStatement();
 			

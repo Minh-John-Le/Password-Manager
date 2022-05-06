@@ -7,6 +7,11 @@ import java.sql.SQLException;
 import GeneralSettings.Settings;
 
 public class DeleteAccountDAO {
+	/** 
+	 * this method remove an account from database
+	 * @param userID
+	 * @param accountID
+	 */
 	public static void deleteAccount(int userID, int accountID)
 	{
 		try 

@@ -35,9 +35,14 @@ public class AddAppController extends AppUI{
 		duration.setText(Settings.tempAccount.getDuration());
 		appName.setText(Settings.tempAccount.getAppName());
 	}
+
+	/**
+	 * This method Verified information of the new application
+	 * Then add it into the user account storage
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
-	//provide logic behind deleting data and updating the database
-	//it returns to main menu after deleting the data
 	public void click_submit(ActionEvent event) throws IOException 
 	{
 		String appNameString = appName.getText().trim();
@@ -61,7 +66,7 @@ public class AddAppController extends AppUI{
 		
 		if (durationString.length() < duration.getText().length())
 		{
-			alretMessege("Duration cannot contains any character!");
+			alretMessege("Duration cannot contain any character or be negative!");
 			return;
 		}
 		
@@ -114,14 +119,25 @@ public class AddAppController extends AppUI{
 		
 		alretMessege("Please add a different account! This account has already added!");
 	}
+	
+	/**
+	 * This method get user go back to the previous page
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
-	//it returns back app info menu
 	public void click_cancel(ActionEvent event) throws IOException {
 		Settings.tempAccount = new Account();
 		changeScene(event, Settings.MainScene);
 	}
+	
+	/**
+	 * This method get user to password generator
+	 * after generate the password, the generated password will auto-filled in password location
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
-	//it returns back app info menu
 	public void click_generatePass(ActionEvent event) throws IOException
 	{
 		Settings.tempAccount.setAppName(appName.getText());

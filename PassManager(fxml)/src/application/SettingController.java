@@ -10,7 +10,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 public class SettingController extends AppUI{
-	private final String text = "Do you want to delete your master account?";
+	//warning text for delete master profile
+	private final String warningText = "Do you want to delete your master account?"; 
 	@FXML
 	private TextField username;
 	@FXML
@@ -19,10 +20,12 @@ public class SettingController extends AppUI{
 	private TextArea quest;
 	@FXML
 	private TextField ans;
-	//initializer fill out the menu with the app information
-	//here is a sample showing the UI works
-	//The data comes from The database,it should be connected to database
-	@FXML public void initialize() 
+	
+	/**
+	 * This method fill in user information to appropriate text field
+	 */
+	@FXML 
+	public void initialize() 
 	{
 		String usernameString = Settings.currentUser.getUserName();
 		String passwordString = Settings.currentUser.getUserPass();
@@ -38,30 +41,65 @@ public class SettingController extends AppUI{
 		ans.setText(ansString);
 	}
 	
-	@FXML public void click_back(ActionEvent event) throws IOException 
+	/**
+	 * This method get user back to previous page
+	 * @param event
+	 * @throws IOException
+	 */
+	@FXML 
+	public void click_back(ActionEvent event) throws IOException 
 	{
 		// back to main menu
 		changeScene(event, Settings.MainScene);
 	}
 
-	
-	@FXML public void click_changePass(ActionEvent event) throws IOException 
+	/**
+	 * This method propmt user to change password page
+	 * @param event
+	 * @throws IOException
+	 */
+	@FXML 
+	public void click_changePass(ActionEvent event) throws IOException 
 	{
 		// back to main menu
 		ChangeLoginPassController.previousScene = Settings.UserProfileScene;
 		changeScene(event, Settings.ResetLogInPasswordScene);
 	}
-	@FXML public void click_changeQuest(ActionEvent event) throws IOException {
+	
+	/**
+	 * This method get user to change security question page
+	 * @param event
+	 * @throws IOException
+	 */
+	@FXML
+	public void click_changeQuest(ActionEvent event) throws IOException 
+	{
 		// back to main menu
 		changeScene(event, Settings.ChangeQuestionScene);
 	}
-	@FXML public void click_changeAns(ActionEvent event) throws IOException {
+	
+	/**
+	 * This method get user to change security answer page
+	 * @param event
+	 * @throws IOException
+	 */
+	@FXML 
+	public void click_changeAns(ActionEvent event) throws IOException 
+	{
 		// back to main menu
 		changeScene(event, Settings.ChangeAnswerScene);
 	}
-	@FXML public void click_delete(ActionEvent event) throws IOException {
+	
+	/**
+	 * This method allow user to delete master account profile
+	 * @param event
+	 * @throws IOException
+	 */
+	@FXML 
+	public void click_delete(ActionEvent event) throws IOException 
+	{
 		// back to main menu
-		if(alretConfirmation(text)) 
+		if(alretConfirmation(warningText)) 
 		{
 			DeleteUserDAO.deleteUser(Settings.currentUser.getUserID());
 			changeScene(event, Settings.LoginScene);

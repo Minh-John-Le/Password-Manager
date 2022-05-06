@@ -11,6 +11,13 @@ import edu.sjsu.yazdankhah.crypto.util.PassUtil;
 
 public class AddAccountDAO {
 	private static PassUtil passUtil = new PassUtil();
+	/**
+	 * This method verified if an account already exist
+	 * @param userID
+	 * @param appName
+	 * @param accountUsername
+	 * @return
+	 */
 	private static boolean isAccountExist(int userID, String appName, String accountUsername){
 		ResultSet result = null;
 		try 
@@ -54,12 +61,27 @@ public class AddAccountDAO {
 		
 	}
 	
+	/**
+	 * This method add new account to database
+	 * @param userID
+	 * @param appName
+	 * @param accountUsername
+	 * @param accountPass
+	 * @param email
+	 * @param dateCreated
+	 * @param dateExpire
+	 * @param duration
+	 * @return
+	 */
 	public static boolean addNewAccount(int userID, String appName, String accountUsername,
 			String accountPass, String email, String dateCreated, String dateExpire, String duration) 
 	{
 		try 
 		{
+			// Encrypting input password
 			String encryptedPass = passUtil.encrypt(accountPass);
+			
+			// Connect to database
 			Connection connection = DriverManager.getConnection(Settings.jdbcUrl);
 			java.sql.Statement statement = connection.createStatement(); 		
 
@@ -71,7 +93,7 @@ public class AddAccountDAO {
 			}
 			
 				
-
+		
 			String addAccountsql = "INSERT INTO " + Settings.accountTable + 
 					"(userID, accountID, appName, accountUsername, accountPass, "
 					+ "email, dateCreated, dateExpire, duration) " + "\n" + 

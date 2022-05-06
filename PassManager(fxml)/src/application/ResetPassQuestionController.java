@@ -26,6 +26,12 @@ public class ResetPassQuestionController extends AppUI  {
 		quest.setText(questString);
 	}
 	
+	/**
+	 * This method verify user answer to security question
+	 * Then get user to reseting password page
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	public void click_submit(ActionEvent event) throws IOException 
 	{
@@ -42,8 +48,12 @@ public class ResetPassQuestionController extends AppUI  {
 		alretMessege("Incorrect answer. Please retry!");
 	}
 	
+	/**
+	 * This method get user back to Log in page
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
-	//it returns back app info menu
 	public void click_cancel(ActionEvent event) throws IOException 
 	{
 		changeScene(event, Settings.LoginScene);

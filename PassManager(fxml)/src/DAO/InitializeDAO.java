@@ -8,6 +8,9 @@ import GeneralSettings.Settings;
 
 public class InitializeDAO {
 	
+	/**
+	 * this method initialize database if database not exist
+	 */
 	public static void initializeDatabase() 
 	{
 		try {

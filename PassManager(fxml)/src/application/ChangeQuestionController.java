@@ -13,19 +13,23 @@ public class ChangeQuestionController extends AppUI {
 	private TextArea oldQuest;
 	@FXML
 	private TextField newQuest;
+	
+	/**
+	 * This method fill in old question textfield with the old question in database
+	 */
 	@FXML 
-	//initializer fill out the menu with the app information
-	//here is a sample showing the UI works
-	//The data comes from The database,it should be connected to database
 	public void initialize() 
 	{
 		oldQuest.setText(Settings.currentUser.getSecQuestion());
 		oldQuest.setWrapText(true);
 	}
 
+	/**
+	 * This method verify user new question and update new question on database
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
-	//provide logic behind deleting data and updating the database
-	//it returns to app info
 	public void click_submit(ActionEvent event) throws IOException 
 	{
 		int userID = Settings.currentUser.getUserID();
@@ -42,8 +46,13 @@ public class ChangeQuestionController extends AppUI {
 		alretMessege("Sucessful change security question!");
 		changeScene(event, Settings.UserProfileScene);
 	}
+	
+	/**
+	 * This method return user to previous page
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
-	//it returns back app info menu
 	public void click_cancel(ActionEvent event) throws IOException {
 		changeScene(event, Settings.UserProfileScene);
 	}		

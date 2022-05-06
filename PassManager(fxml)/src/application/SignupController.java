@@ -2,12 +2,12 @@ package application;
 
 import java.io.IOException;
 
-import DAO.SQLiteDatabase;
 import DAO.SignUpDAO;
 import GeneralSettings.Settings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import testUnit.SQLiteDatabase;
 
 public class SignupController extends AppUI{
 
@@ -22,9 +22,13 @@ public class SignupController extends AppUI{
 	@FXML
 	private TextField ans;
 	
-	
+	/**
+	 * This method verified user input 
+	 * Then create new user account and record it in database
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
-	//it returns back app info menu
 	public void click_submit(ActionEvent event) throws IOException {
 		try 
 		{
@@ -88,9 +92,12 @@ public class SignupController extends AppUI{
 		
 	}
 		
-	
+	/**
+	 * This method get user back to log in scene
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
-	//it returns back app info menu
 	public void click_cancel(ActionEvent event) throws IOException 
 	{
 		changeScene(event, Settings.LoginScene);

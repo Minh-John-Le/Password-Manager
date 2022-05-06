@@ -13,6 +13,11 @@ import edu.sjsu.yazdankhah.crypto.util.PassUtil;
 
 public class LoginDAO {
 	private static PassUtil passUtil = new PassUtil();
+	/**
+	 * This method get user from database based on user name
+	 * @param username
+	 * @return searched user
+	 */
 	public static User getUser(String username)
 	{
 		ResultSet result = null;
@@ -65,6 +70,14 @@ public class LoginDAO {
 		return user;
 	}
 
+	/**
+	 * This method return all search account based on Application name and account User name
+	 * This method follow "And" logic
+	 * @param userID
+	 * @param appName
+	 * @param accountUsername
+	 * @return
+	 */
 	public static ArrayList<Account> getAccount(int userID, String appName, String accountUsername)
 	{
 		ArrayList<Account> accountList = new ArrayList<Account>();

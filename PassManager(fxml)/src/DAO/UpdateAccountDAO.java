@@ -12,6 +12,13 @@ import edu.sjsu.yazdankhah.crypto.util.PassUtil;
 
 public class UpdateAccountDAO {
 	private static PassUtil passUtil = new PassUtil();
+	
+	/**
+	 * This method update use account name in database
+	 * @param userID
+	 * @param accID
+	 * @param newAppName
+	 */
 	public static void updateAccountAppName(int userID, int accID, String newAppName)
 	{
 		try 
@@ -42,6 +49,12 @@ public class UpdateAccountDAO {
 		}
 	} 
 	
+	/**
+	 * This method update account user name in database
+	 * @param userID
+	 * @param accID
+	 * @param newAccUserName
+	 */
 	public static void updateAccountUsername(int userID, int accID, String newAccUsername)
 	{
 		try 
@@ -71,12 +84,18 @@ public class UpdateAccountDAO {
 			e.printStackTrace();	
 		}
 	} 
-
+	
+	/**
+	 * This method update account password in database
+	 * @param userID
+	 * @param accID
+	 * @param newPasssword
+	 */
 	public static void updateAccountPassword(int userID, int accID, String newPassword)
 	{
 		try 
 		{
-			String password = passUtil.encrypt(newPassword);
+			String password = passUtil.encrypt(newPassword); // Encrypt new password
 			Connection connection = DriverManager.getConnection(Settings.jdbcUrl);
 			java.sql.Statement statement = connection.createStatement();
 			
@@ -103,6 +122,12 @@ public class UpdateAccountDAO {
 		}
 	} 
 
+	/**
+	 * This method update account email in database
+	 * @param userID
+	 * @param accID
+	 * @param newEmail
+	 */
 	public static void updateAccountEmail(int userID, int accID, String newEmail)
 	{
 		try 
@@ -134,6 +159,12 @@ public class UpdateAccountDAO {
 		}
 	} 
 
+	/**
+	 * This method update account creation day in database
+	 * @param userID
+	 * @param accID
+	 * @param newCreationDay
+	 */
 	public static void updateAccountCreationDay(int userID, int accID, String newCreationDay)
 	{
 		try 
@@ -165,6 +196,12 @@ public class UpdateAccountDAO {
 		}
 	} 
 
+	/**
+	 * This method update account expired date in database
+	 * @param userID
+	 * @param accID
+	 * @param newExpiredDay
+	 */
 	public static void updateAccountExpiredDay(int userID, int accID, String newExpiredDay)
 	{
 		try 
@@ -196,6 +233,12 @@ public class UpdateAccountDAO {
 		}
 	} 
 
+	/**
+	 * This method update account duration in database
+	 * @param userID
+	 * @param accID
+	 * @param newDuration
+	 */
 	public static void updateAccountDuration(int userID, int accID, String newDuration)
 	{
 		try 
@@ -227,6 +270,12 @@ public class UpdateAccountDAO {
 		}
 	} 
 
+	/**
+	 * This method get an account based on user ID and accID
+	 * @param userID
+	 * @param accID
+	 * @return
+	 */
 	public static Account getAccount(int userID, int accID)
 	{
 		Account account = null;
@@ -277,6 +326,13 @@ public class UpdateAccountDAO {
 		return account;
 	}
 
+	/**
+	 * This method verified if an account has already exist
+	 * @param userID
+	 * @param appName
+	 * @param accountUsername
+	 * @return
+	 */
 	public static boolean isAccountExist(int userID, String appName, String accountUsername){
 		ResultSet result = null;
 		try 

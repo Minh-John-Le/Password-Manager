@@ -32,9 +32,9 @@ public class EditInfoController extends AppUI{
 	public static String previousScene = Settings.MainScene;
 
 
-	//initializer fill out the menu with the app information
-	//here is a sample showing the UI works
-	//The data comes from The database,it should be connected to database
+	/**
+	 * This method fill in all data about the selected account
+	 */
 	@FXML 
 	public void initialize() 
 	{
@@ -42,7 +42,7 @@ public class EditInfoController extends AppUI{
 		{
 			return;
 		}
-		
+		// get data from selected account
 		String appNameString = Settings.tempAccount.getAppName();
 		String emailString = Settings.tempAccount.getEmail();
 		String usernameString = Settings.tempAccount.getUserName();
@@ -51,6 +51,7 @@ public class EditInfoController extends AppUI{
 		String expirationDateString = Settings.tempAccount.getDateExpired();
 		String durationString = Settings.tempAccount.getDuration();
 		
+		// Fill them in appropriate location
 		appName.setText(appNameString);
 		email.setText(emailString);
 		username.setText(usernameString);
@@ -59,11 +60,19 @@ public class EditInfoController extends AppUI{
 		expirationDate.setText(expirationDateString);
 		day.setText(durationString);
 	}
-	
-	@FXML public void click_Back(ActionEvent event) throws IOException {
-		// back to previos scene
+
+	/**
+	 * This method return user to previous page
+	 * @param event
+	 * @throws IOException
+	 */
+	@FXML 
+	public void click_Back(ActionEvent event) throws IOException 
+	{
+		// reset the selected account to empty
 		Settings.tempAccount = new Account();
 		Settings.selectedAccount = new Account();
+
 		changeScene(event, previousScene);
 	}
 	
@@ -72,7 +81,9 @@ public class EditInfoController extends AppUI{
 	 * @param event
 	 * @throws IOException
 	 */
-	@FXML public void click_Delete(ActionEvent event) throws IOException {
+	@FXML 
+	public void click_Delete(ActionEvent event) throws IOException 
+	{
 		//ask for confirmation
 		if(alretConfirmation(deleteWarningText))
 		{
@@ -82,24 +93,40 @@ public class EditInfoController extends AppUI{
 		
 	}
 	
+	/**
+	 * This method verified and update user new information about account
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML 
 	public void click_submit(ActionEvent event) throws IOException {
-		//open change Pass menu
+		//get data from text field
 		String appNameString = appName.getText().trim();
 		String userNameString = username.getText().trim();
 		String emailString = email.getText().trim();
 		String passString = pass.getText().trim();
-		String durationString = day.getText().trim();
+		String durationString = day.getText().replaceAll("[^0-9]", "").trim();
 		
 		int userID = Settings.currentUser.getUserID();
 		int accID = Settings.selectedAccount.getAccID();
 		
-		
-
-		// Check if new application name is empty
+		//=====================================================================================
+		// Validation check
 		if (appNameString.equals(""))
 		{
 			alretMessege("Application cannot be empty!");
+			return;
+		}
+		
+		if (durationString.equals(""))
+		{
+			alretMessege("Duration cannot be empty!");
+			return;	
+		}
+		
+		if (durationString.length() < day.getText().length())
+		{
+			alretMessege("Duration cannot contain any character or be negative!");
 			return;
 		}
 		
@@ -115,6 +142,7 @@ public class EditInfoController extends AppUI{
 			return;
 		}
 		
+		//=====================================================================================
 		// verify if account exist
 		boolean isAccountExist = UpdateAccountDAO.isAccountExist(userID, appNameString, userNameString);
 		
@@ -131,32 +159,44 @@ public class EditInfoController extends AppUI{
 			return;
 		}
 		
+		
+		//=====================================================================================
+		// Update account in database
 		UpdateAccountDAO.updateAccountAppName(userID, accID, appNameString);
 		UpdateAccountDAO.updateAccountUsername(userID, accID, userNameString);
 		UpdateAccountDAO.updateAccountEmail(userID, accID, emailString);
 		UpdateAccountDAO.updateAccountDuration(userID, accID, durationString);
 		
+		
+		// update the password and created only if user change password
 		if (!passString.equals(Settings.selectedAccount.getAppPass()))
 		{
 			updatePasswordInfomation(userID, accID, passString);
 			
 		}
 		
-		Settings.selectedAccount = UpdateAccountDAO.getAccount(userID, accID);
-		
+		// Reset selected account to empty and go back to previous page
 		Settings.tempAccount = new Account();
 		Settings.selectedAccount = new Account();
 		alretMessege("Application information was edited!");
 		changeScene(event, previousScene);
 	}
+	
+	/**
+	 * This method get user to password generator page
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML public void click_generatePass(ActionEvent event) throws IOException {
-		// go to pass generation scene
+		// gett data from textfield
 		String appNameString = appName.getText().trim();
 		String userNameString = username.getText().trim();
 		String emailString = email.getText().trim();
 		String passString = pass.getText().trim();
 		String durationString = day.getText().trim();
 		
+		// Save those data to tempt account, 
+		//so that when getting back from other page, user input still remain
 		Account tempAccount = Settings.tempAccount;
 		tempAccount.setAppName(appNameString);
 		tempAccount.setUserName(userNameString);

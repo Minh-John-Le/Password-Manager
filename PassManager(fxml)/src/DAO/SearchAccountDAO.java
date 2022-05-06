@@ -13,6 +13,15 @@ import edu.sjsu.yazdankhah.crypto.util.PassUtil;
 public class SearchAccountDAO {
 	
 	private static PassUtil passUtil = new PassUtil();
+	
+	/**
+	 * This method search account based on application name and user name
+	 * This method follow "AND" logic
+	 * @param userID
+	 * @param appName
+	 * @param accountUsername
+	 * @return
+	 */
 	public static ArrayList<Account> getAccount(int userID, String appName, String accountUsername)
 	{
 		ArrayList<Account> accountList = new ArrayList<Account>();
@@ -62,7 +71,7 @@ public class SearchAccountDAO {
 				String applicationName = result.getString("appName");
 				String accountName = result.getString("accountUsername");
 				String password = result.getString("accountPass");
-				password = passUtil.decrypt(password);
+				password = passUtil.decrypt(password); // Decypt the password
 				String email = result.getString("email");
 				String dateCreated = result.getString("dateCreated");
 				String dateExpire = result.getString("dateExpire");				
