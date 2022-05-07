@@ -58,16 +58,17 @@ public class AddAppController extends AppUI{
 			return;				
 		}
 		
-		if (durationString.equals(""))
-		{
-			alretMessege("Duration must be positive number and cannot be empty!");
-			return;	
-		}
-		
+				
 		if (durationString.length() < duration.getText().length())
 		{
 			alretMessege("Duration cannot contain any character or be negative!");
 			return;
+		}
+		
+		if (durationString.equals(""))
+		{
+			alretMessege("Duration  cannot be empty!");
+			return;	
 		}
 		
 		if (accountUsernameString.equals(""))

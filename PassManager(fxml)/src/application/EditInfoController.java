@@ -2,6 +2,7 @@ package application;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import DAO.DeleteAccountDAO;
 import DAO.UpdateAccountDAO;
@@ -119,17 +120,18 @@ public class EditInfoController extends AppUI{
 			return;
 		}
 		
-		if (durationString.equals(""))
-		{
-			alretMessege("Duration must be positive number and cannot be empty!");
-			return;	
-		}
-		
 		if (durationString.length() < day.getText().length())
 		{
 			alretMessege("Duration cannot contain any character or be negative!");
 			return;
 		}
+		
+		if (durationString.equals(""))
+		{
+			alretMessege("Duration cannot be empty!");
+			return;	
+		}
+			
 		
 		if (userNameString.equals(""))
 		{
@@ -167,6 +169,19 @@ public class EditInfoController extends AppUI{
 		UpdateAccountDAO.updateAccountUsername(userID, accID, userNameString);
 		UpdateAccountDAO.updateAccountEmail(userID, accID, emailString);
 		UpdateAccountDAO.updateAccountDuration(userID, accID, durationString);
+		
+		int durationInt = Integer.parseInt(durationString);
+		
+		// Update expired date if duration change
+		if (Integer.parseInt(Settings.selectedAccount.getDuration()) != durationInt)
+		{
+			DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+			String createdDateString = Settings.selectedAccount.getDateCreated();
+			LocalDate createdDate = LocalDate.parse(createdDateString, dateFormat);			
+			LocalDate newExpiredDate = createdDate.plusDays(durationInt);
+			String newExpiredDateString = newExpiredDate.toString().replace("-", "/");
+			UpdateAccountDAO.updateAccountExpiredDay(userID, accID, newExpiredDateString);
+		}
 		
 		
 		// update the password and created only if user change password
