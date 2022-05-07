@@ -9,6 +9,7 @@ import GeneralSettings.Settings;
 import edu.sjsu.yazdankhah.crypto.util.PassUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class EditInfoController extends AppUI{
@@ -22,9 +23,9 @@ public class EditInfoController extends AppUI{
 	@FXML
 	private TextField pass;
 	@FXML
-	private TextField creationDate;
+	private Label creationDate;
 	@FXML
-	private TextField expirationDate;
+	private Label expirationDate;
 	@FXML
 	private TextField day;
 	
@@ -120,7 +121,7 @@ public class EditInfoController extends AppUI{
 		
 		if (durationString.equals(""))
 		{
-			alretMessege("Duration cannot be empty!");
+			alretMessege("Duration must be positive number and cannot be empty!");
 			return;	
 		}
 		

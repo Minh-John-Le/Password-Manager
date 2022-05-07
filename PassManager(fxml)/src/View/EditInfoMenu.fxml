@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="396.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.EditInfoController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="396.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.EditInfoController">
    <children>
       <GridPane layoutX="2.0" prefHeight="396.0" prefWidth="450.0" AnchorPane.topAnchor="0.0">
          <columnConstraints>
@@ -52,11 +52,11 @@
                   </HBox>
                </children>
             </VBox>
-            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0" prefWidth="406.0" GridPane.rowIndex="1">
+            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0" prefWidth="406.0" spacing="10.0" GridPane.rowIndex="1">
                <children>
                   <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="393.0">
                      <children>
-                        <Label prefHeight="17.0" prefWidth="119.0" text="Application Name :">
+                        <Label prefHeight="25.0" prefWidth="119.0" text="Application Name :">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
@@ -64,12 +64,12 @@
                         <TextField fx:id="appName" editable="true" prefHeight="25.0" prefWidth="185.0" />
                      </children>
                      <VBox.margin>
-                        <Insets bottom="10.0" />
+                        <Insets />
                      </VBox.margin>
                   </HBox>
                   <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="393.0">
                      <children>
-                        <Label prefHeight="17.0" prefWidth="119.0" text="Email :">
+                        <Label prefHeight="25.0" prefWidth="119.0" text="Email :">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
@@ -80,12 +80,12 @@
                         <Insets bottom="10.0" />
                      </opaqueInsets>
                      <VBox.margin>
-                        <Insets bottom="10.0" />
+                        <Insets />
                      </VBox.margin>
                   </HBox>
                   <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="393.0">
                      <children>
-                        <Label prefHeight="17.0" prefWidth="119.0" text="Username :">
+                        <Label prefHeight="25.0" prefWidth="119.0" text="Username :">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
@@ -93,12 +93,12 @@
                         <TextField fx:id="username" editable="true" prefHeight="25.0" prefWidth="185.0" />
                      </children>
                      <VBox.margin>
-                        <Insets bottom="10.0" />
+                        <Insets />
                      </VBox.margin>
                   </HBox>
                   <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="393.0">
                      <children>
-                        <Label prefHeight="17.0" prefWidth="119.0" text="Password :">
+                        <Label prefHeight="25.0" prefWidth="119.0" text="Password :">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
@@ -106,54 +106,48 @@
                         <TextField fx:id="pass" editable="true" prefHeight="25.0" prefWidth="185.0" />
                      </children>
                      <VBox.margin>
-                        <Insets bottom="10.0" />
+                        <Insets />
                      </VBox.margin>
                   </HBox>
                   <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="300.0">
                      <children>
-                        <Label prefHeight="17.0" prefWidth="202.0" text="Date Created :">
+                        <Label prefHeight="25.0" prefWidth="119.0" text="Password Duration :">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
                         </Label>
-                        <TextField fx:id="creationDate" editable="false" prefHeight="25.0" prefWidth="267.0" />
+                        <TextField fx:id="day" editable="true" prefHeight="25.0" prefWidth="41.0" />
+                        <Label prefHeight="25.0" prefWidth="38.0" text=" Day(s)">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
                      </children>
                   </HBox>
                   <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="300.0">
                      <children>
-                        <Label prefHeight="17.0" prefWidth="202.0" text="Date Expired :">
+                        <Label prefHeight="25.0" prefWidth="130.0" text="Date Created :">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
                         </Label>
-                        <TextField fx:id="expirationDate" editable="false" prefHeight="25.0" prefWidth="267.0" />
+                        <Label fx:id="creationDate" prefHeight="25.0" prefWidth="267.0" />
+                     </children>
+                  </HBox>
+                  <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="300.0">
+                     <children>
+                        <Label prefHeight="25.0" prefWidth="130.0" text="Date Expired :">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                        <Label fx:id="expirationDate" prefHeight="25.0" prefWidth="267.0" />
                      </children>
                      <VBox.margin>
-                        <Insets bottom="10.0" top="10.0" />
+                        <Insets />
                      </VBox.margin>
                   </HBox>
-                  <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="393.0">
-                     <children>
-                        <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="300.0">
-                           <children>
-                              <Label prefHeight="17.0" prefWidth="119.0" text="Password Duration :">
-                                 <HBox.margin>
-                                    <Insets top="5.0" />
-                                 </HBox.margin>
-                              </Label>
-                              <TextField fx:id="day" editable="true" prefHeight="25.0" prefWidth="41.0" />
-                              <Label prefHeight="17.0" prefWidth="38.0" text=" Day(s)">
-                                 <HBox.margin>
-                                    <Insets top="5.0" />
-                                 </HBox.margin>
-                              </Label>
-                           </children>
-                           <padding>
-                              <Insets bottom="10.0" />
-                           </padding>
-                        </HBox>
-                     </children>
-                  </HBox>
+                  <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="393.0" />
                </children>
                <GridPane.margin>
                   <Insets left="35.0" />

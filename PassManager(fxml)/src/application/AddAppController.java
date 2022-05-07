@@ -60,7 +60,7 @@ public class AddAppController extends AppUI{
 		
 		if (durationString.equals(""))
 		{
-			alretMessege("Duration cannot be empty!");
+			alretMessege("Duration must be positive number and cannot be empty!");
 			return;	
 		}
 		
