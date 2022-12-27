@@ -1,6 +1,6 @@
 # Password Manager:
 Password manager is a destop application that allows user to stores, retrieve and update thier password. 
-Besides, the application also have a reminder system taht remind user update thier password after a period of time.
+Besides, the application also have a reminder system that remind user update their password after a period of time.
 
 # Team Members:
 Quang Tang: Tester, Back-end
